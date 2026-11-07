@@ -112,6 +112,9 @@ function sync(){var c=mode();d.getElementById("clin").hidden=c!==1;Object.keys(P
 var ids=Object.keys(L);
 try{var sv=JSON.parse(localStorage.getItem(K)||"{}");ids.forEach(function(i){if(sv[i])d.getElementById(i).value=sv[i]})}catch(x){}
 sync();tyE.addEventListener("change",sync);
+var planQ=new URLSearchParams(location.search).get("plan");
+var planMap={starter:"Starter",growth:"Growth",managed:"Managed Ops",pilot_starter:"Pilot",pilot_growth:"Pilot",pilot:"Pilot"};
+if(planMap[planQ])d.getElementById("pl").value=planMap[planQ];
 F.addEventListener("input",function(){var o={};ids.forEach(function(i){o[i]=d.getElementById(i).value});try{localStorage.setItem(K,JSON.stringify(o))}catch(x){}});
 function v(i){return d.getElementById(i).value.trim()}
 function text(){var t="Hi Quavok, here are my onboarding details.\n";ids.forEach(function(i){var x=v(i);if(x&&(isC()||C.indexOf(i)<0))t+=(x.indexOf("\n")>-1?"\n*"+L[i]+":*\n"+x+"\n":"\n*"+L[i]+":* "+x)});return t+"\n\nConsent to process chats: yes"}
