@@ -70,9 +70,41 @@ for (const needle of ["₹2,999", "₹4,999", "₹9,999", "₹14,999", "₹19,99
 }
 assert.match(home, /pay\/\?plan=starter&amp;cycle=monthly|pay\/\?plan=starter&cycle=monthly/);
 assert.match(home, /pay\/\?plan=audit/);
-assert.match(home, /pay\/\?plan=pilot/);
+assert.match(home, /Ask about this plan/);
+assert.match(home, /Chat on WhatsApp/);
+assert.match(home, /wa\.me\/919041315226\?text=Hi%20Quavok%2C%20I%27d%20like%20to%20discuss%20a%20WhatsApp%20workflow/);
+assert.match(home, /Ask about pilot availability/);
+assert.match(home, /7–14 working days/);
+assert.match(home, /Free 15-minute fit-check/);
+assert.match(home, /separate from the ₹2,999 Audit/);
+assert.doesNotMatch(home, /Most popular|Never miss|1 to 2 weeks|Confirm on WhatsApp|href="book\/">[\s\S]{0,80}Chat on WhatsApp/);
 assert.doesNotMatch(payJs, /key_secret|KEY_SECRET|rzp_live|rzp_test|cfsk_/i);
 assert.match(payJs, /orderApi:\s*""/);
+assert.match(payJs, /links:\s*\{\s*razorpay:\s*\{\s*\},\s*cashfree:\s*\{\s*\}/);
 assert.match(fs.readFileSync(new URL("../assets/checkout.js", import.meta.url), "utf8"), /does not start/i);
+
+const book = fs.readFileSync(new URL("../book/index.html", import.meta.url), "utf8");
+assert.match(book, /Request this time on WhatsApp/);
+assert.match(book, /not a confirmed appointment/);
+assert.match(book, /Nothing is sent until you press Send/);
+assert.match(book, /mailto:hello@quavok.com/);
+assert.doesNotMatch(book, /Confirm on WhatsApp|usually within a few working hours/);
+assert.match(book, /I'd like to request a free 15-minute fit-check/);
+
+const ship = fs.readFileSync(new URL("../shipping/index.html", import.meta.url), "utf8");
+assert.match(ship, /not currently a delivery channel/);
+assert.doesNotMatch(ship, /in your <a href="\.\.\/account\/">Quavok account<\/a>/);
+
+const pay = fs.readFileSync(new URL("../pay/index.html", import.meta.url), "utf8");
+assert.match(pay, /Payment status and invoice enquiries/);
+assert.match(pay, /Ask about an invoice/);
+assert.match(pay, /Email an invoice enquiry/);
+assert.match(pay, /Online checkout is not yet available/);
+assert.doesNotMatch(pay, /Ask for a payment link|Pay Quavok securely/);
+
+const account = fs.readFileSync(new URL("../account/index.html", import.meta.url), "utf8");
+assert.match(account, /Account status/);
+assert.match(account, /does not sign you in/);
+assert.doesNotMatch(account, /Sign in to see your Quavok plan/);
 
 console.log("payment checks passed");
