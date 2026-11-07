@@ -1,0 +1,74 @@
+{
+  "currency": "INR",
+  "gstCharged": false,
+  "extraConversationPaise": 200,
+  "freeCallMinutes": 15,
+  "plans": [
+    {
+      "id": "audit",
+      "name": "Audit",
+      "charge": "one-time",
+      "amountPaise": 299900,
+      "setupPaise": 0,
+      "yearlyPaise": null,
+      "months": null,
+      "summary": "One-time written report. Separate from the free 15-minute fit-check.",
+      "billing": "Charged once. Fully credited to setup if you start a paid plan within 14 days. No monthly fee."
+    },
+    {
+      "id": "starter",
+      "name": "Starter",
+      "charge": "recurring",
+      "amountPaise": 499900,
+      "setupPaise": 999900,
+      "yearlyPaise": 4999000,
+      "months": null,
+      "summary": "One agreed workflow, such as an enquiry assistant or bookings with reminders. 500 AI conversations a month.",
+      "billing": "Monthly price is billed in advance each month. Setup is a separate one-time charge. Yearly is billed in advance for the year and the setup fee is waived."
+    },
+    {
+      "id": "growth",
+      "name": "Growth",
+      "charge": "recurring",
+      "amountPaise": 999900,
+      "setupPaise": 1499900,
+      "yearlyPaise": 9999000,
+      "months": null,
+      "summary": "Up to 3 agreed workflows. 1,500 AI conversations a month.",
+      "billing": "Monthly price is billed in advance each month. Setup is a separate one-time charge. Yearly is billed in advance for the year and the setup fee is waived."
+    },
+    {
+      "id": "managed",
+      "name": "Managed Ops",
+      "charge": "recurring",
+      "amountPaise": 1999900,
+      "setupPaise": 2499900,
+      "yearlyPaise": 19999000,
+      "months": null,
+      "summary": "Published plan for up to 6 agreed workflows and 4,000 AI conversations a month, including one or two no-API apps only after each is validated. The workflow list is written with you. The price is not a blank custom quote.",
+      "billing": "₹19,999 is the monthly charge, billed in advance. ₹24,999 is a separate one-time setup. Yearly is ₹1,99,990 billed in advance and the setup fee is waived. Scope is agreed before any payment."
+    },
+    {
+      "id": "pilot_starter",
+      "name": "Pilot Starter",
+      "charge": "recurring",
+      "amountPaise": 249900,
+      "setupPaise": 0,
+      "yearlyPaise": null,
+      "months": 3,
+      "summary": "Published pilot price for Starter for the first 3 months. Setup waived. The Audit fee is waived on this pilot. A person confirms a spot before any payment.",
+      "billing": "₹2,499 is billed monthly in advance for the first 3 months only. Setup is ₹0. Cancel anytime during the pilot: the service stops at the end of the month already paid, and you are not billed again. This page does not bill a fourth month and does not set a separate renewal price."
+    },
+    {
+      "id": "pilot_growth",
+      "name": "Pilot Growth",
+      "charge": "recurring",
+      "amountPaise": 499900,
+      "setupPaise": 0,
+      "yearlyPaise": null,
+      "months": 3,
+      "summary": "Published pilot price for Growth for the first 3 months. Setup waived. The Audit fee is waived on this pilot. A person confirms a spot before any payment.",
+      "billing": "₹4,999 is billed monthly in advance for the first 3 months only. Setup is ₹0. Cancel anytime during the pilot: the service stops at the end of the month already paid, and you are not billed again. This page does not bill a fourth month and does not set a separate renewal price."
+    }
+  ]
+}

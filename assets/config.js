@@ -1,8 +1,8 @@
 /* Public config only. The Supabase anon key is public by design (RLS protects data).
-   Never put Cashfree keys here: they live in Supabase Edge Function secrets.
-   Leave supabaseUrl empty to keep accounts/checkout hidden (site falls back to WhatsApp). */
+   Never put Razorpay or Cashfree secrets here.
+   Payment links live in assets/payments.js and stay empty until a provider is really active.
+   Leave supabaseUrl empty to keep accounts hidden. */
 window.QUAVOK_CONFIG = {
   supabaseUrl: "",
-  supabaseAnonKey: "",
-  cashfreeMode: "sandbox" /* "sandbox" | "production" */
+  supabaseAnonKey: ""
 };

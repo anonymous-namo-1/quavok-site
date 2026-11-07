@@ -4,6 +4,7 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;
 const inr = p => '₹' + (p / 100).toLocaleString('en-IN');
 if (!C.supabaseUrl || !C.supabaseAnonKey) { $('acc-off').hidden = false; }
 else {
+  $('acc-off').hidden = true;
   let sb;
   try {
     const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
