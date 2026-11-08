@@ -81,7 +81,7 @@ section{padding:96px 0}.sh{max-width:680px;margin-bottom:52px}.sh.ctr{margin:0 a
 .tog{display:inline-flex;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:4px;margin-top:22px}
 .tog button{border:0;background:none;font:600 14px Inter;padding:9px 18px;border-radius:9px;color:var(--mute);cursor:pointer;transition:.2s}.tog button.on{background:#fff;color:var(--ink);box-shadow:var(--sh)}
 .tog small{color:var(--wa);margin-left:6px}
-.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}@media(max-width:1060px){.plans{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.plans{grid-template-columns:1fr}}
+.plans{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:stretch}@media(max-width:620px){.plans{grid-template-columns:1fr}}
 .plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;box-shadow:var(--sh);position:relative}
 .plan.hot{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 30px 60px -20px rgba(0,0,0,.45)}
 .plan.hot .muted,.plan.hot li{color:#cbd5e1}.plan .tag{position:absolute;top:-12px;left:24px;background:linear-gradient(90deg,#000000,#525252);color:#fff;font-size:12px;font-weight:600;padding:4px 11px;border-radius:99px}
