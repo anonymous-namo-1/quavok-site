@@ -23,23 +23,18 @@
 </defs></svg>
 
 <header class="nav s"><div class="c"><a href="../" class="logo"><img src="/assets/logo-lockup.png" alt="Quavok" width="161" height="34"></a><nav><a href="../#pricing">Pricing</a><a href="../demo/">Demo</a><a href="../contact/">Contact</a></nav><a class="btn btn-p" href="https://wa.me/919041315226" target="_blank" rel="noopener">WhatsApp us</a></div></header>
-<main class="legal"><h1>Pay Quavok</h1><p class="d">Last updated: 3 November 2026</p>
-<p>Pay only after we've agreed your plan on a call or on WhatsApp. Every payment gets an invoice numbered QV/2026-27/NNN. Prices are in INR; Quavok is not GST-registered, so no GST is charged. See the <a href="../pricing/">pricing page</a> for plans.</p>
+<main class="legal"><h1>Pay Quavok</h1><p class="d">Last updated: 8 November 2026</p>
+<p>The audit is free. Paid plans are Starter at ₹500/month and Pro at ₹2,499/month. Online card and UPI checkout is not live, and this page does not start a subscription or automatic billing. Prices are in INR; Quavok is not GST-registered, so no GST is charged. See the <a href="../pricing/">pricing page</a>.</p>
 <div id="checkout" hidden></div><div id="paylinks"></div>
 <div id="paynone"><h2>How payment works right now</h2>
-<p>Our online card and UPI checkout is being set up. Until it's live, message us on WhatsApp with your business name and the plan you chose. We'll send your invoice and a payment request. We never ask for your card number, CVV, OTP or UPI PIN on WhatsApp or by phone.</p>
-<p><a class="btn btn-wa" style="color:#fff;text-decoration:none" href="https://wa.me/919041315226?text=Hi%20Quavok%2C%20I%27d%20like%20to%20pay%20for%20my%20plan.%20Business%3A%20" target="_blank" rel="noopener"><svg><use href="#i-msg"/></svg>Ask for a payment link</a></p></div>
+<p>Online card and UPI checkout is not live. Message us with your business name and Starter (₹500/month) or Pro (₹2,499/month). The audit is free. Nothing is sent until you press Send in WhatsApp. We never ask for your card number, CVV, OTP or UPI PIN on WhatsApp or by phone.</p>
+<p><a class="btn btn-wa" style="color:#fff;text-decoration:none" href="https://wa.me/919041315226?text=Hi%20Quavok%2C%20I%27d%20like%20to%20ask%20about%20an%20invoice%20for%20Starter%20or%20Pro.%20Business%3A%20" target="_blank" rel="noopener"><svg><use href="#i-msg"/></svg>Ask about an invoice</a></p></div>
 <h2>Before you pay</h2><p>Read our <a href="../terms/">terms</a> and <a href="../refund/">refund and cancellation policy</a>. Questions about a payment: see our <a href="../contact/">contact page</a>.</p>
 <script>
 /* Paste Cashfree (or other gateway) payment-link / subscription URLs here once the account is live. Empty = hidden. */
 const PAY_LINKS = {
-  "Audit (one-time), ₹2,999": "",
-  "Pilot: Starter, ₹2,499/month": "",
-  "Pilot: Growth, ₹4,999/month": "",
-  "Starter, ₹4,999/month + ₹9,999 setup": "",
-  "Growth, ₹9,999/month + ₹14,999 setup": "",
-  "Managed Ops, ₹19,999/month + ₹24,999 setup": "",
-  "Pay an invoice (any amount)": ""
+  "Starter, ₹500/month": "",
+  "Pro, ₹2,499/month": ""
 };
 const live = Object.entries(PAY_LINKS).filter(([k,v]) => /^https:\/\//.test(v));
 if (live.length) {

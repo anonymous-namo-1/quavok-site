@@ -2,11 +2,9 @@
 import { phoneField, savePhone } from './phone.js';
 const C = window.QUAVOK_CONFIG || {}, box = document.getElementById('checkout');
 if (box && C.supabaseUrl && C.supabaseAnonKey) {
-  const PLANS = { audit: 'Audit (one-time), ₹2,999', starter: 'Starter, ₹4,999/month + ₹9,999 setup',
-    growth: 'Growth, ₹9,999/month + ₹14,999 setup', managed: 'Managed Ops, ₹19,999/month + ₹24,999 setup',
-    pilot_starter: 'Pilot: Starter, ₹2,499/month', pilot_growth: 'Pilot: Growth, ₹4,999/month' };
+  const PLANS = { starter: 'Starter, ₹500/month', pro: 'Pro, ₹2,499/month' };
   box.hidden = false; document.getElementById('paynone').hidden = true;
-  box.innerHTML = '<h2>Pay online</h2><p>Sign in first so your plan and invoices show in <a href="../account/">your account</a>. Monthly plans use UPI AutoPay or card mandate; setup fees are invoiced separately. Cancel as per our <a href="../terms/">terms</a>.</p>' +
+  box.innerHTML = '<h2>Pay online</h2><p>Sign in first so your plan and invoices show in <a href="../account/">your account</a>. Plans are billed monthly. This page does not start automatic billing. The audit is free. Cancel as per our <a href="../terms/">terms</a>.</p>' +
     `<p>${phoneField('cphone')}</p>` + Object.entries(PLANS).map(([k, v]) => `<p><button class="btn btn-p" type="button" data-plan="${k}">${v}</button></p>`).join('') + '<p id="cmsg" role="status" aria-live="polite"></p>';
   const msg = t => document.getElementById('cmsg').textContent = t;
   box.addEventListener('click', async e => {
