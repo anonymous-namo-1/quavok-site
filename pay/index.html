@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pay · Quavok</title><!--seo--><link rel="canonical" href="https://quavok.com/pay/"><meta property="og:type" content="website"><meta property="og:site_name" content="Quavok"><meta property="og:url" content="https://quavok.com/pay/"><meta property="og:title" content="Pay · Quavok"><meta property="og:description" content="Pay Quavok securely for your plan, audit or invoice."><meta property="og:image" content="https://quavok.com/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Quavok: AI workflow automation for your business. Agreed WhatsApp tasks, with human review. Built and run for you. quavok.com"><meta name="twitter:image:alt" content="Quavok: AI workflow automation for your business. Agreed WhatsApp tasks, with human review. Built and run for you. quavok.com"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#000000"><!--/seo--><meta name="description" content="Pay Quavok securely for your plan, audit or invoice."><meta name="robots" content="noindex">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pay · Quavok</title><!--seo--><link rel="canonical" href="https://quavok.com/pay/"><meta property="og:type" content="website"><meta property="og:site_name" content="Quavok"><meta property="og:url" content="https://quavok.com/pay/"><meta property="og:title" content="Pay · Quavok"><meta property="og:description" content="Online checkout is not live. The Quavok audit is free. Any price is shared after the free audit, or when you ask."><meta property="og:image" content="https://quavok.com/assets/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Quavok: AI workflow automation for your business. Agreed WhatsApp tasks, with human review. Built and run for you. quavok.com"><meta name="twitter:image:alt" content="Quavok: AI workflow automation for your business. Agreed WhatsApp tasks, with human review. Built and run for you. quavok.com"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#000000"><!--/seo--><meta name="description" content="Online checkout is not live. The Quavok audit is free. Any price is shared after the free audit, or when you ask."><meta name="robots" content="noindex">
 <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/fonts.css">
 
 <link rel="stylesheet" href="../assets/style.css"><link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"></head><body><svg width="0" height="0" style="position:absolute" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs>
@@ -23,28 +23,13 @@
 </defs></svg>
 
 <header class="nav s"><div class="c"><a href="../" class="logo"><img src="/assets/logo-lockup.png" alt="Quavok" width="161" height="34"></a><nav><a href="../#pricing">Pricing</a><a href="../demo/">Demo</a><a href="../contact/">Contact</a></nav><a class="btn btn-p" href="https://wa.me/919041315226" target="_blank" rel="noopener">WhatsApp us</a></div></header>
-<main class="legal"><h1>Pay Quavok</h1><p class="d">Last updated: 8 November 2026</p>
-<p>The audit is free. Paid plans are Starter at ₹500/month and Pro at ₹2,499/month. Online card and UPI checkout is not live, and this page does not start a subscription or automatic billing. Prices are in INR; Quavok is not GST-registered, so no GST is charged. See the <a href="../pricing/">pricing page</a>.</p>
-<div id="checkout" hidden></div><div id="paylinks"></div>
+<main class="legal"><h1>Pay Quavok</h1><p class="d">Last updated: 9 November 2026</p>
+<p>The audit is free. We do not list paid plans or prices here. Any price is shared after the free audit, or when you ask. Online card and UPI checkout is not live, and this page does not start a subscription or automatic billing. Quavok is not GST-registered, so no GST is charged. See the <a href="../pricing/">pricing page</a>.</p>
+<div id="checkout" hidden></div>
 <div id="paynone"><h2>How payment works right now</h2>
-<p>Online card and UPI checkout is not live. Message us with your business name and Starter (₹500/month) or Pro (₹2,499/month). The audit is free. Nothing is sent until you press Send in WhatsApp. We never ask for your card number, CVV, OTP or UPI PIN on WhatsApp or by phone.</p>
-<p><a class="btn btn-wa" style="color:#fff;text-decoration:none" href="https://wa.me/919041315226?text=Hi%20Quavok%2C%20I%27d%20like%20to%20ask%20about%20an%20invoice%20for%20Starter%20or%20Pro.%20Business%3A%20" target="_blank" rel="noopener"><svg><use href="#i-msg"/></svg>Ask about an invoice</a></p></div>
-<h2>Before you pay</h2><p>Read our <a href="../terms/">terms</a> and <a href="../refund/">refund and cancellation policy</a>. Questions about a payment: see our <a href="../contact/">contact page</a>.</p>
-<script>
-/* Paste Cashfree (or other gateway) payment-link / subscription URLs here once the account is live. Empty = hidden. */
-const PAY_LINKS = {
-  "Starter, ₹500/month": "",
-  "Pro, ₹2,499/month": ""
-};
-const live = Object.entries(PAY_LINKS).filter(([k,v]) => /^https:\/\//.test(v));
-if (live.length) {
-  document.getElementById('paynone').style.display = 'none';
-  const box = document.getElementById('paylinks');
-  box.innerHTML = '<h2>Choose what you are paying for</h2>' + live.map(([k,v]) =>
-    '<p><a class="btn btn-p" style="color:#fff;text-decoration:none" href="'+v+'" target="_blank" rel="noopener">'+k.replace(/</g,'&lt;')+'</a></p>').join('') +
-    '<p>Payments are processed securely by our payment partner. We never see or store your card or bank details.</p>';
-}
-</script>
+<p>Online card and UPI checkout is not live. Message us about the free audit and include your business name. Nothing is sent until you press Send in WhatsApp. We never ask for your card number, CVV, OTP or UPI PIN on WhatsApp or by phone.</p>
+<p><a class="btn btn-wa" style="color:#fff;text-decoration:none" href="https://wa.me/919041315226?text=Hi%2C%20I%27d%20like%20the%20free%20Quavok%20Audit.%20Business%3A%20" target="_blank" rel="noopener"><svg><use href="#i-msg"/></svg>Ask about the free audit</a></p></div>
+<h2>Before you pay</h2><p>Read our <a href="../terms/">terms</a> and <a href="../refund/">refund and cancellation policy</a>. Questions: see our <a href="../contact/">contact page</a>.</p>
 </main><script src="../assets/config.js"></script><script type="module" src="../assets/checkout.js"></script>
 <footer><div class="c foot"><div><a href="../" class="logo"><img src="/assets/logo-lockup.png" alt="Quavok" width="161" height="34"></a><p style="margin-top:12px">AI workflow automation for businesses on WhatsApp, built and run for you. Our assistants are AI and say so when asked.</p></div>
 <nav><a href="../pricing/">Pricing</a><a href="../terms/">Terms</a><a href="../privacy/">Privacy</a><a href="../refund/">Refunds</a><a href="../shipping/">Delivery</a><a href="../pay/">Pay</a><a href="../account/">Account</a><a href="../contact/">Contact</a></nav></div><div class="c" style="margin-top:30px;font-size:13px">© 2026 Quavok</div></footer></body></html>
