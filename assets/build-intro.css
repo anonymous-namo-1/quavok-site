@@ -1,0 +1,247 @@
+/* Homepage-only intro. Agent cursors build the hero, then leave.
+   Loaded from index.html. Nothing here changes layout: the real elements
+   are only ever faded, transformed or clipped, and the overlay is fixed. */
+
+/* Before build-intro.js takes over, the hero pieces are held invisible.
+   The hold is an animation delay, so it ends by itself after a few seconds
+   even if no script ever runs. The site's reduced-motion rule
+   (animation:none!important) switches it off entirely. */
+@keyframes qa-hold {
+  from { opacity: 0; }
+  to { opacity: 0; }
+}
+
+html.qa-pre .nav > .c,
+html.qa-pre .hero .eyebrow,
+html.qa-pre .hero h1,
+html.qa-pre .hero .lead,
+html.qa-pre .hero .ctas,
+html.qa-pre .hero .ticks,
+html.qa-pre .hero .phone,
+html.qa-pre .hero .float {
+  animation: qa-hold 1ms linear 4s backwards;
+}
+
+/* The sample chat waits until the phone has been placed. */
+html.qa-chat .hero .phone .bb {
+  animation-play-state: paused;
+}
+
+.qa-intro {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 60;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout style;
+  transition: opacity 0.2s linear;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.qa-intro.qa-out {
+  opacity: 0;
+}
+
+.qa-box,
+.qa-caret,
+.qa-cur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Selection box with four handles */
+.qa-box {
+  box-sizing: border-box;
+  border: 1.5px solid var(--qa, #0b1220);
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.qa-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--qa, #0b1220);
+  opacity: 0.06;
+}
+
+.qa-box.qa-dash {
+  border-style: dashed;
+}
+
+.qa-box i {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1.5px solid var(--qa, #0b1220);
+  border-radius: 2px;
+  opacity: 0;
+}
+
+.qa-box.qa-handles i {
+  opacity: 1;
+}
+
+/* Handles and the badge sit at the top-left corner and are moved to their
+   corners with transforms from build-intro.js, so a growing box never
+   repositions anything through layout. */
+.qa-box i,
+.qa-box b {
+  top: -6px;
+  left: -6px;
+  will-change: transform;
+}
+
+.qa-box.qa-grab i:nth-child(4) {
+  background: var(--qa, #0b1220);
+  box-shadow: 0 0 0 1.5px #fff;
+}
+
+.qa-box b {
+  position: absolute;
+  margin: -6px 0 0 -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--qa, #0b1220);
+  box-shadow: 0 0 0 2px #fff;
+  opacity: 0;
+  transition: opacity 0.18s linear;
+}
+
+.qa-box b::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.qa-box.qa-ok i {
+  opacity: 0;
+}
+
+.qa-box.qa-ok b {
+  opacity: 1;
+}
+
+/* Text caret used while the headline is typed */
+.qa-caret {
+  width: 2px;
+  border-radius: 1px;
+  background: var(--qa, #15803d);
+  z-index: 2;
+}
+
+/* Agent cursor with its label */
+.qa-cur {
+  z-index: 3;
+  width: 0;
+  height: 0;
+}
+
+.qa-cur svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  transform-origin: 2px 2px;
+  transition: transform 0.12s ease-out;
+  filter: drop-shadow(0 1px 1.5px rgba(11, 18, 32, 0.3));
+}
+
+.qa-cur.qa-down svg {
+  transform: scale(0.84);
+}
+
+.qa-tag {
+  position: absolute;
+  left: 13px;
+  top: 19px;
+  padding: 4px 8px;
+  border-radius: 4px 10px 10px 10px;
+  background: var(--qa, #0b1220);
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 6px 14px -8px rgba(11, 18, 32, 0.6);
+}
+
+/* Near the right or bottom edge the label swings to the other side.
+   Transforms only, so it never counts as a layout change. */
+.qa-cur.qa-flip .qa-tag {
+  transform: translateX(-100%) translateX(-10px);
+  border-radius: 10px 4px 10px 10px;
+}
+
+.qa-cur.qa-raise .qa-tag {
+  transform: translateY(-100%) translateY(-22px);
+  border-radius: 10px 10px 10px 4px;
+}
+
+.qa-cur.qa-raise.qa-flip .qa-tag {
+  transform: translate(-100%, -100%) translate(-10px, -22px);
+  border-radius: 10px 10px 4px 10px;
+}
+
+/* Skip control. Sits inside the visible viewport; build-intro.js moves it
+   when the visual viewport is offset (zoom, keyboard, toolbars). */
+.qa-skip {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 4;
+  transform: translateX(-50%);
+  margin: 0;
+  min-height: 44px;
+  padding: 0 20px;
+  pointer-events: auto;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink, #0b1220);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line, #e6e8ef);
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 24px -10px rgba(15, 23, 42, 0.4);
+}
+
+.qa-skip:hover {
+  border-color: #d4d4d4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qa-intro { display: none !important; }
+}
+
+@media print {
+  .qa-intro { display: none !important; }
+}
