@@ -1,0 +1,64 @@
+export type Faq = { q: string; a: string[] };
+
+// Honest answers. No guarantees, timelines, prices or SLAs that have not been
+// confirmed; unconfirmed operational details are marked as placeholders.
+export const HOME_FAQS: Faq[] = [
+  {
+    q: "What kinds of business processes can you automate?",
+    a: [
+      "Repetitive work that follows a pattern: lead generation, qualification and follow-ups; customer enquiries and routine support; data entry and CRM updates; admin and scheduling; document processing; internal communication and task coordination; reporting, monitoring and recurring operations; and other repetitive workflows specific to your industry.",
+      "If a process depends mostly on judgment, relationships or one-off decisions, we’ll say so in discovery rather than force an automation onto it.",
+    ],
+  },
+  {
+    q: "Can your systems replace tasks currently handled by employees?",
+    a: [
+      "Yes. That is the point: we take repetitive tasks that people on your team do today, such as copying details between tools, answering the same questions or assembling the same report, and have an automation handle them.",
+      "We automate tasks, not judgment. Exceptions, sensitive cases and anything outside the agreed rules are routed to a person. What you do with the time your team gets back is your call; we don’t promise headcount or cost outcomes.",
+    ],
+  },
+  {
+    q: "Do I need technical knowledge?",
+    a: [
+      "No. You explain how the work happens today and what a good result looks like. We handle the design, build, integrations, hosting and maintenance. You review and approve in plain language.",
+    ],
+  },
+  {
+    q: "Who creates and maintains the agents?",
+    a: [
+      "We do. The Quavok team designs, builds, tests, deploys, monitors and maintains every agent and workflow. You never build, configure or deploy anything yourself, and there is no builder to learn.",
+    ],
+  },
+  {
+    q: "Can I request additional automations?",
+    a: [
+      "Yes. Tell us what else is eating your team’s time, by email, on a call, or through Rocket, which forwards the request to us. We scope it with you, you approve it, and we build and run it alongside what’s already running.",
+    ],
+  },
+  {
+    q: "Will this work with my existing software?",
+    a: [
+      "Usually that’s the plan: we build around the tools you already use rather than asking you to switch. Email, forms, spreadsheets, CRMs, calendars and many business tools can be connected when they offer a way in, such as an API, integration or export.",
+      "We check each integration during discovery before we commit to it, and we’ll tell you plainly if a tool can’t be connected reliably.",
+    ],
+  },
+  {
+    q: "Do I need Rocket?",
+    a: [
+      "No. Your automations run without it. Rocket is an optional, conversational way to ask about the automations we run for you and to pass new requests to our team. Its desktop and mobile apps, and a paid proactive add-on that reaches out to you first, are in development.",
+    ],
+  },
+  {
+    q: "How does pricing work?",
+    a: [
+      "Every build is different, so we don’t publish plans or prices. After a discovery call we’ll propose a price for building your automation and for running it, before any work starts. There is no charge for the discovery call.",
+    ],
+  },
+  {
+    q: "What happens when an automation fails?",
+    a: [
+      "Running it is our job. We monitor the automations we run, and they are designed to stop and hand over rather than guess: when something fails or falls outside the agreed rules, the item is held or routed to a person, and we investigate and fix the cause.",
+      "You’ll be told when something needs your attention. Specific monitoring hours and response times will be agreed with you: [PLACEHOLDER: confirm support hours and response times].",
+    ],
+  },
+];

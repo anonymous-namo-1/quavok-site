@@ -1,0 +1,30 @@
+// Facts used across the site. Only details already published on the previous
+// quavok.com site are listed here. Anything unconfirmed is a visible
+// [PLACEHOLDER: …] so it is easy to find and replace.
+
+export const SITE = {
+  name: "Quavok",
+  url: "https://quavok.com",
+  tagline: "Your business runs on processes. We make those processes run themselves.",
+  description:
+    "Quavok builds and runs custom AI agents, workflows and integrations that take repetitive work off your team. Fully managed: we build the automation, we run the automation.",
+  email: "hello@quavok.com",
+  phoneDisplay: "+91 90413 15226",
+  phoneHref: "tel:+919041315226",
+  whatsappHref: "https://wa.me/919041315226",
+  address: "Dasuya, Hoshiarpur district, Punjab 144205, India",
+} as const;
+
+export const NAV = [
+  { href: "/services/", label: "Services" },
+  { href: "/solutions/", label: "Solutions" },
+  { href: "/how-it-works/", label: "How it works" },
+  { href: "/rocket/", label: "Rocket" },
+  { href: "/about/", label: "About" },
+] as const;
+
+export const CTA = {
+  discuss: { href: "/contact/", label: "Discuss Your Workflow" },
+  book: { href: "/contact/?topic=discovery#form", label: "Book a Discovery Call" },
+  automate: { href: "/#automate", label: "See What We Automate" },
+} as const;
