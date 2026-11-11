@@ -1,0 +1,222 @@
+/* Homepage-only overlay. Agents appear to assemble the hero, then leave.
+   Loaded from index.html. No effect unless build-intro.js mounts .qa-intro. */
+
+.qa-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.qa-fx {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.qa-box,
+.qa-ghost,
+.qa-hl,
+.qa-caret,
+.qa-guide,
+.qa-handle,
+.qa-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.qa-box {
+  border: 1.5px solid var(--qa, #0b1220);
+  border-radius: 10px;
+  background: rgba(11, 18, 32, 0.035);
+  background: color-mix(in srgb, var(--qa, #0b1220) 5%, transparent);
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.qa-frame {
+  border-radius: 18px;
+  background: rgba(37, 99, 235, 0.04);
+  background: color-mix(in srgb, var(--qa, #2563eb) 6%, transparent);
+}
+
+.qa-hl {
+  height: 2px;
+  background: #15803d;
+  border-radius: 1px;
+  transform-origin: 0 0;
+  z-index: 3;
+}
+
+.qa-caret {
+  width: 2px;
+  border-radius: 1px;
+  background: #15803d;
+  z-index: 4;
+}
+
+.qa-ghost {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 12px;
+  border-radius: 14px;
+  border: 1.5px dashed var(--qa, #0b1220);
+  background: rgba(251, 251, 253, 0.62);
+  box-shadow: 0 16px 36px -16px rgba(15, 23, 42, 0.42);
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.qa-ghost i {
+  display: block;
+  height: 5px;
+  width: 68%;
+  border-radius: 99px;
+  background: #e6e8ef;
+}
+
+.qa-ghost i.s { width: 40%; }
+
+.qa-ghost.qa-slim {
+  padding: 0;
+}
+
+.qa-ghost.qa-slim i { display: none; }
+
+.qa-ghost.qa-solid { border-style: solid; }
+
+.qa-guide {
+  background: #0b1220;
+  z-index: 1;
+}
+
+.qa-guide.h { height: 1px; }
+.qa-guide.v { width: 1px; }
+
+.qa-handle {
+  width: 8px;
+  height: 8px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1.5px solid var(--qa, #0b1220);
+  border-radius: 1.5px;
+  z-index: 4;
+}
+
+.qa-handle.qa-hot {
+  background: var(--qa, #0b1220);
+  box-shadow: 0 0 0 1.5px #fff;
+}
+
+.qa-cursor {
+  z-index: 5;
+  color: var(--qa, #0b1220);
+  transform-origin: 0 0;
+}
+
+.qa-cursor svg {
+  display: block;
+  filter: drop-shadow(0 1px 1.5px rgba(11, 18, 32, 0.28));
+}
+
+.qa-tag {
+  position: absolute;
+  left: 15px;
+  top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px 3px 6px;
+  border-radius: 999px;
+  background: rgba(251, 251, 253, 0.96);
+  color: var(--ink, #0b1220);
+  border: 1px solid var(--line, #e6e8ef);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 18px -10px rgba(15, 23, 42, 0.45);
+}
+
+.qa-tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--qa, #0b1220);
+  flex: none;
+}
+
+.qa-flip .qa-tag {
+  left: auto;
+  right: 14px;
+  top: 14px;
+}
+
+.qa-raise .qa-tag {
+  top: auto;
+  bottom: 8px;
+}
+
+.qa-up .qa-tag {
+  top: auto;
+  left: 2px;
+  bottom: calc(100% + 6px);
+}
+
+.qa-up.qa-flip .qa-tag {
+  left: auto;
+  right: 2px;
+}
+
+.qa-skip {
+  position: fixed;
+  top: 76px;
+  right: 16px;
+  z-index: 6;
+  pointer-events: auto;
+  touch-action: manipulation;
+  cursor: pointer;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink, #0b1220);
+  background: rgba(251, 251, 253, 0.94);
+  border: 1px solid var(--line, #e6e8ef);
+  border-radius: 999px;
+  padding: 8px 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 20px -10px rgba(15, 23, 42, 0.35);
+}
+
+.qa-skip:hover {
+  background: #fff;
+  border-color: #d4d4d4;
+}
+
+@media (max-width: 960px) {
+  .qa-skip {
+    top: 72px;
+    right: 12px;
+    font-size: 12px;
+    padding: 7px 11px;
+  }
+  .qa-tag { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qa-intro { display: none !important; }
+}
+
+@media print {
+  .qa-intro { display: none !important; }
+}
