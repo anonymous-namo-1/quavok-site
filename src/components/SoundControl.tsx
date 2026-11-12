@@ -19,6 +19,7 @@ export function SoundControl() {
     const called = () => { playSound("call"); };
     const reply = (event: Event) => { if (event instanceof CustomEvent && event.detail === true) playSound("reply"); };
     const complete = () => playSound("done");
+    const confetti = () => playSound("celebrate");
     const preference = (event:Event) => { if(event instanceof CustomEvent) setOn(event.detail===true); };
     const visibility = () => { if (document.hidden) { pauseSound(); } else if (soundEnabled()) void activateSound(); };
     document.addEventListener("pointerdown", unlock, { passive:true });
@@ -29,6 +30,7 @@ export function SoundControl() {
     window.addEventListener("quavok:rocket-call", called);
     window.addEventListener("quavok:rocket-talk", reply);
     window.addEventListener("quavok:assembly-complete", complete);
+    window.addEventListener("quavok:confetti", confetti);
     return () => {
       pauseSound();
       document.removeEventListener("pointerdown", unlock); document.removeEventListener("keydown", unlock);
@@ -36,6 +38,7 @@ export function SoundControl() {
       window.removeEventListener("quavok:sound-change",preference);
       window.removeEventListener("quavok:rocket-call", called); window.removeEventListener("quavok:rocket-talk", reply);
       window.removeEventListener("quavok:assembly-complete", complete);
+      window.removeEventListener("quavok:confetti", confetti);
     };
   }, []);
   const toggle = async () => {

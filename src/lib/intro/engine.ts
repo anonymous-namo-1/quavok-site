@@ -750,6 +750,7 @@ export function startIntro(): () => void {
         a.box.ok = true;
         a.bubble.textContent = "All connected. Over to you.";
         document.querySelector("[data-intro-stage]")?.classList.add("assembly-approved");
+        window.dispatchEvent(new Event("quavok:confetti"));
       },
       run: () => {},
       end: () => {

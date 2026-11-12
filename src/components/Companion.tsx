@@ -125,9 +125,32 @@ export function Companion() {
       hintTimer = setTimeout(() => setHint(""), 3200);
     };
     let guideHide: ReturnType<typeof setTimeout>;
+    let guideWatch: ReturnType<typeof setInterval>;
     const explain = (text: string) => {
       clearTimeout(guideHide); setHint(""); setGuide(text);
-      guideHide = setTimeout(() => setGuide(""), Math.max(4500, text.split(" ").length * 380));
+      if (shell.current) shell.current.dataset.guide = "hidden";
+      // Content keeps settling (reveal animations), so re-check the spot
+      // while the explanation is showing.
+      clearInterval(guideWatch);
+      guideWatch = setInterval(() => schedule(), 250);
+      guideHide = setTimeout(() => { clearInterval(guideWatch); setGuide(""); }, Math.max(4500, text.split(" ").length * 380));
+    };
+    // True when a rectangle (viewport px) would sit on text, controls or media.
+    const CONTENT = "a,button,input,textarea,select,summary,label,img,video,canvas,svg,p,h1,h2,h3,h4,h5,li,dt,dd,q,blockquote,figcaption,kbd,span,[role=tab],.btn";
+    const covers = (l: number, t: number, w: number, h: number, vw: number, vh: number) => {
+      // Sample a fine grid with a small safety margin around the rectangle.
+      l -= 6; t -= 6; w += 12; h += 12;
+      for (let i = 0; i <= 8; i++) for (let j = 0; j <= 4; j++) {
+        const px = l + w * i / 8, py = t + h * j / 4;
+        if (px < 0 || py < 0 || px > vw || py > vh) return true;
+        for (const hit of document.elementsFromPoint(px, py)) {
+          if (shell.current?.contains(hit)) continue;
+          if (hit.closest("[data-rocket-perch],.stage-confetti,.hero-spotlight,.footer-wordmark")) break;
+          if (hit.closest(CONTENT)) return true;
+          break;
+        }
+      }
+      return false;
     };
     const layout = () => {
       raf = 0;
@@ -153,8 +176,38 @@ export function Companion() {
       const logoRect = document.querySelector(".site-header .logo")?.getBoundingClientRect();
       const soundRect = document.querySelector(".site-sound")?.getBoundingClientRect();
       const headerX = logoRect && soundRect ? logoRect.right + (soundRect.left - logoRect.right - 48) / 2 : width - 120;
-      const x = prologue ? width / 2 - 48 : building ? (width < 960 ? Math.max(8,headerX) : width - 72) : perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? Math.max(8,headerX) : width - 72;
-      const y = prologue ? height / 2 - 90 : building ? (width < 960 ? 9 : 110) : perched && perchRect ? perchRect.top : docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
+      const baseX = prologue ? width / 2 - 48 : building ? (width < 960 ? Math.max(8,headerX) : width - 72) : perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? Math.max(8,headerX) : width - 72;
+      const baseY = prologue ? height / 2 - 90 : building ? (width < 960 ? 9 : 110) : perched && perchRect ? perchRect.top : docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
+      // While floating, Rocket never sits on top of content: if his usual spot
+      // at the right edge would cover something, he moves to the empty part
+      // of the header bar, then to the bottom-right corner.
+      let x = baseX, y = baseY;
+      const floating = !prologue && !building && !perched && !docked && !headerPerch;
+      if (floating && covers(x - 6, y - 6, 60, 60, width, height)) {
+        const nav = document.querySelector(".site-header .nav-links")?.getBoundingClientRect();
+        const cta = document.querySelector(".site-header .nav-cta")?.getBoundingClientRect();
+        const slot = nav && cta && nav.width && cta.width && cta.left - nav.right >= 64 ? nav.right + (cta.left - nav.right - 48) / 2 : -1;
+        if (slot >= 0 && !covers(slot - 4, 10, 56, 48, width, height)) { x = slot; y = 10; }
+        else { x = width - 72; y = height - 72; }
+      }
+      // Rocket's explanation bubble only appears where it covers nothing:
+      // below, above, left or right of him, whichever is clear first.
+      const guideEl = el.querySelector<HTMLElement>(".rocket-guide");
+      if (guideEl) {
+        const g = guideEl.getBoundingClientRect();
+        const gw = g.width || 300, gh = g.height || 64;
+        const clampX = (v: number) => Math.max(12, Math.min(width - 12 - gw, v));
+        const clampY = (v: number) => Math.max(76, Math.min(height - 12 - gh, v));
+        const spots = [
+          [clampX(x + size / 2 - gw / 2), y + size + 12],
+          [clampX(x + size / 2 - gw / 2), y - gh - 12],
+          [x - gw - 14, clampY(y)],
+          [x + size + 14, clampY(y)],
+        ];
+        const spot = spots.find(([l, t]) => l >= 12 && t >= 76 && l + gw <= width - 12 && t + gh <= height - 12 && !covers(l, t, gw, gh, width, height));
+        el.dataset.guide = spot ? "shown" : "hidden";
+        if (spot) { el.style.setProperty("--guide-x", `${Math.round(spot[0] - x)}px`); el.style.setProperty("--guide-y", `${Math.round(spot[1] - y)}px`); }
+      }
       const bubbleWidth = Math.min(300, width - 24);
       const bubbleLeft = Math.max(12 - x, Math.min(0, width - 12 - x - bubbleWidth));
       const above = !headerPerch && y > height - (perched ? 420 : 366);
@@ -297,7 +350,7 @@ export function Companion() {
     idle = setTimeout(() => setMood("sleepy"), 14000);
     schedule();
     return () => {
-      cancelAnimationFrame(raf); clearTimeout(idle); clearTimeout(hintTimer); clearTimeout(guideHide);
+      cancelAnimationFrame(raf); clearTimeout(idle); clearTimeout(hintTimer); clearTimeout(guideHide); clearInterval(guideWatch);
       observer.disconnect(); resizeObserver.disconnect();
       window.removeEventListener("pageshow", pageShow);
       window.removeEventListener("pointermove", pointer); window.removeEventListener("pointerdown", outside);
