@@ -31,6 +31,7 @@ export function Companion() {
   const [speaking, setSpeaking] = useState(false);
   const [storySpeaking, setStorySpeaking] = useState(false);
   const [listening, setListening] = useState(false);
+  const [launching, setLaunching] = useState(false);
   const callTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const utterance = useRef<SpeechSynthesisUtterance | null>(null);
   const stopSpeech = () => {
@@ -78,6 +79,7 @@ export function Companion() {
     face.current?.focus({ preventScroll: true });
   };
   const greet = () => {
+    if (document.documentElement.classList.contains("qa-prologue")) { window.dispatchEvent(new Event("quavok:start-build")); return; }
     if (shell.current?.dataset.hero === "true" && current.current !== "open") { window.dispatchEvent(new Event("quavok:hero-call")); return; }
     if (current.current === "open") { close(); return; }
     setMood("happy");
@@ -110,6 +112,7 @@ export function Companion() {
       stopSpeech();
     };
     restorePreference();
+    setLaunching(document.documentElement.classList.contains("qa-prologue"));
     const reduce = matchMedia("(prefers-reduced-motion: reduce)");
     const fine = matchMedia("(hover: hover) and (pointer: fine)");
     const sections = Array.from(document.querySelectorAll("main > section, .site-footer"));
@@ -139,16 +142,17 @@ export function Companion() {
       if (!el || !button) return;
       const width = window.innerWidth;
       const height = window.innerHeight;
+      const prologue = document.documentElement.classList.contains("qa-prologue");
       const originRect = document.getElementById("rocket-origin")?.getBoundingClientRect();
       const mobileOpen = width < 960 && current.current === "open";
       const perchRect = [document.getElementById("hero-rocket-perch"), document.getElementById("rocket-perch")].map(node => node?.getBoundingClientRect()).find(rect => rect && rect.top > 100 && rect.bottom < height - 70);
       const perched = !mobileOpen && current.current !== "minimised" && !!perchRect && perchRect.top > 100 && perchRect.bottom < height - 70;
-      const size = perched ? 96 : 48;
+      const size = prologue || perched ? 96 : 48;
       const docked = !mobileOpen && current.current !== "minimised" && !!originRect && originRect.top >= 84 && originRect.bottom < height;
       const headerPerch = width < 960 && !docked && !perched;
       const sectionRect = section?.getBoundingClientRect();
-      const x = perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? width - 120 : width - 72;
-      const y = perched && perchRect ? perchRect.top : docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
+      const x = prologue ? width / 2 - 48 : perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? width - 120 : width - 72;
+      const y = prologue ? height / 2 - 90 : perched && perchRect ? perchRect.top : docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
       const bubbleWidth = Math.min(300, width - 24);
       const bubbleLeft = Math.max(12 - x, Math.min(0, width - 12 - x - bubbleWidth));
       const above = !headerPerch && y > height - (perched ? 420 : 366);
@@ -163,7 +167,8 @@ export function Companion() {
       el.style.setProperty("--bubble-left", `${Math.round(bubbleLeft)}px`);
       el.style.setProperty("--bubble-tail", `${Math.round(size / 2 - bubbleLeft)}px`);
       el.dataset.docked = String(docked);
-      el.dataset.perched = String(perched);
+      el.dataset.perched = String(perched || prologue);
+      el.dataset.prologue = String(prologue);
       el.dataset.hero = String(perched && document.getElementById("hero-rocket-perch")?.getBoundingClientRect().top === perchRect?.top);
       el.dataset.bubbleAbove = String(above);
       el.dataset.positioned = "true";
@@ -209,6 +214,7 @@ export function Companion() {
     }, { rootMargin: "-20% 0px -45% 0px", threshold: 0 });
     sections.forEach(target => observer.observe(target));
     const open = () => { changeChat("open"); wake("happy"); schedule(); };
+    const buildStarted = () => { setLaunching(false); schedule(); };
     const celebrate = () => { wake("excited"); whisper("One less thing on your plate."); };
     const reaction = (event: Event) => {
       if (!(event instanceof CustomEvent) || typeof event.detail !== "string") return;
@@ -243,6 +249,7 @@ export function Companion() {
     window.addEventListener("scroll", scroll, { passive: true });
     window.addEventListener("resize", schedule, { passive: true });
     window.addEventListener("quavok:open-rocket", open);
+    window.addEventListener("quavok:build-start", buildStarted);
     window.addEventListener("quavok:rocket-position", schedule);
     window.addEventListener("quavok:assembly-complete", celebrate);
     window.addEventListener("quavok:rocket-reaction", reaction);
@@ -262,7 +269,8 @@ export function Companion() {
       window.removeEventListener("pageshow", pageShow);
       window.removeEventListener("pointermove", pointer); window.removeEventListener("pointerdown", outside);
       window.removeEventListener("scroll", scroll); window.removeEventListener("resize", schedule);
-      window.removeEventListener("quavok:open-rocket", open); window.removeEventListener("quavok:rocket-position", schedule);
+      window.removeEventListener("quavok:open-rocket", open);
+      window.removeEventListener("quavok:build-start", buildStarted); window.removeEventListener("quavok:rocket-position", schedule);
       window.removeEventListener("quavok:assembly-complete", celebrate);
       window.removeEventListener("quavok:rocket-reaction", reaction);
       window.removeEventListener("quavok:rocket-say", say);
@@ -276,11 +284,11 @@ export function Companion() {
   }, []);
 
   return <aside ref={shell} className="rocket-companion" data-chat={chat} data-mood={mood} data-speaking={speaking || storySpeaking} data-listening={listening || speaking || chat === "open"} aria-label="Rocket companion">
-    <button ref={face} className="rocket-face" type="button" onClick={greet} aria-label={chat === "minimised" ? "Restore Rocket" : chat === "open" ? "Close Rocket" : "Ask Rocket"} aria-expanded={chat === "open"} aria-controls={chat === "open" ? "rocket-chat" : undefined} aria-keyshortcuts="Control+k Meta+k">
-      <span className="rocket-headphones" aria-hidden="true"><i /><i /></span>
-      <span className="rocket-face-visor" aria-hidden="true"><i /><i /></span>
+    <button ref={face} className="rocket-face" type="button" onClick={greet} aria-label={launching ? "Start page build" : chat === "minimised" ? "Restore Rocket" : chat === "open" ? "Close Rocket" : "Ask Rocket"} aria-expanded={chat === "open"} aria-controls={chat === "open" ? "rocket-chat" : undefined} aria-keyshortcuts="Control+k Meta+k">
+      <span className="rocket-eyes" aria-hidden="true"><i /><i /></span>
       <span className="rocket-face-smile" aria-hidden="true" />
     </button>
+    <span className="rocket-build-command" role="status">Let’s build this page.</span>
     {chat === "closed" && hint && <span className="rocket-whisper" aria-hidden="true">{hint}</span>}
     {chat === "open" && <section id="rocket-chat" className="rocket-chat" aria-label="Rocket quick questions">
       <div className="rocket-chat-heading"><strong>Rocket</strong><div className="rocket-chat-actions">{speechAvailable && <button type="button" onClick={readReply} aria-label={speaking ? "Stop reading Rocket’s answer" : "Read Rocket’s answer aloud"} aria-pressed={speaking}><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z" />{speaking ? <path d="m17 9 5 6m0-6-5 6" /> : <path d="M17 8q5 4 0 8M20 5q7 7 0 14" />}</svg></button>}<button type="button" onClick={close} aria-label="Close Rocket chat"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div></div>

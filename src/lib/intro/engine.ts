@@ -35,10 +35,15 @@ function purpleDone() {
   }
 }
 
-const SAND = "#e8dcc4";
-const PURPLE_SOFT = "#c5a9fa";
-const PURPLE = "#8b5cf6";
-const SAND_LIGHT = "#e8dcc4";
+// Distinct cursor accents stay local to the page-building performance.
+const CURSOR_COLORS = {
+  structure: "#f6c96c",
+  type: "#bea0ff",
+  connections: "#7bdcf2",
+  review: "#99ddb6",
+  layout: "#fa91bd",
+  art: "#ffb58c",
+};
 const SVGNS = "http://www.w3.org/2000/svg";
 const PROPS = ["opacity", "transform", "transform-origin", "will-change", "clip-path", "-webkit-clip-path"];
 
@@ -375,7 +380,7 @@ function makeAgent(color: string, stamp?: string, chatter?: string): Agent {
   const path = document.createElementNS(SVGNS, "path");
   path.setAttribute("d", "M.75.55.75 15.5 5.15 11.85 8.45 18.7 10.95 17.45 7.6 10.65 14.05 10.65Z");
   path.setAttribute("fill", color);
-  path.setAttribute("stroke", "#e8dcc4");
+  path.setAttribute("stroke", "#141219");
   path.setAttribute("stroke-width", "1.15");
   path.setAttribute("stroke-linejoin", "round");
   svg.appendChild(path);
@@ -418,7 +423,8 @@ export function startIntro(): () => void {
   const docEl = document.documentElement;
   const boot = window.__qaIntro;
   if (!boot || !docEl.classList.contains("qa-pre")) {
-    docEl.classList.remove("qa-pre");
+    docEl.classList.remove("qa-pre", "qa-prologue");
+    window.dispatchEvent(new Event("quavok:build-start"));
     purpleDone();
     return () => {};
   }
@@ -455,7 +461,8 @@ export function startIntro(): () => void {
     } catch {
       /* ignore */
     }
-    docEl.classList.remove("qa-pre");
+    docEl.classList.remove("qa-pre", "qa-prologue");
+    window.dispatchEvent(new Event("quavok:build-start"));
   }
 
   function view(): View {
@@ -1113,17 +1120,17 @@ export function startIntro(): () => void {
     fx.setAttribute("aria-hidden", "true");
     overlay.appendChild(fx);
 
-    const mapping = makeAgent(SAND, undefined, "A place for everything.");
-    const copy = makeAgent(PURPLE_SOFT, undefined, "Less jargon. More human.");
-    const wiring = makeAgent(PURPLE, undefined, "Connecting the dots.");
-    const review = makeAgent(SAND_LIGHT, "All in place", "A human gets the final say.");
-    const layout = makeAgent(PURPLE_SOFT, undefined, "Putting things in place.");
-    const art = makeAgent(SAND, undefined, "A little atmosphere.");
+    const mapping = makeAgent(CURSOR_COLORS.structure, undefined, "A place for everything.");
+    const copy = makeAgent(CURSOR_COLORS.type, undefined, "Less jargon. More human.");
+    const wiring = makeAgent(CURSOR_COLORS.connections, undefined, "Connecting the dots.");
+    const review = makeAgent(CURSOR_COLORS.review, "All in place", "A human gets the final say.");
+    const layout = makeAgent(CURSOR_COLORS.layout, undefined, "Putting things in place.");
+    const art = makeAgent(CURSOR_COLORS.art, undefined, "A little atmosphere.");
     agents = [mapping, copy, wiring, review, layout, art];
     for (const a of agents) fx.appendChild(a.box.el);
     caretEl = document.createElement("div");
     caretEl.className = "qa-caret";
-    caretEl.style.setProperty("--qa", PURPLE_SOFT);
+    caretEl.style.setProperty("--qa", CURSOR_COLORS.type);
     fx.appendChild(caretEl);
     for (const a of agents) fx.appendChild(a.el);
     document.body.appendChild(overlay);

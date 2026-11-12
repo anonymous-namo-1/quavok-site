@@ -31,12 +31,12 @@
 }
 .rocket-face:hover { background: #c5a9fa; }
 .rocket-face:active { scale: .96; }
-.rocket-face-visor { display: flex; justify-content: center; align-items: center; gap: 8px; width: 34px; height: 23px; margin-top: -4px; border-radius: 8px; background: #2b2930; }
-.rocket-face-visor i { width: 5px; height: 9px; background: #8b5cf6; border-radius: 6px; transform: translate(var(--eye-x, 0), var(--eye-y, 0)); transition: height 180ms; }
+.rocket-eyes { display: flex; justify-content: center; align-items: center; gap: 8px; width: 34px; height: 23px; margin-top: -4px; border-radius: 8px; background: #2b2930; }
+.rocket-eyes i { width: 5px; height: 9px; background: #8b5cf6; border-radius: 6px; transform: translate(var(--eye-x, 0), var(--eye-y, 0)); transition: height 180ms; }
 .rocket-face-smile { position: absolute; left: 20px; bottom: 6px; width: 8px; height: 3px; background: #2b2930; border-radius: 0 0 8px 8px; }
 .rocket-companion[data-mood="happy"] .rocket-face-smile, .rocket-companion[data-mood="excited"] .rocket-face-smile { height: 5px; }
-.rocket-companion[data-mood="sleepy"] .rocket-face-visor i { height: 3px; }
-.rocket-companion[data-mood="excited"] .rocket-face-visor i { height: 12px; }
+.rocket-companion[data-mood="sleepy"] .rocket-eyes i { height: 3px; }
+.rocket-companion[data-mood="excited"] .rocket-eyes i { height: 12px; }
 .rocket-companion[data-chat="minimised"] .rocket-face { opacity: .75; }
 .rocket-chat {
   position: absolute;
@@ -82,14 +82,14 @@
   body:has(.rocket-companion[data-chat="open"]) main { padding-top: 252px; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .rocket-face-visor { animation: rocket-blink 7s infinite; }
+  .rocket-eyes { animation: rocket-blink 7s infinite; }
   .rocket-companion[data-mood="excited"] .rocket-face { animation: rocket-nod 400ms ease-out 2; }
   @keyframes rocket-blink { 0%, 94%, 98%, 100% { scale: 1 1; } 96% { scale: 1 .15; } }
   @keyframes rocket-nod { 50% { rotate: -7deg; } }
 }
 @media (prefers-reduced-motion: reduce) {
-  .rocket-companion, .rocket-face, .rocket-face-visor i { transition: none; }
-  .rocket-face-visor i { transform: none; }
+  .rocket-companion, .rocket-face, .rocket-eyes i { transition: none; }
+  .rocket-eyes i { transform: none; }
 }
 
 @media (max-width:959px) {

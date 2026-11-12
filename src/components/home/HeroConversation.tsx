@@ -38,7 +38,7 @@ export function HeroConversation() {
   useEffect(() => { setSpeechAvailable("speechSynthesis" in window && "SpeechSynthesisUtterance" in window); }, []);
   return <figure id="day-preview" className="day-preview" data-phase={phase} data-intro-stage data-intro-conversation aria-label="Illustrative conversation with Rocket">
     <div className="day-question" data-site-piece><span className="day-person">You</span><p>{example.question}</p></div>
-    <div className="day-rocket"><span id="hero-rocket-perch" aria-hidden="true" /><span className="day-orbit" aria-hidden="true" /></div>
+    <div className="day-rocket"><span id="hero-rocket-perch" aria-hidden="true" /></div>
     <div className="day-answer" data-site-piece>
       <span className="day-speaker">Rocket</span><span className="day-thinking" aria-hidden="true"><i /><i /><i /></span>
       <p key={selected} aria-busy={phase !== "settled" && phase !== "answering"} aria-live="polite" aria-atomic="true">{example.answer.split(" ").map((word, i) => <span className="reply-word" key={i} style={{animationDelay:`${i * 24}ms`}}>{word}{" "}</span>)}</p>

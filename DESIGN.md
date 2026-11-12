@@ -77,7 +77,7 @@ Dark tonal surfaces and hairline rules define structure. Offset shadows belong t
 
 ## Shapes
 
-Buttons use 8px corners, workflow containers 14px, the companion panel 16px. Dotted paths communicate handoffs. Rocket has a geometric visor, two eyes and an asymmetric rounded face. Keep iconography in authored SVG; do not introduce stock illustration or unrelated decoration.
+Buttons use 8px corners, workflow containers 14px, the companion panel 16px. Dotted paths communicate handoffs. Rocket has a round face, two eyes and a small mouth. Keep iconography in authored SVG; do not introduce stock illustration or unrelated decoration.
 
 ## Components
 
@@ -106,6 +106,10 @@ Rocket speech is opt-in through a small speaker control in its compact bubble. S
 
 Rocket is a recurring host across the page: an inline origin, brief reactions to example decisions, and a larger perch inside its own section. It remains the same character, rather than adding a duplicate illustration. The example conversation lives in a disclosure so the character can lead the section without adding a second permanent interface.
 
-The hero now leads with a person’s workday, represented by a clearly illustrative Rocket conversation. Keep the headline focused on the managed-service benefit. Example replies describe completed routine work and human approvals without invented business results. Technical diagrams belong in the examples below. Rocket’s silhouette is a round purple bot with an expressive dark visor and over-ear headphones. The page-assembly cursors build this conversation as part of the real DOM; they are not removed by the change in hero subject.
+The hero now leads with a person’s workday, represented by a clearly illustrative Rocket conversation. Keep the headline focused on the managed-service benefit. Example replies describe completed routine work and human approvals without invented business results. Technical diagrams belong in the examples below. Rocket’s silhouette is a round purple bot with an expressive eyes. The page-assembly cursors build this conversation as part of the real DOM; they are not removed by the change in hero subject.
 
-The first-visit sequence is page assembly → a question about new leads → Rocket lowers its headphones around its neck → an illustrated reply appears. Clicking Rocket in the hero or choosing another example replays the conversational response. Audio remains opt-in. Reduced motion shows the completed reply immediately. The separate “Ask Rocket” command pill has been removed; the character remains keyboard accessible and Cmd/Ctrl+K still opens the compact conversation.
+The first-visit sequence is page assembly → a question about new leads → Rocket becomes attentive → an illustrated reply appears. Clicking Rocket in the hero or choosing another example replays the conversational response. Audio remains opt-in. Reduced motion shows the completed reply immediately. The separate “Ask Rocket” command pill has been removed; the character remains keyboard accessible and Cmd/Ctrl+K still opens the compact conversation.
+
+The six unnamed building cursors each have a distinct accent: gold, lavender, cyan, mint, pink and peach. These colors are confined to the cursor performance. Rocket has a simple round face and expressive eyes; it has no headphones or other accessories.
+
+Rocket opens a first-visit prologue on an empty screen and gives the command “Let’s build this page” before the anonymous cursors start assembly. The round character has two eyes directly on its face, with no visor, headphones or surrounding orbit. Skip, Escape, reduced motion and fail-open release the whole page.

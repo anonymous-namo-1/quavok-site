@@ -14,7 +14,7 @@
 .rocket-face { background: var(--color-purple); }
 .rocket-face:hover { background: var(--color-purple-soft); }
 .rocket-face-tag { background: var(--color-purple-dark); color: var(--color-sand); }
-.rocket-face-visor i { background: var(--color-sand); }
+.rocket-eyes i { background: var(--color-sand); }
 .rocket-chat-links a, .scope-sticker, .process-ribbon, .text-purple, .nav-links a[aria-current="page"] { color: var(--color-purple-soft); }
 .hero-promise, .page-hero.editorial-hero .t-page, .editorial-closing .closing-inner .t-h2 { color: var(--color-sand); }
 .rocket-confetti i:nth-child(2n) { background: var(--color-sand); }

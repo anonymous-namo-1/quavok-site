@@ -8,4 +8,4 @@
 // CSS hold itself expires after a few seconds.
 export const INTRO_KEY = "quavok-workflow-intro";
 
-export const INTRO_BOOT = `(function(){try{var d=document.documentElement,f=/[?&]intro=1(&|$)/.test(location.search),s=false;try{s=sessionStorage.getItem("${INTRO_KEY}")==="1"}catch(e){}if(window.matchMedia("(prefers-reduced-motion: reduce)").matches||location.hash||(!f&&s))return;if(!f&&window.pageYOffset>40)return;d.classList.add("qa-pre");window.__qaIntro={forced:f,t:setTimeout(function(){d.classList.remove("qa-pre")},3000)}}catch(e){}})();`;
+export const INTRO_BOOT = `(function(){try{if(location.pathname!=="/")return;var d=document.documentElement,f=/[?&]intro=1(&|$)/.test(location.search),s=false;try{s=sessionStorage.getItem("${INTRO_KEY}")==="1"}catch(e){}if(window.matchMedia("(prefers-reduced-motion: reduce)").matches||location.hash||(!f&&s))return;if(!f&&window.pageYOffset>40)return;d.classList.add("qa-pre","qa-prologue");window.__qaIntro={forced:f,t:setTimeout(function(){d.classList.remove("qa-pre","qa-prologue")},3000)}}catch(e){}})();`;

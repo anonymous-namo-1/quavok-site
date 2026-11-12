@@ -12,6 +12,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Companion } from "@/components/Companion";
 import { MotionRuntime } from "@/components/MotionRuntime";
+import { INTRO_BOOT } from "@/lib/intro/boot";
 import { SITE } from "@/lib/site";
 import { OG_IMAGE } from "@/lib/meta";
 
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     // The homepage boot script may add html.qa-pre before hydration.
     <html lang="en" className={`${manrope.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body>

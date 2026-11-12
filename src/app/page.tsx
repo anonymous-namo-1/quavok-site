@@ -1,6 +1,5 @@
 import { pageMeta } from "@/lib/meta";
 import { CTA, SITE } from "@/lib/site";
-import { INTRO_BOOT } from "@/lib/intro/boot";
 import { CATEGORIES } from "@/lib/categories";
 import { HOME_FAQS } from "@/lib/faqs";
 import { RocketEncounter } from "@/components/home/RocketEncounter";
@@ -39,8 +38,6 @@ export default function Home() {
 
       {/* 1. Hero */}
       <section className="hero" data-intro-hero aria-labelledby="hero-title">
-        {/* Runs during parsing, before the hero paints. See lib/intro/boot.ts. */}
-        <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT }} />
         <div className="hero-art" data-site-piece aria-hidden="true"><img src="/media/paper-orchestration.webp" alt="" width={1536} height={1024} fetchPriority="high" /></div>
         <div className="hero-spotlight" aria-hidden="true" />
         <div className="wrap hero-grid">
