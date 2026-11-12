@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { INTRO_DONE_EVENT } from "@/lib/intro/engine";
 import { playVoice, stopVoice, voiceText } from "@/lib/voice";
-import { soundAllowed } from "@/lib/sound";
+import { soundAllowed, soundEnabled } from "@/lib/sound";
 
 const EXAMPLES=[0,1,2].map(index=>({question:voiceText(`question-${index}`),answer:voiceText(`answer-${index}`)}));
 type Phase="building"|"arriving"|"question"|"listening"|"answering"|"settled";
@@ -19,10 +19,11 @@ export function HeroConversation(){
  const waiting=useRef(false);
  const choose=useRef<(index:number)=>void>(()=>{});
  const cancel=()=>{run.current?.abort();stopVoice("demo");window.dispatchEvent(new CustomEvent("quavok:rocket-talk",{detail:false}));};
- // The example plays silently after the build. It is spoken only when the
- // visitor picks a question or asks Rocket directly.
+ // After the build the example is spoken only if the visitor chose sound.
+ // Picking a question or asking Rocket directly always replies aloud, unless
+ // the visitor has explicitly chosen silence.
  const conversation=async(index:number,handoff=false)=>{
-  const speak=!handoff&&soundAllowed();
+  const speak=handoff?soundEnabled():soundAllowed();
   cancel();const controller=new AbortController();run.current=controller;const signal=controller.signal;
   current.current=index;setSelected(index);setWords(0);
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){setWords(1000);setPhase("settled");return;}

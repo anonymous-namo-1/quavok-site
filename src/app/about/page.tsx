@@ -1,7 +1,7 @@
 import { pageMeta } from "@/lib/meta";
 import { CTA, SITE } from "@/lib/site";
 import { PageHero } from "@/components/PageHero";
-import { SectionHead, PlaceholderNote } from "@/components/Section";
+import { SectionHead } from "@/components/Section";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowIcon } from "@/components/Icon";
 
@@ -19,12 +19,6 @@ const PRINCIPLES = [
   { t: "We own the running", b: "Building is half the job. Monitoring, fixing and improving what we built is the other half, and it's ours." },
 ];
 
-// Founder details are intentionally placeholders until confirmed.
-const FOUNDERS = [
-  { name: "Founder name", role: "Role", bio: "Short bio: background and what they focus on at Quavok" },
-  { name: "Founder name", role: "Role", bio: "Short bio: background and what they focus on at Quavok" },
-];
-
 export default function AboutPage() {
   return (
     <>
@@ -34,7 +28,7 @@ export default function AboutPage() {
         lead="Knowing your customers. Caring about the details. Making the next thing better. That’s where your people belong. We build and run the automation that gives them more room for it."
       />
 
-      <section className="section pt-4" aria-labelledby="story-title">
+      <section className="section pt-16" aria-labelledby="story-title">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div data-rv>
             <h2 id="story-title" className="t-h3" style={{ fontSize: "clamp(1.6rem, 1.25rem + 1.2vw, 2.3rem)" }}>
@@ -87,33 +81,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section border-t border-line bg-paper-2" aria-labelledby="founders-title">
-        <div className="wrap">
-          <SectionHead id="founders-title" eyebrow="Founders" title="The people you'll work with." />
-          <div className="mt-12 grid gap-4 md:grid-cols-2" data-rv-group>
-            {FOUNDERS.map((f, i) => (
-              <article key={i} className="card flex gap-5 p-7" data-rv>
-                <div className="grid h-16 w-16 flex-none place-items-center rounded-2xl border border-dashed border-line-2 bg-paper font-mono text-[11px] text-faint">
-                  Photo
-                </div>
-                <div className="min-w-0">
-                  <h3 className="t-h3">
-                    <PlaceholderNote>{f.name}</PlaceholderNote>
-                  </h3>
-                  <p className="mt-2 text-[14px] text-mute">
-                    <PlaceholderNote>{f.role}</PlaceholderNote>
-                  </p>
-                  <p className="mt-3 text-[15px] text-mute">
-                    <PlaceholderNote>{f.bio}</PlaceholderNote>
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="principles-title">
+      <section className="section border-t border-line" aria-labelledby="principles-title">
         <div className="wrap">
           <SectionHead id="principles-title" eyebrow="How we operate" title="A few things we hold ourselves to." />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-rv-group>

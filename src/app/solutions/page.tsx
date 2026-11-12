@@ -25,13 +25,13 @@ const DEPTS: Dept[] = [
     flows: [
       {
         name: "Enquiry to qualified lead",
-        steps: ["New enquiry", "Qualify against your criteria", "Customer details saved", { t: "You approve wording", you: true }, "Follow-up sent"],
+        steps: ["New enquiry", "Check it’s a good fit", "Customer details saved", { t: "You approve wording", you: true }, "Follow-up sent"],
         note: "Unclear or high-value enquiries go straight to your team.",
       },
       {
         name: "Quote follow-up",
         steps: ["Quote sent", "Wait the agreed time", "Reminder drafted", { t: "You approve", you: true }, "Reminder sent", "Status updated"],
-        note: "Replies are logged and handed to whoever owns the deal.",
+        note: "Replies go straight to whoever looks after that customer.",
       },
     ],
   },
@@ -43,7 +43,7 @@ const DEPTS: Dept[] = [
     flows: [
       {
         name: "Routine questions",
-        steps: ["Customer asks", "Match approved answer", "Reply sent", "Conversation logged"],
+        steps: ["Customer asks", "Find your approved answer", "Reply sent", "Saved for your team"],
         note: "Anything new or sensitive is routed to a person instead of guessed.",
       },
       {
@@ -66,7 +66,7 @@ const DEPTS: Dept[] = [
       },
       {
         name: "Recurring admin",
-        steps: ["Scheduled trigger", "Prepare routine paperwork", { t: "You review", you: true }, "Send & file"],
+        steps: ["On your schedule", "Prepare routine paperwork", { t: "You review", you: true }, "Send & file"],
         note: "Runs on the cycle you set: daily, weekly or monthly.",
       },
     ],
@@ -79,12 +79,12 @@ const DEPTS: Dept[] = [
     flows: [
       {
         name: "Invoice intake",
-        steps: ["Invoice arrives", "Read fields", "Check complete", { t: "Over limit → you approve", you: true }, "Entered in your system"],
+        steps: ["Invoice arrives", "Read the details", "Check nothing’s missing", { t: "Over limit → you approve", you: true }, "Entered in your system"],
         note: "Missing or conflicting details go to a person.",
       },
       {
         name: "Form processing",
-        steps: ["Form or PDF received", "Extract details", "Validate", "Update records", "Confirmation sent"],
+        steps: ["Form or PDF received", "Pull out the details", "Check it’s complete", "Update records", "Confirmation sent"],
         note: "We agree the required fields and checks with you up front.",
       },
     ],
@@ -97,7 +97,7 @@ const DEPTS: Dept[] = [
     flows: [
       {
         name: "Request routing",
-        steps: ["Internal request", "Classify", "Assign to the right person", "Chase if stalled", "Close & notify"],
+        steps: ["Internal request", "Work out what it is", "Assign to the right person", "Chase if stalled", "Close & notify"],
         note: "Routing rules come from how your team already divides work.",
       },
       {
@@ -115,7 +115,7 @@ const DEPTS: Dept[] = [
     flows: [
       {
         name: "Weekly report",
-        steps: ["Friday trigger", "Gather figures from your tools", "Assemble report", "Send to the team"],
+        steps: ["Every Friday", "Gather figures from your tools", "Assemble report", "Send to the team"],
         note: "Built from the sources you already trust; we don't invent numbers.",
       },
       {
@@ -160,8 +160,8 @@ export default function SolutionsPage() {
     <>
       <PageHero
         eyebrow="Solutions"
-        title="Good people. Better things to do."
-        lead="The chasing. The copying. The same report, every Friday. These examples show where we could take work off your team’s plate. Each one is designed around your business."
+        title="What we could take off your plate."
+        lead="The chasing. The copying. The same report, every Friday. Here’s how jobs like these could run, step by step, and where you or your team still decide."
       >
         <div className="flex flex-wrap items-center gap-3">
           <a className="btn btn-primary" href={CTA.discuss.href}>
@@ -183,20 +183,20 @@ export default function SolutionsPage() {
         <div className="wrap">
           <nav aria-label="Departments" className="mb-12 flex flex-wrap gap-2">
             {DEPTS.map((d) => (
-              <a key={d.id} href={`#${d.id}`} className="tag hover:border-ink hover:text-ink">
+              <a key={d.id} href={`#${d.id}`} className="dept-link">
                 {d.title}
               </a>
             ))}
           </nav>
           <div className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13.5px] text-mute">
             <span className="inline-flex items-center gap-2">
-              <span className="inline-block h-3 w-3 rounded bg-paper-2 ring-1 ring-line" /> Runs automatically
+              <span className="flow-key" /> Runs automatically
             </span>
             <span className="inline-flex items-center gap-2">
-              <span className="inline-block h-3 w-3 rounded bg-ink" /> You approve
+              <span className="flow-key flow-key--you" /> You approve
             </span>
             <span className="inline-flex items-center gap-2">
-              <span className="inline-block h-3 w-3 rounded bg-accent-surface ring-1 ring-accent-text/30" /> A person handles
+              <span className="flow-key flow-key--person" /> A person handles
             </span>
           </div>
           <div className="grid gap-5">

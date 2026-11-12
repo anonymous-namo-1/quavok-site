@@ -25,7 +25,3 @@ export function SectionHead({
     </div>
   );
 }
-
-export function PlaceholderNote({ children }: { children: ReactNode }) {
-  return <span className="placeholder">[PLACEHOLDER: {children}]</span>;
-}
