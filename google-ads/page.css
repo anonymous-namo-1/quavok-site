@@ -1,0 +1,189 @@
+/* Google Ads landing page. Layout only; colour, type, and chrome come from the site CSS. */
+
+.lp-header .bar {
+  gap: 12px;
+}
+
+.lp-header .lp-nav-cta {
+  display: inline-flex;
+  flex: none;
+}
+
+.lp-hero .editorial-hero-layout {
+  align-items: center;
+}
+
+.lp-hero .t-page {
+  max-width: 9ch;
+}
+
+.lp-subline {
+  display: block;
+  max-width: 22ch;
+  margin-top: 18px;
+  color: #f0f0f0;
+  font-size: clamp(1.45rem, 1.1rem + 1.1vw, 2.05rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.lp-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  margin-top: 28px;
+}
+
+.lp-cta-lg {
+  min-height: 56px;
+  padding-inline: 26px;
+  font-size: 17px;
+}
+
+.lp-note {
+  max-width: 36ch;
+  color: var(--color-mute);
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+.lp-benefits {
+  display: grid;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.lp-benefit {
+  padding: 22px 22px 20px;
+}
+
+.lp-benefit h3 {
+  margin-bottom: 8px;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.lp-benefit p {
+  color: var(--color-mute);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.lp-steps {
+  display: grid;
+  margin-top: 36px;
+  border-top: 1px solid var(--color-line-2);
+  list-style: none;
+}
+
+.lp-steps li {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--color-line-2);
+}
+
+.lp-steps span {
+  color: var(--color-purple-soft);
+  font: 12px var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.lp-steps h3 {
+  margin: 10px 0;
+  font: 600 26px/1.2 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.lp-steps p {
+  color: var(--color-mute);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.lp-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  margin-top: 32px;
+}
+
+.lp-closing .t-h2 {
+  max-width: 12ch;
+}
+
+@media (min-width: 1000px) {
+  .lp-hero .editorial-hero-copy {
+    align-self: center;
+    padding-bottom: 0;
+  }
+}
+
+@media (min-width: 800px) {
+  .lp-benefits {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .lp-steps {
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--color-line-2);
+  }
+
+  .lp-steps li {
+    padding: 28px 28px 8px 0;
+    border-bottom: 0;
+  }
+
+  .lp-steps li + li {
+    padding-left: 28px;
+    border-left: 1px solid var(--color-line-2);
+  }
+}
+
+@media (max-width: 700px) {
+  .lp-hero.page-hero.editorial-hero {
+    padding-block: 28px 36px;
+  }
+
+  .lp-hero.page-hero.editorial-hero .t-page {
+    max-width: 8ch;
+    font-size: clamp(3.1rem, 16vw, 4.4rem);
+  }
+
+  .lp-subline {
+    margin-top: 12px;
+    font-size: clamp(1.28rem, 5.4vw, 1.6rem);
+  }
+
+  .lp-hero .editorial-hero-layout {
+    gap: 22px;
+  }
+
+  .lp-cta-lg {
+    width: 100%;
+  }
+
+  .lp-header .lp-nav-cta {
+    min-height: 40px;
+    padding-inline: 14px;
+    font-size: 14px;
+  }
+
+  /* The shared button lifts itself when a page uses .wrap.
+     Here .wrap is only the page container, so keep the button in the corner. */
+  body.wa-chat-on.lp-page .wa-chat {
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 360px) {
+  .lp-header .lp-nav-cta {
+    padding-inline: 12px;
+  }
+}
