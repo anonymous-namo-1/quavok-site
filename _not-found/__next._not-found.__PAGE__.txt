@@ -1,25 +1,26 @@
 2:"$Sreact.fragment"
-3:"/_next/static/chunks/3pbo-1b4nfe92.js"
-4:I[39756,["$3"],"default"]
-5:I[37457,["$3"],"default"]
-a:I[97367,["$3"],"OutletBoundary"]
-b:"$Sreact.suspense"
-e:"ViewportBoundary"
-f:I[97367,["$3"],"$e"]
-10:"MetadataBoundary"
-11:I[97367,["$3"],"$10"]
-12:I[27201,["$3"],"IconMark"]
-7:X
-7:C
+3:"/_next/static/chunks/3qfy96eoyh-ek.js"
+4:"/_next/static/chunks/32b-i75aavri0.js"
+5:I[39756,["$3","$4"],"default"]
+6:I[37457,["$3","$4"],"default"]
+b:I[97367,["$3","$4"],"OutletBoundary"]
+c:"$Sreact.suspense"
+f:"ViewportBoundary"
+10:I[97367,["$3","$4"],"$f"]
+11:"MetadataBoundary"
+12:I[97367,["$3","$4"],"$11"]
+13:I[27201,["$3","$4"],"IconMark"]
 8:X
-9:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$2","c",{"children":[["$","section",null,{"className":"page-hero","aria-labelledby":"nf-title","children":["$","div",null,{"className":"wrap","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"id":"nf-title","className":"t-page mt-6 max-w-[14ch]","children":"This page isn't part of the workflow."}],["$","p",null,{"className":"t-lead mt-6 max-w-[52ch]","children":"It may have moved when we rebuilt the site."}],["$","div",null,{"className":"mt-9 flex flex-wrap gap-3","children":[["$","a",null,{"className":"btn btn-primary","href":"/","children":["Back to home",["$","svg",null,{"viewBox":"0 0 24 24","width":16,"height":16,"fill":"none","stroke":"currentColor","strokeWidth":1.9,"strokeLinecap":"round","strokeLinejoin":"round","aria-hidden":"true","focusable":"false","className":"arrow","children":["$","path",null,{"d":"M5 12h14M13 6l6 6-6 6"}]}]]}],["$","a",null,{"className":"btn btn-ghost","href":"/contact/","children":"Discuss your workflow"}]]}]]}]}],null,["$","$La",null,{"children":["$","$b",null,{"name":"Next.MetadataOutlet","children":"$@c"}]}]]}],"p":"$@d","v":null,"s":"$8"}}]]
-1:[["children",{"s":"/_not-found","h":64,"d":{"r":["$","$2","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]]}],"p":"$@6","v":"$7","s":"$8"},"c":"$Q9"}]]
-0:{"t":{"t":{"s":"","h":16,"c":"$Q1"},"h":{"r":["$","$2","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$Lf",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#101010"}]]}],["$","$L11",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$b",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Page not found · Quavok"}],["$","meta","1",{"name":"description","content":"Quavok designs, builds and runs custom AI automation, so your team can focus on customers, craft and growth. We handle the technology. You stay in charge."}],["$","meta","2",{"name":"application-name","content":"Quavok"}],["$","link","3",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","meta","4",{"name":"robots","content":"noindex"}],["$","meta","5",{"name":"format-detection","content":"telephone=no"}],["$","meta","6",{"property":"og:title","content":"Page not found · Quavok"}],["$","meta","7",{"property":"og:description","content":"Quavok designs, builds and runs custom AI automation, so your team can focus on customers, craft and growth. We handle the technology. You stay in charge."}],["$","meta","8",{"property":"og:site_name","content":"Quavok"}],["$","meta","9",{"property":"og:image","content":"https://quavok.com/og.png"}],["$","meta","10",{"property":"og:image:width","content":"1200"}],["$","meta","11",{"property":"og:image:height","content":"630"}],["$","meta","12",{"property":"og:image:alt","content":"Quavok: custom AI agents and workflows, built and run for you."}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","15",{"name":"twitter:title","content":"Page not found · Quavok"}],["$","meta","16",{"name":"twitter:description","content":"Quavok designs, builds and runs custom AI automation, so your team can focus on customers, craft and growth. We handle the technology. You stay in charge."}],["$","meta","17",{"name":"twitter:image","content":"https://quavok.com/og.png"}],["$","link","18",{"rel":"icon","href":"/favicon.ico","sizes":"32x32"}],["$","link","19",{"rel":"icon","href":"/favicon.svg","type":"image/svg+xml"}],["$","link","20",{"rel":"apple-touch-icon","href":"/apple-touch-icon.png"}],["$","$L12","21",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@13","v":null,"s":"$8"}},"a":"$@14","u":"$@15","b":"ridQz5jtONvVP4Pe5VStw"}
-c:null
-15:true
-8:300
 8:C
-14:0
-6:"$undefined"
-13:"$undefined"
-d:"$undefined"
+9:X
+a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$2","c",{"children":[["$","section",null,{"className":"page-hero","aria-labelledby":"nf-title","children":["$","div",null,{"className":"wrap","children":[["$","p",null,{"className":"eyebrow","children":"404"}],["$","h1",null,{"id":"nf-title","className":"t-page mt-6 max-w-[14ch]","children":"This page isn't part of the workflow."}],["$","p",null,{"className":"t-lead mt-6 max-w-[52ch]","children":"It may have moved when we rebuilt the site."}],["$","div",null,{"className":"mt-9 flex flex-wrap gap-3","children":[["$","a",null,{"className":"btn btn-primary","href":"/","children":["Back to home",["$","svg",null,{"viewBox":"0 0 24 24","width":16,"height":16,"fill":"none","stroke":"currentColor","strokeWidth":1.9,"strokeLinecap":"round","strokeLinejoin":"round","aria-hidden":"true","focusable":"false","className":"arrow","children":["$","path",null,{"d":"M5 12h14M13 6l6 6-6 6"}]}]]}],["$","a",null,{"className":"btn btn-ghost","href":"/contact/","children":"Discuss your workflow"}]]}]]}]}],null,["$","$Lb",null,{"children":["$","$c",null,{"name":"Next.MetadataOutlet","children":"$@d"}]}]]}],"p":"$@e","v":null,"s":"$9"}}]]
+1:[["children",{"s":"/_not-found","h":64,"d":{"r":["$","$2","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
+0:{"t":{"t":{"s":"","h":16,"c":"$Q1"},"h":{"r":["$","$2","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L10",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#101010"}]]}],["$","$L12",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$c",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Page not found · Quavok"}],["$","meta","1",{"name":"description","content":"Quavok designs, builds and runs custom AI automation, so your team can focus on customers, craft and growth. We handle the technology. You stay in charge."}],["$","meta","2",{"name":"application-name","content":"Quavok"}],["$","link","3",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","meta","4",{"name":"robots","content":"noindex"}],["$","meta","5",{"name":"format-detection","content":"telephone=no"}],["$","meta","6",{"property":"og:title","content":"Page not found · Quavok"}],["$","meta","7",{"property":"og:description","content":"Quavok designs, builds and runs custom AI automation, so your team can focus on customers, craft and growth. We handle the technology. You stay in charge."}],["$","meta","8",{"property":"og:site_name","content":"Quavok"}],["$","meta","9",{"property":"og:image","content":"https://quavok.com/og.png"}],["$","meta","10",{"property":"og:image:width","content":"1200"}],["$","meta","11",{"property":"og:image:height","content":"630"}],["$","meta","12",{"property":"og:image:alt","content":"Quavok: custom AI agents and workflows, built and run for you."}],["$","meta","13",{"property":"og:type","content":"website"}],["$","meta","14",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","15",{"name":"twitter:title","content":"Page not found · Quavok"}],["$","meta","16",{"name":"twitter:description","content":"Quavok designs, builds and runs custom AI automation, so your team can focus on customers, craft and growth. We handle the technology. You stay in charge."}],["$","meta","17",{"name":"twitter:image","content":"https://quavok.com/og.png"}],["$","link","18",{"rel":"icon","href":"/favicon.ico","sizes":"32x32"}],["$","link","19",{"rel":"icon","href":"/favicon.svg","type":"image/svg+xml"}],["$","link","20",{"rel":"apple-touch-icon","href":"/apple-touch-icon.png"}],["$","$L13","21",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@14","v":null,"s":"$9"}},"a":"$@15","u":"$@16","b":"ZwDH-PkiS8cim1MizMlcs"}
+d:null
+16:true
+9:300
+9:C
+15:0
+7:"$undefined"
+14:"$undefined"
+e:"$undefined"
