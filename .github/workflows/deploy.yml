@@ -1,0 +1,67 @@
+# Builds the site from this branch and publishes the static export to `main`,
+# which GitHub Pages serves at quavok.com. Each deploy is a normal commit on
+# `main` (no force push), so any earlier version can be restored from history.
+name: Deploy site
+
+on:
+  push:
+    branches: [redesign/managed-automation]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Check the export
+        run: |
+          for f in out/index.html out/404.html out/CNAME out/.nojekyll; do
+            test -f "$f" || { echo "Missing $f"; exit 1; }
+          done
+          grep -qx "quavok.com" out/CNAME
+
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+
+      - name: Publish to main
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          rsync -a --delete --exclude .git out/ site/
+          cd site
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -m "Deploy redesign/managed-automation@${SOURCE_SHA::7}"
+          git push origin HEAD:main
