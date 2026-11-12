@@ -39,7 +39,7 @@ const DEPTS: Dept[] = [
     id: "support",
     icon: "support",
     title: "Customer support",
-    intro: "Routine questions answered from information you approve, with people kept for the conversations that need them.",
+    intro: "Routine questions answered from information you approve, giving your team room for conversations that need care.",
     flows: [
       {
         name: "Routine questions",
@@ -75,7 +75,7 @@ const DEPTS: Dept[] = [
     id: "finance",
     icon: "document",
     title: "Finance & documents",
-    intro: "Documents read, checked and entered, so nobody retypes an invoice again.",
+    intro: "Less retyping, more time to check what matters. Read, check and enter routine documents with a person handling exceptions.",
     flows: [
       {
         name: "Invoice intake",
@@ -129,7 +129,7 @@ const DEPTS: Dept[] = [
     id: "industry",
     icon: "industry",
     title: "Industry-specific workflows",
-    intro: "Every trade has its own routine. If yours is repetitive, it can be scoped and automated the same way.",
+    intro: "Every trade has its own routine. Bring us yours and we’ll work out whether automation would help.",
     flows: [
       {
         name: "Your recurring process",
@@ -160,15 +160,15 @@ export default function SolutionsPage() {
     <>
       <PageHero
         eyebrow="Solutions"
-        title="Where automation takes work off your team."
-        lead="Examples by department of the repetitive workflows we can build and run. They are illustrative, not case studies or prebuilt packages: your automation is designed around how your business actually operates."
+        title="Good people. Better things to do."
+        lead="The chasing. The copying. The same report, every Friday. These examples show where we could take work off your team’s plate, so they can spend more time with customers and on their craft. Each workflow is designed around your business."
       >
         <div className="flex flex-wrap items-center gap-3">
           <a className="btn btn-primary" href={CTA.discuss.href}>
             {CTA.discuss.label}
             <ArrowIcon />
           </a>
-          <span className="tag">Illustrative examples</span>
+          <span className="tag">Illustrative examples, not client results</span>
         </div>
       </PageHero>
 
@@ -189,9 +189,20 @@ export default function SolutionsPage() {
               </a>
             ))}
           </nav>
+          <div className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13.5px] text-mute">
+            <span className="inline-flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded bg-paper-2 ring-1 ring-line" /> Runs automatically
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded bg-ink" /> You approve
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded bg-accent-surface ring-1 ring-accent-text/30" /> A person handles
+            </span>
+          </div>
           <div className="grid gap-5">
             {DEPTS.map((d) => (
-              <article key={d.id} id={d.id} className="card grid gap-8 p-7 sm:p-9 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12" data-rv>
+              <article key={d.id} id={d.id} className="solution-entry grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12" data-rv>
                 <div>
                   <span className="grid h-11 w-11 place-items-center rounded-xl bg-paper-2" aria-hidden="true">
                     <Icon name={d.icon} />
@@ -213,21 +224,11 @@ export default function SolutionsPage() {
               </article>
             ))}
           </div>
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13.5px] text-mute" data-rv>
-            <span className="inline-flex items-center gap-2">
-              <span className="inline-block h-3 w-3 rounded bg-paper-2 ring-1 ring-line" /> Runs automatically
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="inline-block h-3 w-3 rounded bg-ink" /> You approve
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="inline-block h-3 w-3 rounded bg-amber-2 ring-1 ring-amber/30" /> A person handles
-            </span>
-          </div>
+
         </div>
       </section>
 
-      <CtaBand title="Don't see your process here?" body="Most of what we build isn't on any list. Describe the repetitive work and we'll tell you honestly whether it can be automated." />
+      <CtaBand body="Don’t see your process here? Bring one task your team keeps repeating. We’ll work out together whether automation is a good fit." />
     </>
   );
 }

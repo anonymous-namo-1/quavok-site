@@ -53,7 +53,7 @@ All effects fail open: the finished state is in the HTML, reduced motion shows i
 | Effect | Files |
 | --- | --- |
 | Workflow-assembly intro (four labelled agent cursors build the hero workflow; Review stamps "Scope approved") | `src/lib/intro/boot.ts` (inline boot), `src/lib/intro/engine.ts`, `src/components/home/HeroIntro.tsx`, intro CSS in `globals.css` (`qa-*`) |
-| Signal run through the finished hero graph | `src/components/home/HeroStage.tsx` |
+| Electric Purple run through the finished hero graph | `src/components/home/HeroStage.tsx` |
 | Read-only scenario graph, scroll-drawn edges, inspectable steps | `src/components/graph/WorkflowGraph.tsx`, `ScenarioGraph.tsx` |
 | Before/after settle (FLIP) | `src/components/home/BeforeAfter.tsx` |
 | Four-step story + run trace with an approval hold | `src/components/HowWeWork.tsx`, `src/components/RunTrace.tsx` |
@@ -66,3 +66,15 @@ Intro rules: plays once per tab (sessionStorage), always with `?intro=1`, never 
 ## Content rules
 
 Quavok is an early-stage, two-founder company working toward its first deployments. The site must not claim testimonials, client counts, metrics, pricing tiers, certifications, history or launched features that don't exist. Customers never build, configure or deploy automations; Rocket only forwards new-automation requests to the team. Planning notes are in `research/`.
+
+## Dark studio design pass
+
+The default theme is dark throughout: Forest `#1f3d2b`, Sand `#e8dcc4`, and Electric Purple `#8b5cf6`, over a deep base `#13251a`. `src/app/studio.css` contains the editorial layouts, sticker wall, typography, dark surfaces and shared dark styling. The existing graph geometry and intro safeguards remain in place.
+
+Rocket (trial), in `src/components/Companion.tsx` and `src/app/rocket-trial.css`, is an explicitly scripted preview with no AI or automation backend. Its face begins inline in the hero headline and travels with the section in view. On narrow screens it perches in the header after leaving the headline. Quick replies cover Quavok, the managed service, Rocket, getting started and the workflow demo. Cmd/Ctrl+K or the “Ask Rocket” pill opens it; Escape restores focus. It remembers minimisation locally, tracks fine pointers, reacts to touch, and offers quiet contextual hints. Reduced motion disables eye movement, blinking, nodding and confetti. Konami keys or five face clicks reveal a small easter egg.
+
+The intro characters are Milo, Kit, Dot and Rue. A natural completion triggers a brief celebration; skipping does not. `hero-detail.css` owns the spotlight, cast and opening composition; `editorial-detail.css` owns inner-page layouts and the giant footer wordmark. `studio.css` owns shared dark surfaces and the saturated Purple field (`#392660`). `DESIGN.md` and `.impeccable/design.json` document the resulting design system.
+
+`npm run build` first generates `public/og.png` (1200×630) from `scripts/og-image.tsx`, then exports the site. No network request is needed for that artwork. Brand icons and CNAME remain unchanged.
+
+QA screenshots are local in `.qa/` (gitignored). Headless Chrome checks cover all eight routes at 1440×900 and 390×844, console errors, overflow, axe WCAG A/AA checks, and the intro, graph, form and companion interactions. No browser-test dependency was added to the production bundle.

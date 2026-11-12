@@ -3,6 +3,7 @@ import { CTA, SITE } from "@/lib/site";
 import { INTRO_BOOT } from "@/lib/intro/boot";
 import { CATEGORIES } from "@/lib/categories";
 import { HOME_FAQS } from "@/lib/faqs";
+import { StudioDetails } from "@/components/home/StudioDetails";
 import { HeroIntro } from "@/components/home/HeroIntro";
 import { HeroStage } from "@/components/home/HeroStage";
 import { BeforeAfter } from "@/components/home/BeforeAfter";
@@ -18,7 +19,7 @@ import { ArrowIcon, Icon } from "@/components/Icon";
 export const metadata = pageMeta({
   title: "Quavok · Custom AI agents and workflows, built and run for you",
   description:
-    "Automate the work you'd otherwise hire for. Quavok builds and manages custom AI agents and workflows that take repetitive operations off your team, so you never have to manage the technology.",
+    "Less busywork. More breathing room. Quavok builds and manages custom AI agents and workflows that take repetitive operations off your team, so you never have to manage the technology.",
   path: "/",
 });
 
@@ -61,16 +62,15 @@ export default function Home() {
       <section className="hero" data-intro-hero aria-labelledby="hero-title">
         {/* Runs during parsing, before the hero paints. See lib/intro/boot.ts. */}
         <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT }} />
-        <div className="grid-bg hero-backdrop" aria-hidden="true" />
+        <div className="hero-spotlight" aria-hidden="true" />
         <div className="wrap hero-grid">
-          <div>
-            <p className="eyebrow">Fully managed AI automation</p>
-            <h1 id="hero-title" className="t-hero mt-6 max-w-[15ch]" data-intro-type data-intro-hold>
-              Automate the work you’d otherwise hire for.
+          <div className="hero-copy">
+            <h1 id="hero-title" className="t-hero">
+              <span className="hero-opening">Hand us the <span id="rocket-origin" aria-hidden="true" />busywork.</span>
+              <span className="hero-promise" data-intro-type data-intro-hold>Focus on what actually matters.</span>
             </h1>
             <p className="t-lead mt-7 max-w-[54ch]">
-              We build and manage custom AI agents and workflows that take repetitive business operations off your team’s plate, so you get the results
-              without having to manage the technology.
+              Your customers. Your craft. Your next big idea. We design, deploy and run custom AI automation, so your people have room for all three.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Magnetic href={CTA.discuss.href} className="btn btn-primary">
@@ -87,31 +87,37 @@ export default function Home() {
               <li>You approve what it does</li>
             </ul>
           </div>
-          <HeroStage />
+          <div className="workshop">
+            <p className="workshop-note"><span className="workshop-purple" aria-hidden="true" />Behind the scenes of less busywork</p>
+            <HeroStage />
+            <p className="workshop-afterword">You bring the process. We bring it together.</p>
+          </div>
         </div>
+        <StudioDetails />
         <HeroIntro />
       </section>
 
+      <div className="process-ribbon" aria-label="We connect the dots: inbox, CRM, follow-up, reporting"><span>Inbox</span><b>↗</b><span>CRM</span><b>↗</b><span>Follow-up</span><b>↗</b><span>Reporting</span><b>✳</b><em>We connect the dots.</em></div>
+
       {/* 2. Problem */}
-      <section className="section border-t border-line bg-paper-2" aria-labelledby="problem-title">
+      <section className="section busywork-wall" aria-labelledby="problem-title">
         <div className="wrap grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div>
             <SectionHead
               id="problem-title"
-              eyebrow="The problem"
-              title="Your team is doing work a system could do."
-              lead="Every business runs on routine: enquiries to answer, details to copy between tools, follow-ups to chase, reports to rebuild every week. It's necessary work. It's also repetitive, easy to drop when things get busy, and it keeps capable people from the work that actually needs them."
+              eyebrow="A familiar kind of busy"
+              title="Great people. Too many little tasks."
+              lead="The copy-paste. The chasing. The report that somehow needs rebuilding every Friday. Necessary? Yes. The best use of your people? Probably not."
             />
             <p className="t-body mt-6 max-w-[56ch]" data-rv>
-              The usual fixes are hiring someone to keep up, or buying software your team then has to set up and maintain. We offer a third option: we
-              build the automation and we run it.
+              Show us the routine that keeps getting in the way. We’ll map it with you, automate the agreed parts, and look after the technology. You keep the judgment. We handle the repetition.
             </p>
           </div>
           <div>
             <p className="eyebrow eyebrow--plain mb-4" data-rv>
               Sound familiar?
             </p>
-            <ul className="grid gap-3" data-rv-group>
+            <ul className="sticker-wall" data-rv-group>
               {CHORES.map((c) => (
                 <li key={c} className="chore" data-rv>
                   <Icon name="support" className="mt-1 flex-none text-faint" />
@@ -129,12 +135,13 @@ export default function Home() {
           <SectionHead
             id="automate-title"
             eyebrow="What we automate"
-            title="If your team repeats it, we can probably run it."
+            title="Your repeat list. Our kind of work."
             lead="Custom agents, workflows and integrations for the repetitive work across your business, each one designed around how you already operate."
           />
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-rv-group>
-            {CATEGORIES.map((c) => (
+          <div className="automation-index mt-14" data-rv-group>
+            {CATEGORIES.map((c, i) => (
               <article key={c.title} className="cat" data-rv>
+                <span className="index-number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                 <span className="ico" aria-hidden="true">
                   <Icon name={c.icon} />
                 </span>
@@ -171,17 +178,21 @@ export default function Home() {
             <div data-rv>
               <ScenarioGraph />
             </div>
+            <div className="workflow-invitation">
+              <p>Have a process like this?</p>
+              <a className="btn btn-primary" href="/contact/">Discuss Your Workflow<ArrowIcon /></a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* 4. Before / after */}
-      <section className="section border-t border-line bg-paper-2" aria-labelledby="ba-title">
+      <section className="section sorting-room" aria-labelledby="ba-title">
         <div className="wrap">
           <SectionHead
             id="ba-title"
             eyebrow="Before and after"
-            title="Same work. Off your team’s plate."
+            title="From all over the place to in its place."
             lead="Today, routine tasks pile up on whoever is nearest. With Quavok, the same tasks are handled automatically, wait for you only when you want a say, or go to a person when they need one."
           />
           <div className="mt-12" data-rv>
@@ -212,18 +223,18 @@ export default function Home() {
       </section>
 
       {/* 6. Why us */}
-      <section className="section border-t border-line bg-paper-2" aria-labelledby="why-title">
+      <section className="section why-studio" aria-labelledby="why-title">
         <div className="wrap">
           <SectionHead
             id="why-title"
             eyebrow="Why Quavok"
             title="We build the automation. We run the automation."
-            lead="You get the benefit of custom AI agents and workflows without hiring an engineer, buying a platform or maintaining anything."
+            lead="A useful automation should make your day simpler. That includes the part where someone has to keep it working. That someone is us."
           />
-          <div className="mt-14 grid gap-4 sm:grid-cols-2" data-rv-group>
+          <div className="studio-promises mt-14" data-rv-group>
             {WHY.map((w) => (
               <article key={w.title} className="card p-7" data-rv>
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-ink text-lime" aria-hidden="true">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-ink text-purple" aria-hidden="true">
                   <Icon name={w.icon} />
                 </span>
                 <h3 className="t-h3 mt-6">{w.title}</h3>
@@ -235,33 +246,33 @@ export default function Home() {
       </section>
 
       {/* 7. Rocket */}
-      <section id="rocket" className="section" aria-labelledby="rocket-title">
+      <section id="rocket" className="section rocket-room" aria-labelledby="rocket-title">
         <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
             <SectionHead
               id="rocket-title"
               eyebrow="Rocket"
-              title="Ask about your automations in plain language."
+              title="Your operations. Now in conversation."
               lead="Rocket is the conversational way to interact with the automations we build and run for you: what ran, what’s waiting on you, and what you’d like next."
             />
             <ul className="mt-8 space-y-4 text-[15.5px]" data-rv>
               <li className="flex gap-3">
-                <Icon name="check" className="mt-0.5 flex-none text-moss" strokeWidth={2.2} />
+                <Icon name="check" className="mt-0.5 flex-none text-accent-soft" strokeWidth={2.2} />
                 <span>Ask what happened, what needs your approval, or for a summary.</span>
               </li>
               <li className="flex gap-3">
-                <Icon name="forward" className="mt-0.5 flex-none text-moss" strokeWidth={2} />
+                <Icon name="forward" className="mt-0.5 flex-none text-accent-soft" strokeWidth={2} />
                 <span>Request a new automation. Rocket forwards it to our team; it never builds anything itself.</span>
               </li>
               <li className="flex gap-3">
-                <Icon name="bell" className="mt-0.5 flex-none text-amber" strokeWidth={2} />
+                <Icon name="bell" className="mt-0.5 flex-none text-accent-text" strokeWidth={2} />
                 <span>
                   A paid proactive add-on that reaches out first with alerts, suggestions and reports.{" "}
                   <span className="dev-badge align-[1px]">In development</span>
                 </span>
               </li>
               <li className="flex gap-3">
-                <Icon name="eye" className="mt-0.5 flex-none text-amber" strokeWidth={2} />
+                <Icon name="eye" className="mt-0.5 flex-none text-accent-text" strokeWidth={2} />
                 <span>
                   Desktop and mobile apps. <span className="dev-badge align-[1px]">In development</span>
                 </span>

@@ -7,7 +7,7 @@ import { INTRO_DONE_EVENT } from "@/lib/intro/engine";
 import { Icon } from "../Icon";
 
 // The finished hero workflow. After the intro (or straight away when there is
-// none) one signal travels through it once, lighting each step as it passes.
+// none) one purple travels through it once, lighting each step as it passes.
 export function HeroStage() {
   const scenario = SCENARIOS[0];
   const ref = useRef<HTMLElement>(null);
@@ -111,26 +111,42 @@ export function HeroStage() {
   }, []);
 
   return (
-    <figure ref={ref} className="stage" data-intro-stage aria-labelledby="hero-stage-cap">
+    <figure ref={ref} id="workflow-build" className="stage hero-workflow" data-intro-stage aria-labelledby="hero-stage-cap">
+      <div className="stage-cast" role="group" aria-label="Illustrative build crew">
+        {[
+          { name: "Milo", role: "Maps the process", tone: "sand" },
+          { name: "Kit", role: "Finds the words", tone: "mint" },
+          { name: "Dot", role: "Joins the dots", tone: "purple" },
+          { name: "Rue", role: "Checks the details", tone: "accent-alt" },
+        ].map((member) => (
+          <div className={`cast-member cast-${member.tone}`} key={member.name}>
+            <svg viewBox="0 0 20 24" width="18" height="22" aria-hidden="true">
+              <path d="M2 2v17l5-5 4 8 3-2-4-7h8L2 2Z" fill="currentColor" stroke="currentColor" strokeLinejoin="round" />
+            </svg>
+            <span><b>{member.name}</b><small>{member.role}</small></span>
+          </div>
+        ))}
+      </div>
       <div className="stage-head">
         <span className="stage-title" data-intro-title data-intro-hold>
           {scenario.title}
         </span>
         <span className="stage-status">
           <i aria-hidden="true" />
-          Run by Quavok
+          Illustrative build
         </span>
       </div>
       <div className="stage-body grid-bg">
         <WorkflowGraph scenario={scenario} introHold hot={hot} />
       </div>
       <figcaption id="hero-stage-cap" className="stage-foot">
-        <span>Illustrative workflow. Built and run by Quavok, approved by you.</span>
+        <span className="stage-ownership"><Icon name="check" width={15} height={15} /><span>You approve. We build and run.</span></span>
         <a className="inline-flex items-center gap-1.5 font-semibold text-ink" href="/?intro=1">
           <Icon name="replay" width={14} height={14} />
           Replay the build
         </a>
       </figcaption>
+      <div className="assembly-finale" aria-hidden="true"><Icon name="check" width={22} height={22} /><span>All connected.<small>And always in your hands.</small></span></div>
     </figure>
   );
 }

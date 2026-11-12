@@ -23,7 +23,10 @@ export default function PrivacyPage() {
             <h2 className="t-h3 pt-4 text-ink">This website</h2>
             <p>
               This is a static website. It has no accounts, no cookies of our own and no analytics trackers. The hosting provider may keep standard server
-              logs.
+              logs. Rocket’s minimised preference is saved in your browser’s localStorage on this device. You can restore Rocket with the corner button or clear the preference by clearing this site’s browser storage.
+            </p>
+            <p>
+              The Rocket preview on this website uses scripted replies. It has no AI or backend connection, and does not access your business systems.
             </p>
             <p>
               The contact form does not send anything to a server. Submitting it opens your own email app with your message filled in, addressed to{" "}

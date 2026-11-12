@@ -1,8 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./studio.css";
+import "./editorial-detail.css";
+import "./hero-detail.css";
+import "./rocket-trial.css";
+import "./palette.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Companion } from "@/components/Companion";
 import { MotionRuntime } from "@/components/MotionRuntime";
 import { SITE } from "@/lib/site";
 import { OG_IMAGE } from "@/lib/meta";
@@ -14,7 +20,7 @@ const inter = localFont({
 });
 
 const bricolage = localFont({
-  src: [{ path: "../fonts/bricolage-latin.woff2", weight: "600 700", style: "normal" }],
+  src: [{ path: "../fonts/bricolage-latin.woff2", weight: "200 800", style: "normal" }],
   variable: "--font-bricolage",
   display: "swap",
 });
@@ -37,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f7f3",
+  themeColor: "#1f3d2b",
   width: "device-width",
   initialScale: 1,
 };
@@ -75,6 +81,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main">{children}</main>
         <SiteFooter />
         <MotionRuntime />
+        <Companion />
       </body>
     </html>
   );

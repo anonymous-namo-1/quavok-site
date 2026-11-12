@@ -17,9 +17,9 @@ const TASKS: Task[] = [
 ];
 
 const LANES: { id: Lane; title: string; dot: string }[] = [
-  { id: "handled", title: "Handled automatically", dot: "#5fa82c" },
-  { id: "you", title: "Waiting on you", dot: "#101311" },
-  { id: "person", title: "With a person", dot: "#a8510c" },
+  { id: "handled", title: "Handled automatically", dot: "#5b6c59" },
+  { id: "you", title: "Waiting on you", dot: "#070d09" },
+  { id: "person", title: "With a person", dot: "#5b6c59" },
 ];
 
 type State = "before" | "after";
@@ -135,7 +135,7 @@ export function BeforeAfter() {
       <div ref={boardRef} className="ba-board" aria-live="polite">
         <section className="ba-col ba-col--pile" aria-label="On your team's plate">
           <h3>
-            <span className="dot" style={{ background: "#c9ccc2" }} aria-hidden="true" />
+            <span className="dot" style={{ background: "#c4bfa8" }} aria-hidden="true" />
             On your team’s plate
           </h3>
           <div className="ba-list">

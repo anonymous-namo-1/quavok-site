@@ -11,7 +11,7 @@ import { ArrowIcon, Icon } from "@/components/Icon";
 export const metadata = pageMeta({
   title: "Rocket",
   description:
-    "Rocket is the conversational way to interact with the automations Quavok builds and runs for you. A paid proactive add-on and desktop and mobile apps are in development.",
+    "Ask about the automations Quavok builds and runs for you. Explore the Rocket concept; its desktop and mobile apps and paid proactive add-on are in development.",
   path: "/rocket/",
 });
 
@@ -55,8 +55,8 @@ export default function RocketPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(ROCKET_FAQS)) }} />
       <PageHero
         eyebrow="Rocket"
-        title="Talk to the automations we run for you."
-        lead="Rocket is the conversational way to interact with the automations Quavok has built for your business. Ask what ran, what's waiting on you, or for a summary. Ask for something new, and Rocket passes the request to our team."
+        title="Less digging. Just ask Rocket."
+        lead="Rocket is a conversational way to ask about the automations we build and run for you. What’s done? What needs you? Ask for a new automation, and Rocket passes the request to our team. We handle the build."
       >
         <div className="flex flex-wrap items-center gap-3">
           <a className="btn btn-primary" href={CTA.discuss.href}>
@@ -78,7 +78,7 @@ export default function RocketPage() {
           <SectionHead id="modes-title" eyebrow="Two ways to use it" title="You ask. Or, soon, Rocket reaches out." />
           <div className="mt-12 grid gap-4 md:grid-cols-2" data-rv-group>
             <article className="card p-7 sm:p-9" data-rv>
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-lime text-ink" aria-hidden="true">
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-purple text-ink" aria-hidden="true">
                 <Icon name="support" />
               </span>
               <h3 className="t-h3 mt-6">You ask</h3>
@@ -91,7 +91,7 @@ export default function RocketPage() {
             </article>
             <article className="panel-dark on-dark p-7 sm:p-9" data-rv>
               <div className="flex flex-wrap items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-stage-2 text-lime" aria-hidden="true">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-stage-2 text-purple" aria-hidden="true">
                   <Icon name="bell" />
                 </span>
                 <span className="dev-badge">Paid add-on · In development</span>
@@ -121,7 +121,7 @@ export default function RocketPage() {
           <SectionHead
             id="status-title"
             eyebrow="Status"
-            title="What exists, and what's coming."
+            title="Where Rocket stands."
             lead="We label anything unfinished where it appears. Nothing here is available to download."
           />
           <div className="card divide-y divide-line" data-rv>
@@ -150,13 +150,13 @@ export default function RocketPage() {
             </h2>
             <ul className="mt-6 grid gap-3 text-[15.5px] sm:grid-cols-3">
               <li className="flex gap-3">
-                <Icon name="x" className="mt-0.5 flex-none text-amber" strokeWidth={2} /> Build, configure or deploy an automation
+                <Icon name="x" className="mt-0.5 flex-none text-accent-text" strokeWidth={2} /> Build, configure or deploy an automation
               </li>
               <li className="flex gap-3">
-                <Icon name="x" className="mt-0.5 flex-none text-amber" strokeWidth={2} /> Change what an automation is allowed to do
+                <Icon name="x" className="mt-0.5 flex-none text-accent-text" strokeWidth={2} /> Change what an automation is allowed to do
               </li>
               <li className="flex gap-3">
-                <Icon name="x" className="mt-0.5 flex-none text-amber" strokeWidth={2} /> Replace the Quavok team behind it
+                <Icon name="x" className="mt-0.5 flex-none text-accent-text" strokeWidth={2} /> Replace the Quavok team behind it
               </li>
             </ul>
           </div>

@@ -46,7 +46,7 @@ const STAGES = [
     body: "We deploy it and run it. We monitor it, fix problems, keep it current when your tools or process change, and add new automations when you ask. Each customer's automations are intended to run in their own dedicated, managed cloud environment.",
     you: "Approve what needs you. Tell us what's changed.",
     us: "Operate, monitor, maintain and extend.",
-    out: "Work that runs itself, managed by us.",
+    out: "An automation we run, with you in charge.",
   },
 ];
 
@@ -60,8 +60,8 @@ export default function HowItWorksPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(FAQ_PICK)) }} />
       <PageHero
         eyebrow="How it works"
-        title="Four stages. You never build a thing."
-        lead="Discovery, design, build, then deployment and ongoing management. The technical work is ours from start to finish. Your part is explaining how the work happens and approving what the automation is allowed to do."
+        title="You know the work. We make it flow."
+        lead="Start with one process that gets in the way of your real work. We’ll listen, design it with you, build it and keep it running. You decide what good looks like. We handle the technology."
       >
         <a className="btn btn-primary" href={CTA.book.href}>
           {CTA.book.label}
@@ -73,7 +73,7 @@ export default function HowItWorksPage() {
         <div className="wrap">
           <ol className="grid gap-5">
             {STAGES.map((s) => (
-              <li key={s.n} className="card grid gap-8 p-7 sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14" data-rv>
+              <li key={s.n} className="process-entry grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14" data-rv>
                 <div>
                   <p className="step-num">
                     <b>{s.n}</b>
@@ -115,10 +115,10 @@ export default function HowItWorksPage() {
             />
             <ul className="mt-8 space-y-4 text-[15.5px]" data-rv>
               <li className="flex gap-3">
-                <Icon name="check" className="mt-0.5 flex-none text-moss" strokeWidth={2.2} /> Clear summaries of what ran and what is waiting on you.
+                <Icon name="check" className="mt-0.5 flex-none text-accent-soft" strokeWidth={2.2} /> Clear summaries of what ran and what is waiting on you.
               </li>
               <li className="flex gap-3">
-                <Icon name="person" className="mt-0.5 flex-none text-amber" strokeWidth={2} /> Exceptions go to your team instead of being guessed at.
+                <Icon name="person" className="mt-0.5 flex-none text-accent-text" strokeWidth={2} /> Exceptions go to your team instead of being guessed at.
               </li>
               <li className="flex gap-3">
                 <Icon name="wrench" className="mt-0.5 flex-none text-ink" strokeWidth={2} /> We monitor, investigate failures and fix the cause.

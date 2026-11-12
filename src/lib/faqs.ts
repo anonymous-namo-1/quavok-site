@@ -11,10 +11,10 @@ export const HOME_FAQS: Faq[] = [
     ],
   },
   {
-    q: "Can your systems replace tasks currently handled by employees?",
+    q: "How does automation help my team?",
     a: [
-      "Yes. That is the point: we take repetitive tasks that people on your team do today, such as copying details between tools, answering the same questions or assembling the same report, and have an automation handle them.",
-      "We automate tasks, not judgment. Exceptions, sensitive cases and anything outside the agreed rules are routed to a person. What you do with the time your team gets back is your call; we don’t promise headcount or cost outcomes.",
+      "Copying details between tools, answering the same questions, rebuilding Friday’s report: these tasks take attention away from customers, craft and growth. We design an automation to handle the agreed routine, then run it for you.",
+      "We automate tasks, not judgment. Exceptions, sensitive cases and anything outside the agreed rules are routed to a person. Your people keep the decisions and relationships. We take care of the repetitive steps around them.",
     ],
   },
   {

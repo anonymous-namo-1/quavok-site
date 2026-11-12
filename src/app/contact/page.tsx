@@ -15,8 +15,8 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Show us the work you'd like off your plate."
-        lead="Describe a process your team repeats. We'll read it, come back with questions, and set up a discovery call to see whether and how we'd automate it."
+        title="What keeps getting in the way?"
+        lead="Tell us about one task your team keeps repeating. No polished brief needed. Use the form to prepare an email, then send it from your email app. We’ll start with the work and see where automation could help."
       />
       <section className="section pt-4" aria-label="Contact form and details">
         <div className="wrap grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-14">

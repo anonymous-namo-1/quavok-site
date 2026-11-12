@@ -2,7 +2,7 @@ import { CTA, NAV, SITE } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer editorial-footer">
       <div className="wrap">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
@@ -56,8 +56,11 @@ export function SiteFooter() {
         </div>
         <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 text-[13.5px] text-faint md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()} Quavok. Custom AI automation, built and run for you.</p>
-          <p>Rocket desktop and mobile apps and the proactive add-on are in development.</p>
+          <p>Rocket desktop and mobile apps, and its paid proactive add-on, are in development.</p>
         </div>
+      </div>
+      <div className="footer-wordmark" aria-hidden="true">
+        {Array.from("QUAVOK").map((letter, index) => <span key={index}>{letter}</span>)}
       </div>
     </footer>
   );

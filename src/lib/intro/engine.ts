@@ -26,7 +26,7 @@ declare global {
 
 export const INTRO_DONE_EVENT = "quavok:intro-done";
 
-function signalDone() {
+function purpleDone() {
   window.__qaIntroDone = true;
   try {
     window.dispatchEvent(new Event(INTRO_DONE_EVENT));
@@ -35,10 +35,10 @@ function signalDone() {
   }
 }
 
-const INK = "#101311";
-const GREEN = "#36661b";
-const BLUE = "#2457d6";
-const AMBER = "#a8510c";
+const SAND = "#e8dcc4";
+const PURPLE_SOFT = "#c5a9fa";
+const PURPLE = "#8b5cf6";
+const SAND_LIGHT = "#e8dcc4";
 const SVGNS = "http://www.w3.org/2000/svg";
 const PROPS = ["opacity", "transform", "transform-origin", "will-change", "clip-path", "-webkit-clip-path"];
 
@@ -353,6 +353,7 @@ type Box = {
 type Agent = {
   el: HTMLDivElement;
   tag: HTMLSpanElement;
+  bubble: HTMLSpanElement;
   tagW: number;
   x: number;
   y: number;
@@ -365,7 +366,7 @@ type Agent = {
   box: Box;
 };
 
-function makeAgent(name: string, color: string, stamp?: string): Agent {
+function makeAgent(name: string, color: string, stamp?: string, chatter?: string): Agent {
   const el = document.createElement("div");
   el.className = "qa-cur";
   el.style.setProperty("--qa", color);
@@ -376,7 +377,7 @@ function makeAgent(name: string, color: string, stamp?: string): Agent {
   const path = document.createElementNS(SVGNS, "path");
   path.setAttribute("d", "M.75.55.75 15.5 5.15 11.85 8.45 18.7 10.95 17.45 7.6 10.65 14.05 10.65Z");
   path.setAttribute("fill", color);
-  path.setAttribute("stroke", "#fff");
+  path.setAttribute("stroke", "#e8dcc4");
   path.setAttribute("stroke-width", "1.15");
   path.setAttribute("stroke-linejoin", "round");
   svg.appendChild(path);
@@ -385,6 +386,10 @@ function makeAgent(name: string, color: string, stamp?: string): Agent {
   tag.textContent = name;
   el.appendChild(svg);
   el.appendChild(tag);
+  const bubble = document.createElement("span");
+  bubble.className = "qa-chatter";
+  bubble.textContent = chatter || "On it.";
+  el.appendChild(bubble);
 
   const boxEl = document.createElement("div");
   boxEl.className = "qa-box";
@@ -401,6 +406,7 @@ function makeAgent(name: string, color: string, stamp?: string): Agent {
   return {
     el,
     tag,
+    bubble,
     tagW: 90,
     x: 0,
     y: 0,
@@ -421,7 +427,7 @@ export function startIntro(): () => void {
   const boot = window.__qaIntro;
   if (!boot || !docEl.classList.contains("qa-pre")) {
     docEl.classList.remove("qa-pre");
-    signalDone();
+    purpleDone();
     return () => {};
   }
 
@@ -582,6 +588,8 @@ export function startIntro(): () => void {
         a.box.ok = false;
         a.box.hold = 0;
         a.box.follow = boxAround(it, opt.pad == null ? 4 : opt.pad);
+        const label = it.el.querySelector(".n-title")?.textContent;
+        a.bubble.textContent = label ? `${label}. In its place.` : "A place for everything.";
       },
       run: (u) => {
         const k = 1 - easeBack(u);
@@ -640,6 +648,7 @@ export function startIntro(): () => void {
       d,
       begin: () => {
         ty.it.op = 1;
+        a.bubble.textContent = "Room for the work you love.";
         caret.on = true;
         const c = ty.typeTo(0);
         Object.assign(caret, { x: c.x, y: c.y, h: c.h });
@@ -668,6 +677,7 @@ export function startIntro(): () => void {
       begin: () => {
         a.show = true;
         a.down = true;
+        a.bubble.textContent = e.dashed ? "Unsure? Ask a person." : "Passing it along…";
         if (e.dashed) e.op = 0;
         else e.u = 0.001;
       },
@@ -712,6 +722,8 @@ export function startIntro(): () => void {
       d,
       begin: () => {
         a.box.ok = true;
+        a.bubble.textContent = "All connected. Over to you.";
+        document.querySelector("[data-intro-stage]")?.classList.add("assembly-approved");
       },
       run: () => {},
       end: () => {
@@ -813,7 +825,7 @@ export function startIntro(): () => void {
         if (ov.parentNode) ov.parentNode.removeChild(ov);
       }
     }
-    signalDone();
+    purpleDone();
   }
 
   function onKey(e: KeyboardEvent) {
@@ -956,6 +968,7 @@ export function startIntro(): () => void {
       placeSkip();
 
       if (!busy) {
+        window.dispatchEvent(new Event("quavok:assembly-complete"));
         finish();
         return;
       }
@@ -1002,7 +1015,7 @@ export function startIntro(): () => void {
   function setup() {
     if (reduceMq.matches) {
       release();
-      signalDone();
+      purpleDone();
       return;
     }
     hero = document.querySelector<HTMLElement>("[data-intro-hero]");
@@ -1010,13 +1023,13 @@ export function startIntro(): () => void {
     const stage = hero && hero.querySelector<HTMLElement>("[data-intro-stage]");
     if (!hero || !h1) {
       release();
-      signalDone();
+      purpleDone();
       return;
     }
     if (boot!.forced) toTop();
     if (!visibleEnough(h1)) {
       release();
-      signalDone();
+      purpleDone();
       return;
     }
 
@@ -1108,15 +1121,15 @@ export function startIntro(): () => void {
     fx.setAttribute("aria-hidden", "true");
     overlay.appendChild(fx);
 
-    const mapping = makeAgent("Mapping", INK);
-    const copy = makeAgent("Copy", GREEN);
-    const wiring = makeAgent("Wiring", BLUE);
-    const review = makeAgent("Review", AMBER, "Scope approved");
+    const mapping = makeAgent("Milo · Mapping", SAND, undefined, "A place for everything.");
+    const copy = makeAgent("Kit · Copy", PURPLE_SOFT, undefined, "Less jargon. More human.");
+    const wiring = makeAgent("Dot · Wiring", PURPLE, undefined, "Connecting the dots.");
+    const review = makeAgent("Rue · Review", SAND_LIGHT, "Example checked", "A human gets the final say.");
     agents = [mapping, copy, wiring, review];
     for (const a of agents) fx.appendChild(a.box.el);
     caretEl = document.createElement("div");
     caretEl.className = "qa-caret";
-    caretEl.style.setProperty("--qa", GREEN);
+    caretEl.style.setProperty("--qa", PURPLE_SOFT);
     fx.appendChild(caretEl);
     for (const a of agents) fx.appendChild(a.el);
     document.body.appendChild(overlay);

@@ -67,7 +67,7 @@ const SERVICES: { id: string; icon: IconName; title: string; summary: string; in
       "Changes and new automations on request",
       "A dedicated managed environment per customer (intended)",
     ],
-    example: "Your supplier changes their invoice format. We update the agent; your team doesn't notice anything changed.",
+    example: "Your supplier changes their invoice format. We check the affected steps, update the agent and test it again.",
   },
 ];
 
@@ -76,8 +76,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Everything it takes to automate the work. Done by us."
-        lead="Quavok is a fully managed service. We design, build, connect, deploy and run custom AI agents and workflows for your business. You explain the work and approve what we propose. You never build or maintain anything."
+        title="Leave the busywork with us."
+        lead="Your team knows the work. We build the automation around it, then keep it running. From the first process map to the everyday fixes, the technical work is ours. You approve what it does and get back to what matters."
       >
         <div className="flex flex-wrap gap-3">
           <a className="btn btn-primary" href={CTA.discuss.href}>
@@ -100,14 +100,13 @@ export default function ServicesPage() {
             ))}
           </nav>
           <div className="grid gap-5">
-            {SERVICES.map((s, i) => (
-              <article key={s.id} id={s.id} className="card grid gap-8 p-7 sm:p-10 lg:grid-cols-[1fr_1fr] lg:gap-14" data-rv>
+            {SERVICES.map((s) => (
+              <article key={s.id} id={s.id} className="service-entry grid gap-8 lg:grid-cols-[1fr_1fr] lg:gap-14" data-rv>
                 <div>
                   <div className="flex items-center gap-4">
-                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-ink text-lime" aria-hidden="true">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-ink text-purple" aria-hidden="true">
                       <Icon name={s.icon} />
                     </span>
-                    <span className="font-mono text-[12px] tracking-[0.08em] text-mute">{String(i + 1).padStart(2, "0")} / 04</span>
                   </div>
                   <h2 className="t-h3 mt-6" style={{ fontSize: "clamp(1.6rem, 1.25rem + 1.2vw, 2.3rem)" }}>
                     {s.title}
@@ -119,12 +118,12 @@ export default function ServicesPage() {
                   <ul className="mt-4 space-y-3">
                     {s.includes.map((x) => (
                       <li key={x} className="flex gap-3 text-[15.5px]">
-                        <Icon name="check" className="mt-0.5 flex-none text-moss" strokeWidth={2.2} />
+                        <Icon name="check" className="mt-0.5 flex-none text-accent-soft" strokeWidth={2.2} />
                         {x}
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-7 rounded-2xl border border-line bg-paper p-5">
+                  <div className="service-example mt-7">
                     <p className="font-mono text-[11px] tracking-[0.08em] text-faint uppercase">For example (illustrative)</p>
                     <p className="mt-2 text-[15px] text-ink-2">{s.example}</p>
                   </div>
@@ -172,7 +171,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <CtaBand title="Tell us what your team keeps repeating." body="A discovery call is where we map one process with you and tell you honestly whether and how we'd automate it." />
+      <CtaBand />
     </>
   );
 }

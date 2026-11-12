@@ -5,9 +5,9 @@
 export const SITE = {
   name: "Quavok",
   url: "https://quavok.com",
-  tagline: "Your business runs on processes. We make those processes run themselves.",
+  tagline: "Focus on what actually matters.",
   description:
-    "Quavok builds and runs custom AI agents, workflows and integrations that take repetitive work off your team. Fully managed: we build the automation, we run the automation.",
+    "Quavok designs, builds and runs custom AI automation, so your team can focus on customers, craft and growth. We handle the technology. You stay in charge.",
   email: "hello@quavok.com",
   phoneDisplay: "+91 90413 15226",
   phoneHref: "tel:+919041315226",

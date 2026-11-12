@@ -30,20 +30,19 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="A small team that builds and runs the automation."
-        lead={SITE.tagline}
+        title="For the work only your people can do."
+        lead="Knowing your customers. Caring about the details. Making the next thing better. That’s where your people belong. We build and run the automation that gives them more room for it."
       />
 
       <section className="section pt-4" aria-labelledby="story-title">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div data-rv>
             <h2 id="story-title" className="t-h3" style={{ fontSize: "clamp(1.6rem, 1.25rem + 1.2vw, 2.3rem)" }}>
-              Where we are
+              Small team. Close to the work.
             </h2>
             <div className="t-body mt-5 space-y-4">
               <p>
-                Quavok is an early-stage company with two founders. We started it because so much of the work inside a business is the same task done
-                again and again, and the tools to automate it usually come with a job attached: someone has to build, configure and maintain them.
+                Quavok is an early-stage company with two founders. We think good people spend too much of their day moving information around. We want to help them get back to the work they care about.
               </p>
               <p>
                 So we take that job. We design custom AI agents, workflows and integrations around how a business already operates, and then we run them.
@@ -119,7 +118,7 @@ export default function AboutPage() {
           <SectionHead id="principles-title" eyebrow="How we operate" title="A few things we hold ourselves to." />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-rv-group>
             {PRINCIPLES.map((p) => (
-              <article key={p.t} className="card p-6" data-rv>
+              <article key={p.t} className="principle-entry" data-rv>
                 <h3 className="text-[17px] font-semibold tracking-[-0.01em]">{p.t}</h3>
                 <p className="t-body mt-3 text-[15px]">{p.b}</p>
               </article>

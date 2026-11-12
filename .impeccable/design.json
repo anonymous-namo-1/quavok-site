@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-12T04:36:58.209441+00:00",
+  "title": "Design System: Quavok",
+  "extensions": {
+    "motion": [
+      {
+        "name": "ease-out-soft",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Entrances and interaction settling"
+      },
+      {
+        "name": "rocket-travel",
+        "value": "460ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Section-aware companion travel; none with reduced motion"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "640px"
+      },
+      {
+        "name": "navigation",
+        "value": "960px"
+      },
+      {
+        "name": "hero-columns",
+        "value": "1040px"
+      }
+    ],
+    "shadows": [
+      {
+        "name": "preview",
+        "value": "0 16px 64px #00000077",
+        "purpose": "Opt-in scripted preview panel"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Electric Purple discovery button",
+      "kind": "button",
+      "refersTo": "button-purple",
+      "description": "Primary discovery action in the header and hero",
+      "html": "<button class=\"q-button\">Discuss Your Workflow \u2192</button>",
+      "css": ".q-button { background:#593b9d; color:#e8dcc4; min-height:50px; padding:12px 22px; border:0; border-radius:8px; font:600 15px Inter,sans-serif; cursor:pointer; } .q-button:hover { background:#e8dcc4; } .q-button:focus-visible { outline:2px solid #8b5cf6; outline-offset:4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The operations studio",
+    "overview": "Dark editorial confidence with visible workflow handoffs and a warm scripted guide.",
+    "keyCharacteristics": [
+      "People-first promise",
+      "Forest and sand colour fields",
+      "Approval-led diagrams",
+      "Traveling scripted Rocket trial"
+    ],
+    "rules": [
+      {
+        "name": "Honest demonstration",
+        "body": "Label illustrative workflows, scripted replies and features in development locally.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Use dark surfaces and readable sand text",
+      "Show human approval and exception routes"
+    ],
+    "donts": [
+      "Invent proof or customer outcomes",
+      "Turn the website into an agent builder"
+    ]
+  }
+}
