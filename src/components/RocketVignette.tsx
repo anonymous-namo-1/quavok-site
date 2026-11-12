@@ -24,12 +24,12 @@ type Exchange = {
 const ASK: Exchange[] = [
   {
     q: "What needs my approval today?",
-    a: "One item. An invoice in Invoice intake is above the limit you set, so it is waiting for your OK before it is recorded. Everything else ran as agreed.",
+    a: "Just one. A supplier invoice is above the limit you set, so it’s waiting for your OK. Everything else went as planned.",
     focus: "invoices",
   },
   {
     q: "Summarise yesterday’s enquiries.",
-    a: "Yesterday’s enquiries were logged to your CRM and followed up in the wording you approved. One didn’t match your criteria, so it went to your team instead.",
+    a: "Every enquiry got a reply, and the follow-ups went out on time. One was unusual, so a person on your team picked it up.",
     focus: "leads",
   },
   {

@@ -11,6 +11,12 @@ let lastCue = -1;
 let lastSample = -1;
 
 export function soundEnabled() { return enabled; }
+// Rocket answers aloud when someone asks him something, unless the visitor
+// has explicitly chosen silence (header mute or "Continue silently").
+export function soundAllowed() {
+  if (enabled) return true;
+  try { return localStorage.getItem("quavok-sound-effects") !== "off"; } catch { return true; }
+}
 export function setSoundEnabled(value: boolean) {
   enabled = value;
   if (!value) void context?.suspend();

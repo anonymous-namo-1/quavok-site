@@ -23,7 +23,7 @@ export const metadata = pageMeta({
 });
 
 const CHORES = [
-  "Can someone copy this lead into the CRM?",
+  "Can someone note down this customer’s details?",
   "Did anyone reply to yesterday’s enquiry?",
   "I’ll chase that quote tomorrow.",
   "Who’s putting the weekly report together?",

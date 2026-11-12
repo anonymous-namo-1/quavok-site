@@ -1,25 +1,28 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { guideForSection, playVoice, stopVoice, voiceForText, voiceOwner, voiceText } from "@/lib/voice";
-import { soundEnabled } from "@/lib/sound";
+import { playVoice, stopVoice, voiceForText, voiceOwner, voiceText } from "@/lib/voice";
+import { soundAllowed, soundEnabled } from "@/lib/sound";
 
 const STORAGE_KEY = "quavok-rocket-minimised";
-const INTRO = voiceText("greeting");
+const INTRO = "Hi, I’m Rocket. What would you like to know?";
 const QUESTIONS = [
   { label: "What does Quavok do?", answer: voiceText("faq-0") },
   { label: "Do I build anything?", answer: voiceText("faq-1") },
   { label: "What is Rocket?", answer: voiceText("faq-2") },
   { label: "How do I start?", answer: voiceText("faq-3") },
 ];
-const SECTION_HINTS: Record<string, string> = {
-  automate: "A little less busywork.",
-  how: "You approve. Quavok handles the build.",
-  rocket: "Your automations, in conversation.",
-  "problem-title": "More room for the work you love.",
-  "ba-title": "Same work. Clearer handoffs.",
-  "why-title": "The technical work stays with Quavok.",
-  faq: "Good questions welcome.",
+// Rocket explains each part of the page in a quiet text bubble. He only
+// speaks when someone asks him something.
+const SECTION_GUIDES: Record<string, string> = {
+  "problem-title": "This is the busywork we take off your plate. Your people keep the judgment calls.",
+  automate: "Start with the task you repeat most. Quavok builds around how you already work.",
+  "ba-title": "Routine work gets handled. Decisions wait for you, and anything unusual goes to a person.",
+  how: "You explain the process and approve the scope. Quavok builds it and keeps it running.",
+  rocket: "Ask me about the automations Quavok runs for you. New requests go straight to the team.",
+  faq: "Ask whatever’s on your mind. When you’re ready, tell the team about one task you repeat.",
+  "cta-title": "Your next step is a discovery call. No technical homework.",
+  footer: "You keep the craft, the customers and the decisions. We’ll handle the repetitive work.",
 };
 type Mood = "curious" | "happy" | "sleepy" | "excited";
 type ChatState = "closed" | "open" | "minimised";
@@ -29,6 +32,7 @@ export function Companion() {
   const [mood, setMood] = useState<Mood>("curious");
   const [reply, setReply] = useState(INTRO);
   const [hint, setHint] = useState("");
+  const [guide, setGuide] = useState("");
   const speechAvailable = true;
   const [speaking,setSpeaking] = useState(false);
   const [storySpeaking,setStorySpeaking] = useState(false);
@@ -52,7 +56,7 @@ export function Companion() {
     setChat(next);
     setHint("");
     if (next !== "open") stopSpeech();
-    else {stopVoice("demo");stopVoice("guide");if(soundEnabled())void playVoice("greeting",{owner:"chat"});}
+    else {stopVoice("demo");setGuide("");}
     try {
       if (next === "minimised") localStorage.setItem(STORAGE_KEY, "1");
       else localStorage.removeItem(STORAGE_KEY);
@@ -119,6 +123,11 @@ export function Companion() {
       clearTimeout(hintTimer);
       setHint(text);
       hintTimer = setTimeout(() => setHint(""), 3200);
+    };
+    let guideHide: ReturnType<typeof setTimeout>;
+    const explain = (text: string) => {
+      clearTimeout(guideHide); setHint(""); setGuide(text);
+      guideHide = setTimeout(() => setGuide(""), Math.max(4500, text.split(" ").length * 380));
     };
     const layout = () => {
       raf = 0;
@@ -202,10 +211,10 @@ export function Companion() {
     const queueGuide=()=>{
       clearTimeout(guideTimer);
       guideTimer=setTimeout(()=>{
-        if(!soundEnabled()||document.hidden||current.current!=="closed"||voiceOwner()||document.documentElement.matches(".qa-prologue,.qa-building"))return;
-        const id=guideForSection(narrationKey);
-        if(!id||narrated.has(narrationKey))return;
-        narrated.add(narrationKey);void playVoice(id,{owner:"guide"});
+        if(document.hidden||current.current!=="closed"||document.documentElement.matches(".qa-prologue,.qa-building"))return;
+        const text=SECTION_GUIDES[narrationKey];
+        if(!text||narrated.has(narrationKey))return;
+        narrated.add(narrationKey);explain(text);
       },850);
     };
     const visible = new Set<Element>();
@@ -213,7 +222,7 @@ export function Companion() {
       entries.forEach(entry => { if (entry.isIntersecting) visible.add(entry.target); else visible.delete(entry.target); });
       const next = sections.filter(candidate=>visible.has(candidate)).sort((a,b)=>Math.abs(a.getBoundingClientRect().top-innerHeight*.25)-Math.abs(b.getBoundingClientRect().top-innerHeight*.25))[0];
       if (next && next !== section) {
-        stopVoice("guide");section=next;
+        section=next;
         narrationKey=next.tagName==="FOOTER"?"footer":next.id||next.getAttribute("aria-labelledby")||"";
         if(narrationKey==="page-title"){
           const pathname=location.pathname;
@@ -235,15 +244,13 @@ export function Companion() {
       if (!(event instanceof CustomEvent) || typeof event.detail !== "string") return;
       stopSpeech(); wake("happy"); whisper(event.detail);
     };
-    const quiet = () => { if (document.hidden) { stopVoice(); clearTimeout(guideTimer);setStorySpeaking(false); } else queueGuide(); };
+    const quiet = () => { if (document.hidden) { stopVoice(); clearTimeout(guideTimer);setStorySpeaking(false); } };
     const voiceChanged=(event:Event)=>{
       if(!(event instanceof CustomEvent)||typeof event.detail?.active!=="boolean")return;
       setSpeaking(event.detail.active&&event.detail.role==="rocket");
       if(event.detail.active)wake(event.detail.role==="person"?"curious":"happy");
-      else queueGuide();
     };
-    const audioReady=()=>{narrated.delete(narrationKey);queueGuide();};
-    const soundChanged=()=>{if(soundEnabled())queueGuide();else{clearTimeout(guideTimer);stopVoice();}};
+    const soundChanged=()=>{if(!soundEnabled())stopVoice();};
     const called = () => {
       setListening(true); wake("curious");
       if (callTimer.current) clearTimeout(callTimer.current);
@@ -275,7 +282,6 @@ export function Companion() {
     window.addEventListener("quavok:build-start", buildStarted);
     window.addEventListener("quavok:build-end",schedule);
     window.addEventListener("quavok:voice-state",voiceChanged);
-    window.addEventListener("quavok:audio-ready",audioReady);
     window.addEventListener("quavok:sound-change",soundChanged);
     window.addEventListener("quavok:rocket-position", schedule);
     window.addEventListener("quavok:assembly-complete", celebrate);
@@ -291,7 +297,7 @@ export function Companion() {
     idle = setTimeout(() => setMood("sleepy"), 14000);
     schedule();
     return () => {
-      cancelAnimationFrame(raf); clearTimeout(idle); clearTimeout(hintTimer);
+      cancelAnimationFrame(raf); clearTimeout(idle); clearTimeout(hintTimer); clearTimeout(guideHide);
       observer.disconnect(); resizeObserver.disconnect();
       window.removeEventListener("pageshow", pageShow);
       window.removeEventListener("pointermove", pointer); window.removeEventListener("pointerdown", outside);
@@ -300,7 +306,6 @@ export function Companion() {
       window.removeEventListener("quavok:build-start", buildStarted);
       window.removeEventListener("quavok:build-end",schedule);
       window.removeEventListener("quavok:voice-state",voiceChanged);
-      window.removeEventListener("quavok:audio-ready",audioReady);
       window.removeEventListener("quavok:sound-change",soundChanged);
       clearTimeout(guideTimer);stopVoice(); window.removeEventListener("quavok:rocket-position", schedule);
       window.removeEventListener("quavok:assembly-complete", celebrate);
@@ -321,12 +326,13 @@ export function Companion() {
       <span className="rocket-face-smile" aria-hidden="true" />
     </button>
     <span className="rocket-build-command" role="status">Let’s build this page.</span>
-    {chat === "closed" && hint && <span className="rocket-whisper" aria-hidden="true">{hint}</span>}
+    {chat === "closed" && hint && !guide && <span className="rocket-whisper" aria-hidden="true">{hint}</span>}
+    {chat === "closed" && guide && <span className="rocket-whisper rocket-guide" aria-hidden="true">{guide}</span>}
     {chat === "open" && <section id="rocket-chat" className="rocket-chat" aria-label="Rocket quick questions">
       <div className="rocket-chat-heading"><strong>Rocket</strong><div className="rocket-chat-actions">{speechAvailable && <button type="button" onClick={readReply} aria-label={speaking ? "Stop reading Rocket’s answer" : "Read Rocket’s answer aloud"} aria-pressed={speaking}><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z" />{speaking ? <path d="m17 9 5 6m0-6-5 6" /> : <path d="M17 8q5 4 0 8M20 5q7 7 0 14" />}</svg></button>}<button type="button" onClick={close} aria-label="Close Rocket chat"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div></div>
       <div className="rocket-chat-scroll">
         <p ref={answer} className="rocket-chat-reply" aria-live="polite" aria-atomic="true">{reply}</p>
-        <div className="rocket-chat-questions">{QUESTIONS.map((question, index) => <button key={question.label} ref={index === 0 ? firstQuestion : undefined} type="button" onClick={() => { stopSpeech(); setReply(question.answer); if(soundEnabled())speakText(question.answer); setMood("happy"); answer.current?.parentElement?.scrollTo({ top: 0 }); }}>{question.label}</button>)}<button type="button" onClick={showDemo}>Show the demo</button></div>
+        <div className="rocket-chat-questions">{QUESTIONS.map((question, index) => <button key={question.label} ref={index === 0 ? firstQuestion : undefined} type="button" onClick={() => { stopSpeech(); setReply(question.answer); if(soundAllowed())speakText(question.answer); setMood("happy"); answer.current?.parentElement?.scrollTo({ top: 0 }); }}>{question.label}</button>)}<button type="button" onClick={showDemo}>Show the demo</button></div>
         <div className="rocket-chat-links"><a href="/contact/">Discuss your workflow</a></div>
         <p className="rocket-chat-disclosure">Demo conversation; the real Rocket runs inside your automations.</p>
         <button className="rocket-chat-minimise" type="button" onClick={() => { changeChat("minimised"); face.current?.focus({ preventScroll: true }); }}>Minimise Rocket</button>

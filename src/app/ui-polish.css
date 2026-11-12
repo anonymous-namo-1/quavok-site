@@ -195,122 +195,88 @@ li.who { display: flex; }
   .stage-head .tabs button { min-height: 44px; padding: 6px 8px; border-radius: 12px; font-size: 13.5px; line-height: 1.2; text-wrap: balance; }
 }
 
-/* ---------- Premium controls ----------
-   One system for every button: a lit top edge, a soft shade below, a quiet
-   purple glow on primary actions, frosted glass for secondary ones, and a
-   small physical response (lift on hover, press on click). Motion is removed
-   for reduced-motion visitors; disabled controls keep the flat style above. */
+/* ---------- Buttons ----------
+   Quiet and precise: one solid fill, a hairline edge, no glow or sheen.
+   Hover is a small change in tone; the arrow nudges forward. Disabled
+   controls keep the flat style above. */
 .btn {
-  --btn-glow: 139 92 246;
-  isolation: isolate;
-  overflow: hidden;
-  padding-inline: 24px;
-  border: 1px solid rgb(197 169 250 / 0.42);
-  background: linear-gradient(180deg, #7352cc 0%, #5a3a9f 52%, #4c2f8a 100%);
+  padding-inline: 22px;
+  border: 1px solid #6a43d6;
+  background: #6a43d6;
   color: #fff;
   font-weight: 600;
-  letter-spacing: -0.006em;
-  text-shadow: 0 1px 0 rgb(20 8 48 / 0.35);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.24),
-    inset 0 -1px 0 rgb(0 0 0 / 0.22),
-    0 1px 2px rgb(0 0 0 / 0.45),
-    0 10px 28px -14px rgb(var(--btn-glow) / 0.75);
-  transition:
-    background-color 180ms ease-out, border-color 180ms ease-out, color 180ms ease-out,
-    box-shadow 220ms ease-out, translate 180ms cubic-bezier(.2,.7,.2,1), filter 180ms ease-out;
+  letter-spacing: -0.005em;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14);
+  transition: background-color 160ms ease-out, border-color 160ms ease-out, color 160ms ease-out;
 }
-/* A soft sheen that crosses the button once on hover. */
-.btn::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.16) 48%, transparent 66%);
-  translate: -120% 0;
-  pointer-events: none;
-}
-.btn:not(:disabled):hover {
-  background: linear-gradient(180deg, #7d5dd8 0%, #6243ad 52%, #523494 100%);
-  border-color: rgb(214 194 252 / 0.7);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.3),
-    inset 0 -1px 0 rgb(0 0 0 / 0.22),
-    0 2px 4px rgb(0 0 0 / 0.45),
-    0 16px 36px -14px rgb(var(--btn-glow) / 0.9);
-}
-.btn:not(:disabled):active {
-  background: linear-gradient(180deg, #553896 0%, #4a2f86 100%);
-  border-color: rgb(197 169 250 / 0.5);
-  box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.35), 0 1px 1px rgb(0 0 0 / 0.4);
-}
-.btn svg.arrow { transition: translate 220ms cubic-bezier(.2,.7,.2,1); }
+.btn:not(:disabled):hover { background: #7651e2; border-color: #7651e2; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18); }
+.btn:not(:disabled):active { background: #5c38c2; border-color: #5c38c2; box-shadow: none; }
+.btn svg.arrow { transition: translate 200ms ease-out; }
 
-/* Secondary: frosted glass with a hairline edge. */
 :is(.btn-ghost, .hero .btn-ghost, .on-dark .btn-ghost, .page-hero .btn-ghost) {
-  border: 1px solid rgb(255 255 255 / 0.18);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+  border: 1px solid rgb(255 255 255 / 0.24);
+  background: transparent;
   color: var(--color-white);
-  text-shadow: none;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 1px 2px rgb(0 0 0 / 0.35);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  box-shadow: none;
 }
 :is(.btn-ghost, .hero .btn-ghost, .on-dark .btn-ghost, .page-hero .btn-ghost):not(:disabled):hover {
-  border-color: rgb(255 255 255 / 0.36);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.05));
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12), 0 10px 24px -14px rgb(0 0 0 / 0.9);
+  border-color: rgb(255 255 255 / 0.5);
+  background: rgb(255 255 255 / 0.05);
 }
 :is(.btn-ghost, .hero .btn-ghost, .on-dark .btn-ghost, .page-hero .btn-ghost):not(:disabled):active {
-  background: rgb(255 255 255 / 0.04);
-  border-color: rgb(255 255 255 / 0.28);
-  box-shadow: inset 0 2px 5px rgb(0 0 0 / 0.4);
+  background: rgb(255 255 255 / 0.09);
 }
-.btn-ghost::after { background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.08) 48%, transparent 66%); }
 
-/* Round controls, segmented tabs and small chips share the same material. */
+/* Round controls, tabs and chips: the same hairline language. */
 .day-controls button, .site-sound, .rocket-command, .sample-actions button {
-  border-color: rgb(255 255 255 / 0.18);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.015));
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 1px 2px rgb(0 0 0 / 0.35);
-  transition: background-color 160ms ease-out, border-color 160ms ease-out, color 160ms ease-out, box-shadow 200ms ease-out, translate 160ms ease-out;
+  border-color: rgb(255 255 255 / 0.2);
+  background: transparent;
 }
 .day-controls button:not(:disabled):hover, .site-sound:hover, .rocket-command:hover, .sample-actions button:not(:disabled):hover {
-  border-color: rgb(197 169 250 / 0.6);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.04));
+  border-color: rgb(255 255 255 / 0.45);
+  background: rgb(255 255 255 / 0.05);
 }
 .day-controls button[aria-pressed="true"], .site-sound[aria-pressed="true"], .sample-actions .sample-approve {
-  border-color: rgb(197 169 250 / 0.5);
-  background: linear-gradient(180deg, #7352cc, #4c2f8a);
+  border-color: #6a43d6;
+  background: #6a43d6;
   color: #fff;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.24), 0 6px 18px -8px rgb(139 92 246 / 0.7);
 }
 .sample-actions button { min-height: 40px; padding: 8px 16px; font-size: 13px; font-weight: 500; }
 
-.tabs, .on-dark .tabs {
-  border-color: rgb(255 255 255 / 0.14);
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.25), rgb(255 255 255 / 0.03));
-  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.45), 0 1px 0 rgb(255 255 255 / 0.05);
-}
-.tabs button, .on-dark .tabs button { color: #cfcfcf; transition: background-color 160ms ease-out, color 160ms ease-out, box-shadow 200ms ease-out; }
+.tabs, .on-dark .tabs { border-color: rgb(255 255 255 / 0.14); background: rgb(255 255 255 / 0.02); }
+.tabs button, .on-dark .tabs button { color: #cfcfcf; }
 .tabs button:hover, .on-dark .tabs button:hover { color: #fff; background: rgb(255 255 255 / 0.06); }
 .tabs button:is([aria-selected="true"], [aria-pressed="true"]),
 .on-dark .tabs button:is([aria-selected="true"], [aria-pressed="true"]) {
-  background: linear-gradient(180deg, #d6c2fc, #b897f7);
-  color: #1a0f33;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), 0 1px 2px rgb(0 0 0 / 0.4), 0 6px 16px -8px rgb(139 92 246 / 0.8);
+  background: #f0f0f0;
+  color: #141414;
+  box-shadow: none;
 }
 
-/* Text-style actions get a tidy underline that warms on hover. */
-.day-listen, .day-controls a, .qa-entry-quiet { text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 160ms ease-out, text-decoration-color 160ms ease-out; }
+.day-listen, .day-controls a, .qa-entry-quiet { text-decoration-thickness: 1px; text-underline-offset: 4px; }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .btn:not(:disabled):hover, .rocket-command:hover { translate: 0 -1px; }
-  .btn:not(:disabled):active, .rocket-command:active { translate: 0 0; }
   .btn:not(:disabled):hover svg.arrow { translate: 3px 0; }
-  .btn:not(:disabled):hover::after { translate: 120% 0; transition: translate 700ms cubic-bezier(.2,.7,.2,1); }
 }
 @media (forced-colors: active) {
   .btn, .btn-ghost, .tabs button, .day-controls button, .site-sound { background: ButtonFace; color: ButtonText; border-color: ButtonText; box-shadow: none; }
-  .btn::after { display: none; }
+}
+
+/* Rocket's silent explanations: a readable, wrapping bubble. */
+.rocket-whisper.rocket-guide {
+  width: max-content;
+  max-width: min(300px, calc(100vw - 32px));
+  white-space: normal;
+  overflow: visible;
+  padding: 10px 13px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 12px;
+  background: #1f1f1f;
+  color: #ececec;
+  font: 13px/1.45 var(--font-sans);
+  box-shadow: 0 12px 28px -16px rgb(0 0 0 / 0.9);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rocket-whisper.rocket-guide { animation: rocket-guide-in 260ms ease-out both; }
+  @keyframes rocket-guide-in { from { opacity: 0; translate: 0 4px; } to { opacity: 1; translate: 0 0; } }
 }

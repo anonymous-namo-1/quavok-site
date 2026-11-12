@@ -46,10 +46,10 @@ export const SCENARIOS: Scenario[] = [
         explain: "An agent reads the enquiry and checks it against the criteria you gave us during discovery.",
       },
       {
-        title: "CRM record",
-        sub: "Contact and notes",
+        title: "Customer details",
+        sub: "Saved for your team",
         who: "auto",
-        explain: "The contact, the request and the qualification notes are written into the CRM you already use.",
+        explain: "The customer’s details and what they asked for are saved in the tools you already use.",
       },
       {
         title: "Follow-up",
@@ -131,7 +131,7 @@ export const SCENARIOS: Scenario[] = [
       },
       {
         title: "Send & log",
-        sub: "Ticket or CRM",
+        sub: "Where your team sees it",
         who: "auto",
         explain: "The reply is sent and the conversation is logged where your team can see it.",
       },

@@ -10,7 +10,7 @@ type Line = { t: string; text: string; ok?: boolean; hold?: boolean; pause?: num
 const LINES: Line[] = [
   { t: "18:02", text: "New enquiry received from the website form" },
   { t: "18:02", text: "Checked against your criteria: a good fit", ok: true },
-  { t: "18:03", text: "Contact and notes added to your CRM", ok: true },
+  { t: "18:03", text: "Customer details saved for your team", ok: true },
   { t: "18:03", text: "Follow-up drafted in your approved wording", hold: true, pause: 1.3 },
   { t: "18:41", text: "You approved. Follow-up sent", ok: true },
   { t: "21:00", text: "Evening summary sent to you", ok: true },

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { INTRO_DONE_EVENT } from "@/lib/intro/engine";
 import { playVoice, stopVoice, voiceText } from "@/lib/voice";
+import { soundAllowed } from "@/lib/sound";
 
 const EXAMPLES=[0,1,2].map(index=>({question:voiceText(`question-${index}`),answer:voiceText(`answer-${index}`)}));
 type Phase="building"|"arriving"|"question"|"listening"|"answering"|"settled";
@@ -18,20 +19,23 @@ export function HeroConversation(){
  const waiting=useRef(false);
  const choose=useRef<(index:number)=>void>(()=>{});
  const cancel=()=>{run.current?.abort();stopVoice("demo");window.dispatchEvent(new CustomEvent("quavok:rocket-talk",{detail:false}));};
+ // The example plays silently after the build. It is spoken only when the
+ // visitor picks a question or asks Rocket directly.
  const conversation=async(index:number,handoff=false)=>{
+  const speak=!handoff&&soundAllowed();
   cancel();const controller=new AbortController();run.current=controller;const signal=controller.signal;
   current.current=index;setSelected(index);setWords(0);
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){setWords(1000);setPhase("settled");return;}
   if(handoff){setPhase("arriving");await delay(650,signal);if(signal.aborted)return;}
   setPhase("question");window.dispatchEvent(new Event("quavok:rocket-call"));
-  const question=await playVoice(`question-${index}`,{owner:"demo",signal});
+  const question=speak?await playVoice(`question-${index}`,{owner:"demo",force:true,signal}):"muted";
   if(signal.aborted)return;
   if(question==="cancelled"){setWords(1000);setPhase("settled");return;}
   if(question!=="ended")await delay(1150,signal);
   if(signal.aborted)return;
   setPhase("listening");await delay(450,signal);if(signal.aborted)return;
   setPhase("answering");const count=EXAMPLES[index].answer.split(" ").length;
-  const answer=await playVoice(`answer-${index}`,{owner:"demo",signal,onProgress:progress=>setWords(Math.max(1,Math.ceil(progress*count)))});
+  const answer=speak?await playVoice(`answer-${index}`,{owner:"demo",force:true,signal,onProgress:progress=>setWords(Math.max(1,Math.ceil(progress*count)))}):"muted";
   if(signal.aborted)return;
   if(answer==="cancelled"){setWords(1000);setPhase("settled");return;}
   if(answer!=="ended"){

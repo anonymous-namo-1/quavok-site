@@ -4,147 +4,76 @@
     "text": "Let's build this page.",
     "role": "rocket",
     "src": "/media/voice/command.mp3",
-    "duration": 1.497
+    "duration": 1.683
   },
   {
     "id": "question-0",
-    "text": "Any new leads today?",
+    "text": "Any new enquiries today?",
     "role": "person",
     "src": "/media/voice/question-0.mp3",
-    "duration": 1.644
+    "duration": 1.586
   },
   {
     "id": "answer-0",
-    "text": "Your new enquiries are already in the CRM, and their follow-ups are drafted. Anything unusual is waiting for your decision.",
+    "text": "Four came in this morning. Each one got a friendly reply, and two of them would like a call back tomorrow.",
     "role": "rocket",
     "src": "/media/voice/answer-0.mp3",
-    "duration": 8.254
+    "duration": 7.034
   },
   {
     "id": "question-1",
-    "text": "What needs my approval?",
+    "text": "Anything that needs me?",
     "role": "person",
     "src": "/media/voice/question-1.mp3",
-    "duration": 1.604
+    "duration": 1.397
   },
   {
     "id": "answer-1",
-    "text": "Just the follow-up wording. Nothing goes out until you’ve approved it.",
+    "text": "Just one thing. A regular customer asked for a small discount, and that’s your call.",
     "role": "rocket",
     "src": "/media/voice/answer-1.mp3",
-    "duration": 4.122
+    "duration": 5.666
   },
   {
     "id": "question-2",
-    "text": "Could we add quote reminders?",
+    "text": "Did the Sharma order go out?",
     "role": "person",
     "src": "/media/voice/question-2.mp3",
-    "duration": 1.983
+    "duration": 1.716
   },
   {
     "id": "answer-2",
-    "text": "Good idea. I’ll pass it to the Quavok team, and they’ll shape it around how you already work.",
+    "text": "Yes, it left this afternoon. They’ve been told, and they have the tracking link.",
     "role": "rocket",
     "src": "/media/voice/answer-2.mp3",
-    "duration": 5.51
-  },
-  {
-    "id": "greeting",
-    "text": "Hi, I’m Rocket. What would you like to know?",
-    "role": "rocket",
-    "src": "/media/voice/greeting.mp3",
-    "duration": 2.714
+    "duration": 5.056
   },
   {
     "id": "faq-0",
     "text": "Quavok designs, builds and runs automations for the work you repeat. You explain the process, and you keep the important decisions.",
     "role": "rocket",
     "src": "/media/voice/faq-0.mp3",
-    "duration": 8.764
+    "duration": 9.487
   },
   {
     "id": "faq-1",
     "text": "Nothing at all. Quavok handles the build, the setup and the ongoing care.",
     "role": "rocket",
     "src": "/media/voice/faq-1.mp3",
-    "duration": 4.737
+    "duration": 5.179
   },
   {
     "id": "faq-2",
     "text": "That’s me. I can tell you what your automations have done, and pass new requests to the team.",
     "role": "rocket",
     "src": "/media/voice/faq-2.mp3",
-    "duration": 5.301
+    "duration": 6.272
   },
   {
     "id": "faq-3",
     "text": "Bring one task you repeat to a discovery call. The team will look at it with you.",
     "role": "rocket",
     "src": "/media/voice/faq-3.mp3",
-    "duration": 4.562
-  },
-  {
-    "id": "guide-busywork",
-    "text": "This is the busywork we take off your plate. Your people keep the judgment calls.",
-    "role": "rocket",
-    "section": "problem-title",
-    "src": "/media/voice/guide-busywork.mp3",
-    "duration": 4.874
-  },
-  {
-    "id": "guide-automate",
-    "text": "Start with the task you repeat most. Quavok builds around how you already work.",
-    "role": "rocket",
-    "section": "automate",
-    "src": "/media/voice/guide-automate.mp3",
-    "duration": 4.928
-  },
-  {
-    "id": "guide-handoffs",
-    "text": "Routine work gets handled. Decisions wait for you, and anything unusual goes to a person.",
-    "role": "rocket",
-    "section": "ba-title",
-    "src": "/media/voice/guide-handoffs.mp3",
-    "duration": 6.18
-  },
-  {
-    "id": "guide-process",
-    "text": "You explain the process and approve the scope. Quavok builds it and keeps it running.",
-    "role": "rocket",
-    "section": "how",
-    "src": "/media/voice/guide-process.mp3",
-    "duration": 5.071
-  },
-  {
-    "id": "guide-rocket",
-    "text": "Ask me about the automations Quavok builds for you. New requests go straight to the team.",
-    "role": "rocket",
-    "section": "rocket",
-    "src": "/media/voice/guide-rocket.mp3",
-    "duration": 5.33
-  },
-  {
-    "id": "guide-questions",
-    "text": "Ask whatever’s on your mind. When you’re ready, tell the team about one task you repeat.",
-    "role": "rocket",
-    "section": "faq",
-    "src": "/media/voice/guide-questions.mp3",
-    "duration": 5.378
-  },
-  {
-    "id": "guide-start",
-    "text": "Your next step is a discovery call. No technical homework.",
-    "role": "rocket",
-    "section": "cta-title",
-    "src": "/media/voice/guide-start.mp3",
-    "duration": 3.703
-  },
-  {
-    "id": "guide-footer",
-    "text": "You keep the craft, the customers and the decisions. We’ll handle the repetitive work.",
-    "role": "rocket",
-    "section": "footer",
-    "src": "/media/voice/guide-footer.mp3",
-    "duration": 5.136
+    "duration": 5.278
   }
 ]

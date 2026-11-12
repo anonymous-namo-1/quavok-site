@@ -1,5 +1,5 @@
 Rocket and the visitor's voice clips were generated offline with Kokoro-82M (hexgrad/Kokoro-82M, Apache-2.0),
-run through kokoro-onnx (thewh1teagle/kokoro-onnx, MIT). Voices: af_heart (Rocket) and am_michael (the visitor).
+run through kokoro-onnx (thewh1teagle/kokoro-onnx, MIT). Voices: am_michael (Rocket) and am_fenrir (the visitor).
 Model: https://huggingface.co/hexgrad/Kokoro-82M . Licence: https://www.apache.org/licenses/LICENSE-2.0
 Only generated audio is shipped. Kokoro, the model and generation dependencies are not part of the website runtime.
 Keyboard samples (public/media/keyboard/key-1.wav ... key-6.wav) are six single keystrokes cut from "Mechanical Keyboard Typing" by shaunhillyard,

@@ -8,11 +8,11 @@ type Task = { id: string; title: string; before: string; after: string; lane: La
 // The same six tasks. Today they sit in one pile on your team's plate.
 // With Quavok they settle into lanes. Illustrative: no metrics, no clocks.
 const TASKS: Task[] = [
-  { id: "lead", title: "New website enquiry", before: "Copied from inbox to a sheet", after: "Qualified and logged to CRM", lane: "handled", r: -2.2, dx: 6 },
+  { id: "lead", title: "New website enquiry", before: "Copied from inbox to a sheet", after: "Replied and noted for you", lane: "handled", r: -2.2, dx: 6 },
   { id: "status", title: "“Is my order ready?”", before: "Someone checks and replies", after: "Answered from order status", lane: "handled", r: 1.8, dx: -8 },
   { id: "invoice", title: "Supplier invoice", before: "Typed into accounts by hand", after: "Fields read and entered", lane: "handled", r: -1.2, dx: 10 },
   { id: "report", title: "Weekly numbers", before: "Pulled together every Friday", after: "Report assembled and sent", lane: "handled", r: 2.4, dx: -4 },
-  { id: "quote", title: "Quote to chase", before: "On someone’s mental to-do list", after: "Follow-up drafted for your OK", lane: "you", r: -2.8, dx: 4 },
+  { id: "quote", title: "Quote to chase", before: "On someone’s mental to-do list", after: "Reminder ready for your OK", lane: "you", r: -2.8, dx: 4 },
   { id: "complaint", title: "Unhappy customer", before: "Buried in the same inbox", after: "Flagged straight to a person", lane: "person", r: 1.4, dx: -10 },
 ];
 

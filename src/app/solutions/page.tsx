@@ -25,7 +25,7 @@ const DEPTS: Dept[] = [
     flows: [
       {
         name: "Enquiry to qualified lead",
-        steps: ["New enquiry", "Qualify against your criteria", "CRM record", { t: "You approve wording", you: true }, "Follow-up sent"],
+        steps: ["New enquiry", "Qualify against your criteria", "Customer details saved", { t: "You approve wording", you: true }, "Follow-up sent"],
         note: "Unclear or high-value enquiries go straight to your team.",
       },
       {

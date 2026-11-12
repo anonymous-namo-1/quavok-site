@@ -1,10 +1,10 @@
 import catalog from "./voice-catalog.json";
 import { soundEnabled } from "./sound";
 
-export type VoiceOwner = "opening" | "demo" | "guide" | "chat";
+export type VoiceOwner = "opening" | "demo" | "chat";
 export type VoiceResult = "ended" | "cancelled" | "muted" | "blocked" | "busy" | "missing";
 type Options = { owner: VoiceOwner; force?: boolean; signal?: AbortSignal; onProgress?: (progress:number)=>void };
-const priority: Record<VoiceOwner,number> = {guide:1,demo:2,opening:3,chat:4};
+const priority: Record<VoiceOwner,number> = {demo:1,opening:2,chat:3};
 let player: HTMLAudioElement | null = null;
 let owner: VoiceOwner | null = null;
 let finishCurrent: ((result:VoiceResult)=>void) | null = null;
@@ -23,7 +23,6 @@ export function stopVoice(source?:VoiceOwner) {
 }
 export function voiceText(id:string) { const line=catalog.find(item=>item.id===id); if(!line)throw Error(`Missing voice line: ${id}`); return line.text; }
 export function voiceForText(text:string) { return catalog.find(line=>line.text===text)?.id; }
-export function guideForSection(section:string) { return catalog.find(line=>"section" in line && line.section===section)?.id; }
 export function primeVoice(): Promise<boolean> {
   if (primed || owner) return Promise.resolve(true);
   if (prime) return prime;
