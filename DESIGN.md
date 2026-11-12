@@ -2,21 +2,21 @@
 name: Quavok operations studio
 description: Dark, people-first managed automation with visible handoffs.
 colors:
-  midnight: "#13251a"
-  forest: "#1f3d2b"
+  midnight: "#141219"
+  charcoal: "#2b2930"
   sand: "#e8dcc4"
   purple-field: "#392660"
   purple: "#8b5cf6"
   purple-dark: "#593b9d"
   purple-soft: "#c5a9fa"
-  paper-2: "#122419"
-  card: "#162b1e"
+  paper-2: "#1a181f"
+  card: "#1f1d24"
   ink: "#e8dcc4"
   ink-2: "#d6ceb6"
   mute: "#c0bda6"
   faint: "#b5b49d"
-  line: "#354e3c"
-  line-2: "#445b47"
+  line: "#39373e"
+  line-2: "#434148"
 typography:
   display:
     fontFamily: "Bricolage Grotesque, sans-serif"
@@ -57,11 +57,11 @@ components:
 
 ## Overview
 
-The operations studio makes managed automation tangible: requests pass between named roles, stop for human approval, and finish with a clear summary. The typography speaks confidently while the Rocket and workflow characters add warmth. The owner chose a dark visual world, complementary forest/sand and a contrasting Electric Purple accent.
+The operations studio makes managed automation tangible: requests pass between named roles, stop for human approval, and finish with a clear summary. The typography speaks confidently while the Rocket and workflow characters add warmth. The owner chose a dark visual world, complementary charcoal/sand and a contrasting Electric Purple accent.
 
 ## Colors
 
-Midnight is the page base. Forest holds navigation and inner-page openings. Sand carries display emphasis. Purple accents the companion; its deep purple-field variant floods the busywork section. Electric Purple marks primary actions and approval decisions. Sand-tinted text stays readable on all dark fields. Use Sand text on Deep Purple #593b9d for normal-size button labels. Electric Purple #8b5cf6 is reserved for highlights, focus and decorative moments.
+Midnight is the page base. Charcoal holds navigation and inner-page openings. Sand carries display emphasis. Purple accents the companion; its deeper shade marks buttons and workflow outputs. Electric Purple marks primary actions and approval decisions. Sand-tinted text stays readable on all dark fields. Use Sand text on Deep Purple #593b9d for normal-size button labels. Electric Purple #8b5cf6 is reserved for highlights, focus and decorative moments.
 
 ## Typography
 
@@ -97,3 +97,5 @@ The workflow intro is optional, replayable, skippable, and fails open. Its finis
 - Do not introduce fabricated proof, staff-replacement framing or a site-wide WhatsApp bubble.
 
 The homepage workflow has an open stage with no outer card. Two illustrative request choices demonstrate approval and human escalation; these controls do not configure or run customer automations. The category index is compact, the process overview has four steps, and the detailed walkthrough is available through a disclosure. Rocket's page example gains layered depth only on the homepage; its persistent companion uses a compact attached speech bubble opened by explicit action.
+
+The owner superseded the green palette: backgrounds now use warm charcoal and muted plum. The single sand task note, workflow input and compact Rocket bubble share a warm surface language. Hero/closing display type carries the strongest emphasis; middle headings are smaller and lighter, with descriptions alongside them on desktop. The workflow input, approval and output each have a distinct visual role.

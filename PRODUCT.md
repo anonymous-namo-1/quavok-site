@@ -28,7 +28,7 @@ Existing Next.js static export remains the delivery mechanism. The owner has rem
 
 ## Brand Commitments
 
-Quavok and existing brand assets remain. Voice: human, confident, people-first, short sentences. Avoid employee-replacement framing, filler and invented evidence. Dark by default, Forest Green, Sand Beige and Electric Purple. Bricolage Grotesque display and self-hosted fonts stay.
+Quavok and existing brand assets remain. Voice: human, confident, people-first, short sentences. Avoid employee-replacement framing, filler and invented evidence. Dark by default, warm Charcoal, Sand Beige and Electric Purple. Bricolage Grotesque display and self-hosted fonts stay.
 
 ## Evidence on Hand
 

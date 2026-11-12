@@ -2,34 +2,34 @@
 
 /* ==========================================================================
    Quavok design system
-   Dark forest, complementary sand and Signal accents. Display: Bricolage
+   Warm charcoal, sand text and restrained purple accents. Display: Bricolage
    Grotesque. Text: Inter. Both self-hosted through next/font/local.
    ========================================================================== */
 
 @theme {
-  --color-midnight: #13251a;
+  --color-midnight: #141219;
   --color-purple-field: #392660;
-  --color-forest: #1f3d2b;
+  --color-charcoal: #2b2930;
   --color-sand: #e8dcc4;
   --color-purple: #8b5cf6;
-  --color-paper: #13251a;
-  --color-paper-2: #122419;
-  --color-card: #162b1e;
+  --color-paper: #141219;
+  --color-paper-2: #1a181f;
+  --color-card: #1f1d24;
   --color-ink: #e8dcc4;
   --color-ink-2: #d6ceb6;
   --color-mute: #c0bda6;
   --color-faint: #b5b49d;
-  --color-line: #354e3c;
-  --color-line-2: #445b47;
+  --color-line: #39373e;
+  --color-line-2: #434148;
   --color-purple-dark: #593b9d;
   --color-purple-soft: #c5a9fa;
   --color-accent-soft: #c5a9fa;
   --color-accent-text: #e8dcc4;
-  --color-accent-surface: #193122;
-  --color-accent-alt: #415845;
-  --color-stage: #112117;
-  --color-stage-2: #162b1e;
-  --color-stage-line: #3d5542;
+  --color-accent-surface: #232128;
+  --color-accent-alt: #413f46;
+  --color-stage: #18161d;
+  --color-stage-2: #1f1d24;
+  --color-stage-line: #3e3c43;
   --color-stage-text: #ddd3bb;
   --color-stage-mute: #c5c0a9;
 
@@ -47,8 +47,8 @@
   --section-y: clamp(84px, 11vw, 152px);
   --radius: 14px;
   --radius-lg: 22px;
-  --shadow-card: 0 1px 2px rgb(19 37 26 / 0.04), 0 8px 24px -12px rgb(19 37 26 / 0.14);
-  --shadow-lift: 0 1px 2px rgb(19 37 26 / 0.05), 0 22px 48px -22px rgb(19 37 26 / 0.28);
+  --shadow-card: 0 1px 2px rgb(20 18 25 / 0.04), 0 8px 24px -12px rgb(20 18 25 / 0.14);
+  --shadow-lift: 0 1px 2px rgb(20 18 25 / 0.05), 0 22px 48px -22px rgb(20 18 25 / 0.28);
   color-scheme: dark;
 }
 
@@ -243,7 +243,7 @@ h3 {
   font-family: var(--font-mono);
   font-size: 0.86em;
   background: repeating-linear-gradient(-45deg, #e8dcc4, #e8dcc4 6px, #e7dbc3 6px, #e7dbc3 12px);
-  color: #3c5441;
+  color: #3e3c43;
   border: 1px dashed #c9c4ad;
   border-radius: 6px;
   padding: 0.05em 0.4em;
@@ -278,8 +278,8 @@ h3 {
 
 .on-dark .dev-badge {
   color: #a68bba;
-  background: rgb(19 37 26 / 0.18);
-  border-color: rgb(19 37 26 / 0.3);
+  background: rgb(20 18 25 / 0.18);
+  border-color: rgb(20 18 25 / 0.3);
 }
 
 .tag {
@@ -357,7 +357,7 @@ h3 {
 
 .btn-primary:hover {
   --btn-bg: #000000;
-  box-shadow: 0 10px 24px -12px rgb(19 37 26 / 0.55);
+  box-shadow: 0 10px 24px -12px rgb(20 18 25 / 0.55);
 }
 
 .btn-purple {
@@ -469,13 +469,13 @@ h3 {
 }
 
 .nav-links a:hover {
-  background: rgb(19 37 26 / 0.05);
+  background: rgb(20 18 25 / 0.05);
   color: var(--color-ink);
 }
 
 .nav-links a[aria-current="page"] {
   color: var(--color-ink);
-  background: rgb(19 37 26 / 0.06);
+  background: rgb(20 18 25 / 0.06);
 }
 
 .nav-cta {
@@ -629,8 +629,8 @@ h3 {
 /* Fine grid used behind the hero and on stages. */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgb(19 37 26 / 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(19 37 26 / 0.055) 1px, transparent 1px);
+    linear-gradient(to right, rgb(20 18 25 / 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(20 18 25 / 0.055) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
@@ -660,8 +660,8 @@ h3 {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(60% 55% at 78% 30%, rgb(19 37 26 / 0.32), transparent 70%),
-    radial-gradient(50% 50% at 10% 0%, rgb(19 37 26 / 0.05), transparent 70%);
+    radial-gradient(60% 55% at 78% 30%, rgb(20 18 25 / 0.32), transparent 70%),
+    radial-gradient(50% 50% at 10% 0%, rgb(20 18 25 / 0.05), transparent 70%);
 }
 
 .hero-backdrop {
@@ -704,7 +704,7 @@ h3 {
   height: 7px;
   border-radius: 2px;
   background: var(--color-purple);
-  box-shadow: 0 0 0 1px rgb(19 37 26 / 0.25);
+  box-shadow: 0 0 0 1px rgb(20 18 25 / 0.25);
 }
 
 /* ---------- workflow stage (shared by hero + scenario graph) ---------- */
@@ -751,7 +751,7 @@ h3 {
   height: 8px;
   border-radius: 50%;
   background: #c5a9fa;
-  box-shadow: 0 0 0 3px rgb(19 37 26 / 0.18);
+  box-shadow: 0 0 0 3px rgb(20 18 25 / 0.18);
 }
 
 .stage-body {
@@ -842,7 +842,7 @@ h3 {
   background: var(--color-card);
   border: 1px solid var(--color-line-2);
   border-radius: calc(var(--u) * 12);
-  box-shadow: 0 1px 1px rgb(19 37 26 / 0.04), 0 6px 16px -10px rgb(19 37 26 / 0.22);
+  box-shadow: 0 1px 1px rgb(20 18 25 / 0.04), 0 6px 16px -10px rgb(20 18 25 / 0.22);
   text-align: left;
   transition: border-color 0.3s var(--ease-out-soft), box-shadow 0.3s var(--ease-out-soft), background-color 0.3s;
 }
@@ -890,7 +890,7 @@ h3 {
 
 .g-node[data-hot="true"] {
   border-color: var(--color-ink);
-  box-shadow: 0 0 0 calc(var(--u) * 3) rgb(19 37 26 / 0.75), 0 8px 18px -10px rgb(19 37 26 / 0.3);
+  box-shadow: 0 0 0 calc(var(--u) * 3) rgb(20 18 25 / 0.75), 0 8px 18px -10px rgb(20 18 25 / 0.3);
 }
 
 .g-node[data-hot="true"] .n-num {
@@ -909,8 +909,8 @@ button.g-node:hover {
 
 button.g-node[aria-pressed="true"] {
   border-color: var(--color-ink);
-  background: #193223;
-  box-shadow: 0 0 0 calc(var(--u) * 3) rgb(19 37 26 / 0.75);
+  background: #242229;
+  box-shadow: 0 0 0 calc(var(--u) * 3) rgb(20 18 25 / 0.75);
 }
 
 button.g-node[aria-pressed="true"] .n-num {
@@ -965,7 +965,7 @@ button.g-gate[aria-pressed="true"] {
 
 button.g-exc[aria-pressed="true"] {
   border-style: solid;
-  box-shadow: 0 0 0 calc(var(--u) * 3) rgb(19 37 26 / 0.25);
+  box-shadow: 0 0 0 calc(var(--u) * 3) rgb(20 18 25 / 0.25);
 }
 
 .g-exc .exc-narrow {
@@ -1116,7 +1116,7 @@ html.qa-pre [data-intro-hold] {
 
 .qa-box {
   box-sizing: border-box;
-  border: 1.5px solid var(--qa, #1f3d2b);
+  border: 1.5px solid var(--qa, #2b2930);
   border-radius: 4px;
   z-index: 1;
 }
@@ -1125,7 +1125,7 @@ html.qa-pre [data-intro-hold] {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--qa, #1f3d2b);
+  background: var(--qa, #2b2930);
   opacity: 0.05;
 }
 
@@ -1139,7 +1139,7 @@ html.qa-pre [data-intro-hold] {
   height: 9px;
   box-sizing: border-box;
   background: #e8dcc4;
-  border: 1.5px solid var(--qa, #1f3d2b);
+  border: 1.5px solid var(--qa, #2b2930);
   border-radius: 2px;
   opacity: 0;
 }
@@ -1161,7 +1161,7 @@ html.qa-pre [data-intro-hold] {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--qa, #1f3d2b);
+  background: var(--qa, #2b2930);
   box-shadow: 0 0 0 2px #e8dcc4;
   opacity: 0;
   transition: opacity 0.18s linear;
@@ -1189,7 +1189,7 @@ html.qa-pre [data-intro-hold] {
   align-items: center;
   padding: 0 10px;
   border-radius: 999px;
-  background: var(--qa, #1f3d2b);
+  background: var(--qa, #2b2930);
   color: #e8dcc4;
   font-family: var(--font-sans);
   font-size: 12px;
@@ -1209,7 +1209,7 @@ html.qa-pre [data-intro-hold] {
 .qa-caret {
   width: 2px;
   border-radius: 1px;
-  background: var(--qa, #1f3d2b);
+  background: var(--qa, #2b2930);
   z-index: 2;
 }
 
@@ -1225,7 +1225,7 @@ html.qa-pre [data-intro-hold] {
   left: 0;
   transform-origin: 2px 2px;
   transition: transform 0.12s ease-out;
-  filter: drop-shadow(0 1px 1.5px rgb(19 37 26 / 0.3));
+  filter: drop-shadow(0 1px 1.5px rgb(20 18 25 / 0.3));
 }
 
 .qa-cur.qa-down svg {
@@ -1238,14 +1238,14 @@ html.qa-pre [data-intro-hold] {
   top: 19px;
   padding: 4px 8px;
   border-radius: 4px 10px 10px 10px;
-  background: var(--qa, #1f3d2b);
+  background: var(--qa, #2b2930);
   color: #e8dcc4;
   font-family: var(--font-sans);
   font-size: 11.5px;
   font-weight: 600;
   line-height: 1.2;
   white-space: nowrap;
-  box-shadow: 0 6px 14px -8px rgb(19 37 26 / 0.6);
+  box-shadow: 0 6px 14px -8px rgb(20 18 25 / 0.6);
 }
 
 .qa-cur.qa-flip .qa-tag {
@@ -1280,10 +1280,10 @@ html.qa-pre [data-intro-hold] {
   font-weight: 600;
   line-height: 1;
   color: var(--color-ink);
-  background: rgb(19 37 26 / 0.96);
+  background: rgb(20 18 25 / 0.96);
   border: 1px solid var(--color-line);
   border-radius: 999px;
-  box-shadow: 0 1px 2px rgb(19 37 26 / 0.05), 0 10px 24px -10px rgb(19 37 26 / 0.4);
+  box-shadow: 0 1px 2px rgb(20 18 25 / 0.05), 0 10px 24px -10px rgb(20 18 25 / 0.4);
 }
 
 .qa-skip kbd {
@@ -1429,7 +1429,7 @@ html.qa-pre [data-intro-hold] {
 .tabs button[aria-pressed="true"] {
   background: var(--color-card);
   color: var(--color-ink);
-  box-shadow: 0 1px 2px rgb(19 37 26 / 0.08), 0 0 0 1px var(--color-line);
+  box-shadow: 0 1px 2px rgb(20 18 25 / 0.08), 0 0 0 1px var(--color-line);
 }
 
 .tabs button:active {
@@ -1506,7 +1506,7 @@ html.qa-pre [data-intro-hold] {
   border-radius: var(--radius);
   border: 1px dashed var(--color-line-2);
   padding: 14px;
-  background: #162b1e;
+  background: #1f1d24;
   display: flex;
   flex-direction: column;
 }
@@ -1565,7 +1565,7 @@ html.qa-pre [data-intro-hold] {
   border-radius: 12px;
   background: var(--color-card);
   border: 1px solid var(--color-line);
-  box-shadow: 0 1px 1px rgb(19 37 26 / 0.04), 0 4px 12px -8px rgb(19 37 26 / 0.2);
+  box-shadow: 0 1px 1px rgb(20 18 25 / 0.04), 0 4px 12px -8px rgb(20 18 25 / 0.2);
 }
 
 .task strong {
@@ -1696,7 +1696,7 @@ html.qa-pre [data-intro-hold] {
   border-radius: 6px;
   background: var(--color-purple-dark);
   color: var(--color-accent-soft);
-  border: 1px solid rgb(19 37 26 / 0.2);
+  border: 1px solid rgb(20 18 25 / 0.2);
 }
 
 .note-list .mark--keep {
@@ -1794,7 +1794,7 @@ html.qa-pre [data-intro-hold] {
   font-weight: 600;
   letter-spacing: 0.02em;
   color: #a68bba;
-  border: 1px solid rgb(19 37 26 / 0.35);
+  border: 1px solid rgb(20 18 25 / 0.35);
   border-radius: 999px;
   padding: 1px 8px;
 }
@@ -1993,7 +1993,7 @@ html.qa-pre [data-intro-hold] {
   margin-top: 10px;
   padding: 6px 11px;
   border-radius: 999px;
-  border: 1px solid rgb(19 37 26 / 0.35);
+  border: 1px solid rgb(20 18 25 / 0.35);
   color: var(--color-purple);
   font-size: 12.5px;
   font-weight: 600;
@@ -2176,7 +2176,7 @@ html.qa-pre [data-intro-hold] {
 .field select:focus {
   outline: none;
   border-color: var(--color-ink);
-  box-shadow: 0 0 0 3px rgb(19 37 26 / 0.7);
+  box-shadow: 0 0 0 3px rgb(20 18 25 / 0.7);
 }
 
 .field [aria-invalid="true"] {
@@ -2216,7 +2216,7 @@ html.qa-pre [data-intro-hold] {
 
 .radio-cards label:has(input:checked) {
   border-color: var(--color-ink);
-  box-shadow: 0 0 0 3px rgb(19 37 26 / 0.6);
+  box-shadow: 0 0 0 3px rgb(20 18 25 / 0.6);
 }
 
 .radio-cards input {
@@ -2241,7 +2241,7 @@ html.qa-pre [data-intro-hold] {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(50% 70% at 85% 10%, rgb(19 37 26 / 0.26), transparent 70%);
+  background: radial-gradient(50% 70% at 85% 10%, rgb(20 18 25 / 0.26), transparent 70%);
 }
 
 .kv {
@@ -2298,7 +2298,7 @@ html.qa-pre [data-intro-hold] {
 .flow li span.person {
   background: var(--color-accent-surface);
   color: var(--color-accent-text);
-  border-color: rgb(19 37 26 / 0.25);
+  border-color: rgb(20 18 25 / 0.25);
 }
 
 .flow li + li::before {

@@ -17,9 +17,9 @@ const TASKS: Task[] = [
 ];
 
 const LANES: { id: Lane; title: string; dot: string }[] = [
-  { id: "handled", title: "Handled automatically", dot: "#5b6c59" },
-  { id: "you", title: "Waiting on you", dot: "#070d09" },
-  { id: "person", title: "With a person", dot: "#5b6c59" },
+  { id: "handled", title: "Handled automatically", dot: "#514f56" },
+  { id: "you", title: "Waiting on you", dot: "#0b0910" },
+  { id: "person", title: "With a person", dot: "#514f56" },
 ];
 
 type State = "before" | "after";

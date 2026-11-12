@@ -17,7 +17,7 @@ export function GET() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#1f3d2b",
+          background: "#2b2930",
           color: "#e8dcc4",
           padding: "72px 80px",
           fontFamily: "sans-serif",
@@ -41,7 +41,7 @@ export function GET() {
                   display: "flex",
                   padding: "12px 18px",
                   borderRadius: 14,
-                  background: i === 3 ? "#14281c" : "#162b1e",
+                  background: i === 3 ? "#1d1b22" : "#1f1d24",
                   color: i === 3 ? "#8b5cf6" : "#e8dcc4",
                   border: "2px solid #e8dcc4",
                   fontSize: 24,
@@ -50,7 +50,7 @@ export function GET() {
               >
                 {s}
               </div>
-              {i < steps.length - 1 ? <div style={{ width: 28, height: 2, background: "#1f3d2b", display: "flex" }} /> : null}
+              {i < steps.length - 1 ? <div style={{ width: 28, height: 2, background: "#2b2930", display: "flex" }} /> : null}
             </div>
           ))}
         </div>

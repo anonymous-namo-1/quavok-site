@@ -1,11 +1,11 @@
-/* Forest, Sand and Electric Purple. Deep Purple is Electric Purple × 0.64. */
+/* Charcoal, Sand and Electric Purple. Deep Purple is Electric Purple × 0.64. */
 .btn, .btn-primary, .btn-purple, .hero .btn-primary, .site-header .btn-primary, .mobile-menu .btn-primary {
   --btn-bg: var(--color-purple-dark); --btn-fg: var(--color-sand); --btn-bd: var(--color-purple);
   border-radius: 999px;
 }
 .btn:hover, .btn-primary:hover, .btn-purple:hover { --btn-bg: #493081; --btn-fg: var(--color-sand); --btn-bd: var(--color-purple-soft); }
-.btn-ghost, .hero .btn-ghost { --btn-bg: transparent; --btn-fg: var(--color-sand); --btn-bd: #8f927d; }
-.btn-ghost:hover { --btn-bg: #1f3d2b; --btn-fg: var(--color-sand); }
+.btn-ghost, .hero .btn-ghost { --btn-bg: transparent; --btn-fg: var(--color-sand); --btn-bd: #716f76; }
+.btn-ghost:hover { --btn-bg: #2b2930; --btn-fg: var(--color-sand); }
 .hero-spotlight { background: radial-gradient(ellipse 24% 46% at 50% 50%, #8b5cf680, #8b5cf638 45%, transparent 78%); }
 .hero .g-gate, .assembly-finale, .qa-box.qa-ok b, .qa-tag, .stamp, .g-gate,
 .rk-suggest button[aria-pressed="true"], .g-node[data-hot="true"] .n-num, button.g-node[aria-pressed="true"] .n-num {

@@ -69,7 +69,7 @@ Quavok is an early-stage, two-founder company working toward its first deploymen
 
 ## Dark studio design pass
 
-The default theme is dark throughout: Forest `#1f3d2b`, Sand `#e8dcc4`, and Electric Purple `#8b5cf6`, over a deep base `#13251a`. `src/app/studio.css` contains the editorial layouts, sticker wall, typography, dark surfaces and shared dark styling. The existing graph geometry and intro safeguards remain in place.
+The default theme is dark throughout: Charcoal `#2b2930`, Sand `#e8dcc4`, and Electric Purple `#8b5cf6`, over a deep base `#141219`. `src/app/studio.css` contains the editorial layouts, sticker wall, typography, dark surfaces and shared dark styling. The existing graph geometry and intro safeguards remain in place.
 
 Rocket, in `src/components/Companion.tsx` and `src/app/rocket-companion.css`, is an explicitly scripted conversation with no AI or automation backend. Its face begins inline in the hero headline and travels with the section in view. On narrow screens it perches in the header after leaving the headline. Quick replies cover Quavok, the managed service, Rocket, getting started and the workflow demo. A click, Cmd/Ctrl+K or the “Ask Rocket” pill opens a compact attached bubble. Escape, the close button and outside clicks return focus to Rocket. Only minimisation persists; old open-state values are ignored. It remembers minimisation locally, tracks fine pointers, reacts to touch, and offers quiet contextual hints. Reduced motion disables eye movement, blinking, nodding and confetti. Konami keys reveal a short, expiring greeting without opening the conversation.
 

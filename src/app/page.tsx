@@ -75,7 +75,7 @@ export default function Home() {
         <HeroIntro />
       </section>
 
-      <div className="process-ribbon" aria-label="We connect the dots: inbox, CRM, follow-up, reporting"><span>Inbox</span><b>↗</b><span>CRM</span><b>↗</b><span>Follow-up</span><b>↗</b><span>Reporting</span><b>✳</b><em>We connect the dots.</em></div>
+
 
       {/* 2. Problem */}
       <section className="section busywork-wall" aria-labelledby="problem-title">
@@ -83,18 +83,15 @@ export default function Home() {
           <div>
             <SectionHead
               id="problem-title"
-              eyebrow="A familiar kind of busy"
+              eyebrow=""
               title="Great people. Too many little tasks."
-              lead="The copy-paste. The chasing. The report that somehow needs rebuilding every Friday. Necessary? Yes. The best use of your people? Probably not."
+              lead="The copy-paste. The chasing. The report rebuilt every Friday. Small jobs that take up too much of the day."
             />
             <p className="t-body mt-6 max-w-[56ch]" data-rv>
-              Show us the routine that keeps getting in the way. We’ll map it with you, automate the agreed parts, and look after the technology. You keep the judgment. We handle the repetition.
+              You keep the judgment. We handle the repetition.
             </p>
           </div>
           <div>
-            <p className="eyebrow eyebrow--plain mb-4" data-rv>
-              Sound familiar?
-            </p>
             <ul className="sticker-wall" data-rv-group>
               {CHORES.map((c) => (
                 <li key={c} className="chore" data-rv>
@@ -112,14 +109,13 @@ export default function Home() {
         <div className="wrap">
           <SectionHead
             id="automate-title"
-            eyebrow="What we automate"
+            eyebrow=""
             title="Your repeat list. Our kind of work."
             lead="Custom agents, workflows and integrations for the repetitive work across your business, each one designed around how you already operate."
           />
           <div className="automation-index automation-index--compact mt-14" data-rv-group>
-            {CATEGORIES.map((c, i) => (
+            {CATEGORIES.map((c) => (
               <article key={c.title} className="cat" data-rv>
-                <span className="index-number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="font-sans text-[16.5px] font-semibold leading-snug tracking-[-0.01em]">{c.title}</h3>
                 <ul>
                   {c.examples.slice(0, 1).map((e) => (
@@ -148,9 +144,9 @@ export default function Home() {
         <div className="wrap">
           <SectionHead
             id="ba-title"
-            eyebrow="Before and after"
-            title="From all over the place to in its place."
-            lead="Today, routine tasks pile up on whoever is nearest. With Quavok, the same tasks are handled automatically, wait for you only when you want a say, or go to a person when they need one."
+            eyebrow=""
+            title="Everything in its place."
+            lead="Routine work gets handled. Decisions wait for you. Exceptions go to a person."
           />
           <div className="mt-12" data-rv>
             <BeforeAfter />
@@ -163,9 +159,9 @@ export default function Home() {
         <div className="wrap">
           <SectionHead
             id="how-title"
-            eyebrow="How we work"
-            title="You explain the work. We do the rest."
-            lead="Four steps, and you never build, configure or deploy anything. You tell us how the work happens, approve what we propose, and we take it from there."
+            eyebrow=""
+            title="Your process. Our responsibility."
+            lead="From the first conversation to ongoing care, we handle the technology."
           />
           <ol className="process-strip">
             {[
@@ -192,9 +188,9 @@ export default function Home() {
           <div>
             <SectionHead
               id="rocket-title"
-              eyebrow="Rocket"
-              title="Your operations. Now in conversation."
-              lead="Rocket is the conversational way to interact with the automations we build and run for you: what ran, what’s waiting on you, and what you’d like next."
+              eyebrow=""
+              title="Just ask Rocket."
+              lead="What ran? What needs your approval? Ask Rocket about the automations we build and run for you."
             />
             <ul className="mt-8 space-y-4 text-[15.5px]" data-rv>
               <li className="flex gap-3">
@@ -236,7 +232,7 @@ export default function Home() {
       <section id="faq" className="section border-t border-line" aria-labelledby="faq-title">
         <div className="wrap grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
-            <SectionHead id="faq-title" eyebrow="FAQ" title="Questions, answered plainly." />
+            <SectionHead id="faq-title" eyebrow="" title="Questions, answered plainly." />
             <p className="t-body mt-6 max-w-[36ch]" data-rv>
               Something else on your mind?{" "}
               <a className="text-link text-ink" href={`mailto:${SITE.email}`}>
