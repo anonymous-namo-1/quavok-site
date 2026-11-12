@@ -73,7 +73,7 @@ Content uses a 1200px maximum width with responsive gutters. The homepage pairs 
 
 ## Elevation & Depth
 
-Dark tonal surfaces and hairline rules define structure. Offset shadows belong to the physical task stickers. A single purple spotlight illuminates the hero build. Rocket's opt-in conversation uses a soft shadow to separate its temporary panel from the page.
+Dark tonal surfaces and hairline rules define structure. One physical task note provides a warm, tactile contrast. A restrained purple light sits behind the Rocket conversation. Rocket's opt-in conversation uses a soft shadow to separate its temporary panel from the page.
 
 ## Shapes
 
@@ -96,24 +96,6 @@ The workflow intro is optional, replayable, skippable, and fails open. Its finis
 - Do not imply customers configure agents or Rocket builds them.
 - Do not introduce fabricated proof, staff-replacement framing or a site-wide WhatsApp bubble.
 
-The homepage workflow has an open stage with no outer card. Two illustrative request choices demonstrate approval and human escalation; these controls do not configure or run customer automations. The category index is compact, the process overview has four steps, and the detailed walkthrough is available through a disclosure. Rocket's page example gains layered depth only on the homepage; its persistent companion uses a compact attached speech bubble opened by explicit action.
+The hero is a compact conversation window about the customer’s workday. No decorative background image sits behind it. At tablet widths from 768px it uses a balanced two-column composition; phones stack intentionally. Framed monochrome photos belong to the workday story, paired with enquiry/follow-up and human-decision windows. No unrelated film or abstract machinery is displayed.
 
-The owner superseded the green palette: backgrounds now use neutral charcoal and neutral gray. The single off-white task note, workflow input and compact Rocket bubble share a warm surface language. Hero/closing display type carries the strongest emphasis; middle headings are smaller and lighter, with descriptions alongside them on desktop. The workflow input, approval and output each have a distinct visual role.
-
-Original etched paper-orchestration imagery gives the page a physical metaphor: scattered paper passing through a series of rings into one flowing ribbon. It appears subtly behind the hero workflow and in a bounded film/still panel above the comparison. Six unnamed pointers build actual page DOM during the intro; navigation, typography, actions, imagery and lower sections join the workflow assembly. Never hijack scroll to show off the intro. Motion media remains static during the intro, under reduced motion and data saving, and pauses offscreen.
-
-Rocket speech is opt-in through a small speaker control in its compact bubble. Speech reads only the visible authored answer and stops on close or answer change. Mouth feedback animates only when reduced motion is off. Keep the one demo disclosure inside the bubble; avoid adding extra helper lines around this interaction.
-
-Rocket is a recurring host across the page: an inline origin, brief reactions to example decisions, and a larger perch inside its own section. It remains the same character, rather than adding a duplicate illustration. The example conversation lives in a disclosure so the character can lead the section without adding a second permanent interface.
-
-The hero now leads with a person’s workday, represented by a clearly illustrative Rocket conversation. Keep the headline focused on the managed-service benefit. Example replies describe completed routine work and human approvals without invented business results. Technical diagrams belong in the examples below. Rocket’s silhouette is a round purple bot with an expressive eyes. The page-assembly cursors build this conversation as part of the real DOM; they are not removed by the change in hero subject.
-
-The first-visit sequence is page assembly → a question about new leads → Rocket becomes attentive → an illustrated reply appears. Clicking Rocket in the hero or choosing another example replays the conversational response. Audio remains opt-in. Reduced motion shows the completed reply immediately. The separate “Ask Rocket” command pill has been removed; the character remains keyboard accessible and Cmd/Ctrl+K still opens the compact conversation.
-
-The six unnamed building cursors each have a distinct accent: gold, lavender, cyan, mint, pink and peach. These colors are confined to the cursor performance. Rocket has a simple round face and expressive eyes; it has no headphones or other accessories.
-
-Rocket opens a first-visit prologue on an empty screen and gives the command “Let’s build this page” before the anonymous cursors start assembly. The round character has two eyes directly on its face, with no visor, headphones or surrounding orbit. Skip, Escape, reduced motion and fail-open release the whole page.
-
-The final resting palette is monochrome: Midnight #101010, Charcoal #282828, Surface #181818, Card #202020, Off-white #f0f0f0, muted text #b8b8b8 and neutral rules. Purple (#8b5cf6, deep #593b9d and soft #c5a9fa) is limited to primary actions, focus, Rocket and important states. The original background artwork and film render in grayscale. Six distinct colors remain confined to the requested cursor-build performance.
-
-Sound effects use one browser AudioContext, a shared noise buffer and short procedural tones. Mechanical key clicks follow the cursor text build and animated replies; placement, selection, Rocket calls, replies and completion have quiet, distinct cues. The header control enables/mutes effects and remembers the preference. In the opening scene it becomes “Build with sound” and starts assembly after a user gesture unlocks audio. Effects pause when the tab is hidden. Spoken replies remain a separate explicit read-aloud action.
+Rocket travels between reserved anchors with distinct left, right and center positions. The same character appears at every stop. Main content is never used as an overlay target. Future-feature promotion is omitted from public copy; unconfirmed business facts retain their placeholders.

@@ -111,7 +111,6 @@ export function RunTrace({ className = "" }: { className?: string }) {
           );
         })}
       </ol>
-      <p className="mt-4 text-[12.5px] text-stage-mute">Sample run of an illustrative workflow. Times are examples, not live activity or a customer log.</p>
     </div>
   );
 }

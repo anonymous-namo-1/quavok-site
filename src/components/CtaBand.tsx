@@ -18,6 +18,7 @@ export function CtaBand({
             </h2>
             <p className="mt-6 max-w-[54ch] text-[1.12rem] leading-relaxed">{body}</p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
+              <span className="rocket-stop rocket-stop--cta" data-rocket-perch aria-hidden="true" />
               <a className="btn btn-primary" href={CTA.book.href}>
                 {CTA.book.label}
                 <ArrowIcon />

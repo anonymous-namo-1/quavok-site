@@ -124,7 +124,6 @@ export default function ServicesPage() {
                     ))}
                   </ul>
                   <div className="service-example mt-7">
-                    <p className="font-mono text-[11px] tracking-[0.08em] text-faint uppercase">For example (illustrative)</p>
                     <p className="mt-2 text-[15px] text-ink-2">{s.example}</p>
                   </div>
                 </div>

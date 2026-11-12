@@ -3,7 +3,7 @@ import { CTA, SITE } from "@/lib/site";
 import { CATEGORIES } from "@/lib/categories";
 import { HOME_FAQS } from "@/lib/faqs";
 import { RocketEncounter } from "@/components/home/RocketEncounter";
-import { Atmosphere } from "@/components/home/Atmosphere";
+import { WorkWindows } from "@/components/home/WorkWindows";
 import { HeroIntro } from "@/components/home/HeroIntro";
 import { HeroConversation } from "@/components/home/HeroConversation";
 import { BeforeAfter } from "@/components/home/BeforeAfter";
@@ -38,7 +38,6 @@ export default function Home() {
 
       {/* 1. Hero */}
       <section className="hero" data-intro-hero aria-labelledby="hero-title">
-        <div className="hero-art" data-site-piece aria-hidden="true"><img src="/media/paper-orchestration.webp" alt="" width={1536} height={1024} fetchPriority="high" /></div>
         <div className="hero-spotlight" aria-hidden="true" />
         <div className="wrap hero-grid">
           <div className="hero-copy">
@@ -118,7 +117,7 @@ export default function Home() {
           </div>
 
           <div className="mt-24 grid gap-10">
-            <h3 className="t-h3">Pick an example. See who does what.</h3>
+            <div className="rocket-heading-row"><h3 className="t-h3">Pick an example. See who does what.</h3><span className="rocket-stop" data-rocket-perch aria-hidden="true" /></div>
             <div data-rv>
               <ScenarioGraph />
             </div>
@@ -138,7 +137,7 @@ export default function Home() {
             eyebrow=""
             title="Everything in its place."
           />
-          <Atmosphere />
+          <WorkWindows />
           <div className="mt-12" data-rv>
             <BeforeAfter />
           </div>
@@ -161,6 +160,7 @@ export default function Home() {
               ["Improve", "You tell us what’s changed. We keep it useful."],
             ].map(([title, body], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p></li>)}
           </ol>
+          <span className="rocket-stop rocket-stop--process" data-rocket-perch aria-hidden="true" />
           <details className="process-details"><summary>Explore the build, approval and run walkthrough</summary><HowWeWork /></details>
           <p className="mt-4" data-rv>
             <a className="btn btn-ghost" href="/how-it-works/">
@@ -185,19 +185,6 @@ export default function Home() {
               <li className="flex gap-3">
                 <Icon name="forward" className="mt-0.5 flex-none text-accent-soft" strokeWidth={2} />
                 <span>Request a new automation. Rocket forwards it to our team; it never builds anything itself.</span>
-              </li>
-              <li className="flex gap-3">
-                <Icon name="bell" className="mt-0.5 flex-none text-accent-text" strokeWidth={2} />
-                <span>
-                  A paid proactive add-on that reaches out first with alerts, suggestions and reports.{" "}
-                  <span className="dev-badge align-[1px]">In development</span>
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <Icon name="eye" className="mt-0.5 flex-none text-accent-text" strokeWidth={2} />
-                <span>
-                  Desktop and mobile apps. <span className="dev-badge align-[1px]">In development</span>
-                </span>
               </li>
             </ul>
             <p className="mt-8" data-rv>

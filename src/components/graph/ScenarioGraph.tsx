@@ -98,7 +98,6 @@ export function ScenarioGraph() {
             </button>
           ))}
         </div>
-        <span className="tag">Illustrative · read-only</span>
       </div>
       <div id="sc-panel" role="tabpanel" aria-labelledby={`sc-tab-${s.id}`} className="grid lg:grid-cols-[1fr_17rem]">
         <div className="stage-body grid-bg">

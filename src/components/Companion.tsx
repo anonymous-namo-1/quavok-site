@@ -7,7 +7,7 @@ const INTRO = "Hi, I’m Rocket. What would you like to know?";
 const QUESTIONS = [
   { label: "What does Quavok do?", answer: "Quavok designs, builds and runs automations for your repetitive work. You explain the process and approve the important decisions." },
   { label: "Do I build anything?", answer: "No technical homework. Quavok handles the build, deployment and ongoing care." },
-  { label: "What is Rocket?", answer: "Rocket talks to your Quavok-built automations and forwards new requests to the team. The proactive add-on and desktop/mobile apps are in development." },
+  { label: "What is Rocket?", answer: "Rocket talks to your Quavok-built automations and forwards new requests to the team." },
   { label: "How do I start?", answer: "Bring one repetitive process to a discovery conversation. The team will explore it with you." },
 ];
 const SECTION_HINTS: Record<string, string> = {
@@ -130,7 +130,7 @@ export function Companion() {
       idle = setTimeout(() => setMood("sleepy"), 14000);
     };
     const whisper = (text: string) => {
-      if (current.current !== "closed" || shell.current?.dataset.hero === "true") return;
+      if (current.current !== "closed" || shell.current?.dataset.perched === "true") return;
       clearTimeout(hintTimer);
       setHint(text);
       hintTimer = setTimeout(() => setHint(""), 3200);
@@ -145,9 +145,13 @@ export function Companion() {
       const prologue = document.documentElement.classList.contains("qa-prologue");
       const originRect = document.getElementById("rocket-origin")?.getBoundingClientRect();
       const mobileOpen = width < 960 && current.current === "open";
-      const perchRect = [document.getElementById("hero-rocket-perch"), document.getElementById("rocket-perch")].map(node => node?.getBoundingClientRect()).find(rect => rect && rect.top > 100 && rect.bottom < height - 70);
+      const visiblePerch = Array.from(document.querySelectorAll<HTMLElement>("[data-rocket-perch],#hero-rocket-perch,#rocket-perch"))
+        .map(node => ({node,rect:node.getBoundingClientRect()}))
+        .filter(({rect}) => rect.top > 100 && rect.bottom < height - 70)
+        .sort((a,b) => Math.abs(a.rect.top + a.rect.height / 2 - height * .45) - Math.abs(b.rect.top + b.rect.height / 2 - height * .45))[0];
+      const perchRect = visiblePerch?.rect;
       const perched = !mobileOpen && current.current !== "minimised" && !!perchRect && perchRect.top > 100 && perchRect.bottom < height - 70;
-      const size = prologue || perched ? 96 : 48;
+      const size = prologue ? 96 : perched && perchRect ? perchRect.width : 48;
       const docked = !mobileOpen && current.current !== "minimised" && !!originRect && originRect.top >= 84 && originRect.bottom < height;
       const headerPerch = width < 960 && !docked && !perched;
       const sectionRect = section?.getBoundingClientRect();
@@ -170,9 +174,12 @@ export function Companion() {
       el.style.setProperty("--bubble-left", `${Math.round(bubbleLeft)}px`);
       el.style.setProperty("--bubble-tail", `${Math.round(size / 2 - bubbleLeft)}px`);
       el.dataset.docked = String(docked);
+      el.style.setProperty("--rocket-scale",String(size / 48));
+      el.style.setProperty("--rocket-perch-size",`${size}px`);
+      el.style.setProperty("--rocket-bubble-gap",`${size + 16}px`);
       el.dataset.perched = String(perched || prologue);
       el.dataset.prologue = String(prologue);
-      el.dataset.hero = String(perched && document.getElementById("hero-rocket-perch")?.getBoundingClientRect().top === perchRect?.top);
+      el.dataset.hero = String(perched && visiblePerch?.node.id === "hero-rocket-perch");
       el.dataset.bubbleAbove = String(above);
       el.dataset.positioned = "true";
       pageRegions.forEach(({ region, clip }) => region.style.setProperty("--rocket-clearance", `${clip}px`));

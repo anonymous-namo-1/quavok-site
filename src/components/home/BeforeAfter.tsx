@@ -129,7 +129,6 @@ export function BeforeAfter() {
             With Quavok
           </button>
         </div>
-        <span className="tag">Illustrative process comparison</span>
       </div>
 
       <div ref={boardRef} className="ba-board" aria-live="polite">

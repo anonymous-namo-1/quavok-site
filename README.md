@@ -10,13 +10,13 @@ Next.js (App Router) + React + TypeScript + Tailwind CSS v4, exported as plain s
 npm install        # Node 20.9+
 npm run dev        # http://localhost:3000 with hot reload
 npm run build      # static export to out/
-npm run conversation    # serve out/ at http://localhost:4173 (no extra dependencies)
+npm run preview    # serve out/ at http://localhost:4173 (no extra dependencies)
 npm run typecheck
 ```
 
 `npm run build` writes `out/` with one directory per page (`out/services/index.html`, …), `404.html`, `sitemap.xml`, `robots.txt`, `og.png`, `CNAME` (`quavok.com`) and `.nojekyll`. The `.nojekyll` file is required on GitHub Pages; without it, Jekyll drops the `_next/` asset folder.
 
-Deploying is deliberately not wired up. To publish later, put the contents of `out/` on the Pages branch (or use a Pages workflow that runs `npm ci && npm run build` and uploads `out/`). Keep `CNAME` as is.
+The public review copy uses the separate `vekhyat/quavok-preview` GitHub Pages repository. The production repository and `quavok.com` configuration are independent. A preview build needs the `/quavok-preview` base path and prefixed public URLs; production builds retain `/` and `CNAME`.
 
 ## Pages
 
@@ -43,7 +43,7 @@ Search the code for `PLACEHOLDER` and `TODO`:
 - Founder names, roles, bios and photos — `src/app/about/page.tsx`.
 - Support hours / response times — `src/lib/faqs.ts`, `src/app/how-it-works/page.tsx`.
 - Booking calendar link — `src/app/contact/page.tsx`.
-- Rocket base availability — `src/app/rocket/page.tsx` (desktop, mobile and the proactive add-on are labelled *in development*).
+- Rocket base availability — confirm the visible availability placeholder before making launch claims.
 - Full privacy policy — `src/app/privacy/page.tsx`.
 
 ## Effects and where they live
@@ -57,7 +57,7 @@ All effects fail open: the finished state is in the HTML, reduced motion shows i
 | Read-only scenario graph, scroll-drawn edges, inspectable steps | `src/components/graph/WorkflowGraph.tsx`, `ScenarioGraph.tsx` |
 | Before/after settle (FLIP) | `src/components/home/BeforeAfter.tsx` |
 | Four-step story + run trace with an approval hold | `src/components/HowWeWork.tsx`, `src/components/RunTrace.tsx` |
-| Rocket vignette (ask mode, proactive mode labelled in development, forward-only) | `src/components/RocketVignette.tsx` |
+| Rocket vignette (questions and forward-only requests) | `src/components/RocketVignette.tsx` |
 | Section entrances (blur + rise + stagger, once) | `src/components/MotionRuntime.tsx`, `[data-rv]` |
 | One magnetic CTA (fine pointer only) | `src/components/Magnetic.tsx` |
 
@@ -67,38 +67,20 @@ Intro rules: plays once per tab (sessionStorage), always with `?intro=1`, never 
 
 Quavok is an early-stage, two-founder company working toward its first deployments. The site must not claim testimonials, client counts, metrics, pricing tiers, certifications, history or launched features that don't exist. Customers never build, configure or deploy automations; Rocket only forwards new-automation requests to the team. Planning notes are in `research/`.
 
-## Dark studio design pass
+## Current visual and interaction system
 
-The default theme is dark throughout: Charcoal `#282828`, Off-white `#f0f0f0`, and Electric Purple `#8b5cf6`, over a deep base `#101010`. `src/app/studio.css` contains the editorial layouts, sticker wall, typography, dark surfaces and shared dark styling. The existing graph geometry and intro safeguards remain in place.
+The resting palette is monochrome: Midnight `#101010`, Charcoal `#282828`, Surface `#181818`, Card `#202020`, Off-white `#f0f0f0`, muted text `#b8b8b8`. Purple accents primary actions, focus and Rocket. Six distinct colors are reserved for the anonymous cursor-build performance.
 
-Rocket, in `src/components/Companion.tsx` and `src/app/rocket-companion.css`, is an explicitly scripted conversation with no AI or automation backend. Its face begins inline in the hero headline and travels with the section in view. On narrow screens it perches in the header after leaving the headline. Quick replies cover Quavok, the managed service, Rocket, getting started and the workflow demo. A click, Cmd/Ctrl+K or the “Ask Rocket” pill opens a compact attached bubble. Escape, the close button and outside clicks return focus to Rocket. Only minimisation persists; old open-state values are ignored. It remembers minimisation locally, tracks fine pointers, reacts to touch, and offers quiet contextual hints. Reduced motion disables eye movement, blinking, nodding and confetti. Konami keys reveal a short, expiring greeting without opening the conversation.
+The first visit opens with Rocket on an empty screen. Its command starts six cursors assembling actual page elements, followed by the new-leads question and Rocket’s authored reply. Skip, Escape, keyboard entry, reduced motion, error recovery and the watchdog all release the finished page. No scroll hijack or backend is involved.
 
-Six anonymous cursor pointers assemble actual DOM elements across the homepage. No agent names or roster are displayed. A natural completion triggers a brief celebration; skipping does not. `hero-detail.css` owns the spotlight and opening composition; `editorial-detail.css` owns inner-page layouts and the giant footer wordmark. `studio.css` owns shared dark surfaces and the saturated Purple field (`#191919`). `DESIGN.md` and `.impeccable/design.json` document the resulting design system.
+Rocket is one round character with two expressive eyes. It travels between reserved page anchors beside the hero, workflow examples, photo windows, process, CTA and footer. Mobile conversation bubbles move to a reserved header area. Click or Cmd/Ctrl+K opens the compact bubble; close, outside click and Escape restore focus. Only minimisation is remembered. Spoken replies are optional and browser-provided.
 
-`npm run build` first generates `public/og.png` (1200×630) from `scripts/og-image.tsx`, then exports the site. No network request is needed for that artwork. Brand icons and CNAME remain unchanged.
+The homepage uses purpose-led black-and-white photos in framed windows: routine follow-ups are handled while people focus on craft and decisions. There is no decorative film or abstract background machine. `WorkWindows.tsx` owns the photo compositions. Asset provenance and full generation prompts are in `research/visual-assets.md`.
 
-QA screenshots are local in `.qa/` (gitignored). Headless Chrome checks cover all eight routes at 1440×900 and 390×844, console errors, overflow, axe WCAG A/AA checks, and the intro, graph, form and companion interactions. No browser-test dependency was added to the production bundle.
+Type is self-hosted Sora and Manrope. OFL licences and build-only OG fonts are in `src/fonts/`. `npm run build` creates the matching OG image before exporting.
 
-The homepage now uses an open workflow stage with illustrative clear/unclear enquiry controls and an approval decision. The compact process overview keeps the detailed walkthrough in a native disclosure. Rocket’s homepage vignette uses layered panels; its dedicated page retains its existing layout.
+`SoundControl.tsx` and `lib/sound.ts` provide one shared browser AudioContext for mechanical typing, placement, selection, Rocket and reply cues. Sound is opt-in and remembered. “Build with sound” starts the opening sequence after audio is unlocked. The header control mutes effects; hidden tabs pause them.
 
-## Page assembly and original media
+Public copy omits repetitive demo badges and unreleased-feature promotion. The companion retains its single demo disclosure. Contact form and unconfirmed business placeholders remain honest and visible.
 
-The loading intro places navigation, typography, copy, actions, artwork and section containers, alongside the original node-and-connector build. Below-fold sections assemble in place without automatically scrolling the visitor. The promise and CTAs stay visible; skip, Escape, keyboard entry, reduced motion and fail-open are preserved.
-
-`src/components/home/Atmosphere.tsx` shows an original paper-orchestration artwork and its silent, 10-second camera-motion study. Video loads only in view, pauses outside the viewport or when the document is hidden, and has a pause button. Reduced motion and data saving use the still without requesting video. Assets live in `public/media/`; generation prompt and encoding are recorded in `research/visual-assets.md`.
-
-The current type pair is self-hosted Sora (display) and Manrope (body), with OFL licences in `src/fonts/`. Matching TTF files are used only by the build-time OG renderer. Repeated hero helper lines and category/process subheads have been removed; illustrative labels, development status and contact-form disclosures remain. Rocket's optional speaker control reads its existing scripted answer through the browser speech service, only after a click. Closing the bubble or changing the answer stops speech.
-
-Rocket also has a character perch in its homepage section. The same companion travels into it, waves, and opens its compact bubble only when invited. The detailed automation conversation is available in an expandable example. Selecting or approving an illustrative enquiry gives Rocket a brief contextual reaction.
-
-The current hero is benefit-led: a person asks Rocket about their day, and the illustrated replies show enquiries organised, follow-ups prepared and decisions kept with people. It uses no invented client counts or performance metrics. The anonymous cursor intro remains: it now places the question and reply alongside the headline, navigation, imagery and section containers. Technical workflow diagrams remain in the examples further down the page. Rocket’s mascot is a round bot with expressive eyes, shared across every page.
-
-The first-visit sequence is page assembly → a question about new leads → Rocket becomes attentive → an illustrated reply appears. Clicking Rocket in the hero or choosing another example replays the conversational response. Audio remains opt-in. Reduced motion shows the completed reply immediately. The separate “Ask Rocket” command pill has been removed; the character remains keyboard accessible and Cmd/Ctrl+K still opens the compact conversation.
-
-The six unnamed building cursors each have a distinct accent: gold, lavender, cyan, mint, pink and peach. These colors are confined to the cursor performance. Rocket has a simple round face and expressive eyes; it has no headphones or other accessories.
-
-Rocket opens a first-visit prologue on an empty screen and gives the command “Let’s build this page” before the anonymous cursors start assembly. The round character has two eyes directly on its face, with no visor, headphones or surrounding orbit. Skip, Escape, reduced motion and fail-open release the whole page.
-
-The final resting palette is monochrome: Midnight #101010, Charcoal #282828, Surface #181818, Card #202020, Off-white #f0f0f0, muted text #b8b8b8 and neutral rules. Purple (#8b5cf6, deep #593b9d and soft #c5a9fa) is limited to primary actions, focus, Rocket and important states. The original background artwork and film render in grayscale. Six distinct colors remain confined to the requested cursor-build performance.
-
-Sound effects use one browser AudioContext, a shared noise buffer and short procedural tones. Mechanical key clicks follow the cursor text build and animated replies; placement, selection, Rocket calls, replies and completion have quiet, distinct cues. The header control enables/mutes effects and remembers the preference. In the opening scene it becomes “Build with sound” and starts assembly after a user gesture unlocks audio. Effects pause when the tab is hidden. Spoken replies remain a separate explicit read-aloud action.
+QA artifacts live in `.qa/` (ignored). Checks cover the eight routes, desktop/mobile/tablet layouts, keyboard, axe, console errors, character travel, intro exits, sound and static-export artifacts.

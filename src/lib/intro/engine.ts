@@ -656,7 +656,7 @@ export function startIntro(): () => void {
       d,
       begin: () => {
         ty.it.op = 1;
-        a.bubble.textContent = "Room for the work you love.";
+        a.bubble.textContent = "Setting the type.";
         caret.on = true;
         const c = ty.typeTo(0);
         Object.assign(caret, { x: c.x, y: c.y, h: c.h });
@@ -1130,11 +1130,11 @@ export function startIntro(): () => void {
     overlay.appendChild(fx);
 
     const mapping = makeAgent(CURSOR_COLORS.structure, undefined, "A place for everything.");
-    const copy = makeAgent(CURSOR_COLORS.type, undefined, "Less jargon. More human.");
+    const copy = makeAgent(CURSOR_COLORS.type, undefined, "Setting the type.");
     const wiring = makeAgent(CURSOR_COLORS.connections, undefined, "Connecting the dots.");
     const review = makeAgent(CURSOR_COLORS.review, "All in place", "A human gets the final say.");
     const layout = makeAgent(CURSOR_COLORS.layout, undefined, "Putting things in place.");
-    const art = makeAgent(CURSOR_COLORS.art, undefined, "A little atmosphere.");
+    const art = makeAgent(CURSOR_COLORS.art, undefined, "Opening a window.");
     agents = [mapping, copy, wiring, review, layout, art];
     for (const a of agents) fx.appendChild(a.box.el);
     caretEl = document.createElement("div");
@@ -1167,7 +1167,7 @@ export function startIntro(): () => void {
     const visiblePieces = pagePieces.filter(piece => !piece.section);
     const sections = pagePieces.filter(piece => piece.section).map(piece => piece.item);
     const pageSteps: Step[] = [];
-    for (const { item, essential } of visiblePieces.filter(piece => !["hero-art", "day-question", "day-answer"].some(className => piece.item.el.classList.contains(className)))) {
+    for (const { item, essential } of visiblePieces.filter(piece => !piece.item.el.hasAttribute("data-site-art") && !["hero-art", "day-question", "day-answer"].some(className => piece.item.el.classList.contains(className)))) {
       if (essential) item.op = .4;
       let soundTick = -1;
       pageSteps.push(move(layout, () => ({ x: clamp(item.home.x + 12, V.l + 12, V.r - 32), y: clamp(item.home.y + 12, V.t + 12, V.b - 80) }), .12));
@@ -1190,11 +1190,11 @@ export function startIntro(): () => void {
       const steps = [move(agent, () => grabPoint(message,option,1),.3), dragIn(agent,message,option,.6),leave(agent,.3)];
       tracks.push({at,steps,i:0,acc:0}); total=Math.max(total,at+sum(steps));
     }
-    const artwork = visiblePieces.find(piece => piece.item.el.classList.contains("hero-art"))?.item;
+    const artwork = visiblePieces.find(piece => (piece.item.el.classList.contains("hero-art") || piece.item.el.hasAttribute("data-site-art")))?.item;
     const artSteps: Step[] = [];
     if (artwork) {
-      artSteps.push(move(art, () => ({x: V.r - 100, y: V.t + 140}), .35));
-      if (v.w >= 900) artSteps.push(marquee(art, () => ({x: V.r * .55, y: V.t + 90, w: V.w * .4, h: Math.min(340, V.h * .5)}), .35));
+      artSteps.push(move(art, () => ({x: artwork.home.x,y:artwork.home.y}), .35));
+      if (v.w >= 900) artSteps.push(marquee(art, boxAround(artwork,6), .35));
       artSteps.push(popIn([artwork], .55));
     }
     artSteps.push(popIn(sections, 1.2), leave(art, .35));

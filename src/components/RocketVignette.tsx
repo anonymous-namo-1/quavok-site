@@ -40,23 +40,6 @@ const ASK: Exchange[] = [
   },
 ];
 
-const PROACTIVE: { kind: string; text: string; action?: string; done?: string }[] = [
-  {
-    kind: "Alert",
-    text: "Heads up: a supplier invoice arrived without a due date. I’ve routed it to your team rather than guessing.",
-  },
-  {
-    kind: "Report",
-    text: "Your weekly report is ready: what each automation handled, and what’s still waiting on you.",
-  },
-  {
-    kind: "Suggestion",
-    text: "Your team seems to send the same quote reminder by hand each week. Want me to ask the Quavok team whether it’s worth automating?",
-    action: "Ask the team to look at this",
-    done: "Forwarded to the Quavok team",
-  },
-];
-
 function RocketAvatar() {
   return (
     <span className="rk-avatar" aria-hidden="true">
@@ -66,28 +49,18 @@ function RocketAvatar() {
 }
 
 export function RocketVignette({ layered = false }: { layered?: boolean }) {
-  const [mode, setMode] = useState<"ask" | "proactive">("ask");
   const [q, setQ] = useState(0);
   const [asked, setAsked] = useState(false);
-  const [sent, setSent] = useState(false);
   const ex = ASK[q];
-  const focus: AutoId | null = mode === "ask" ? ex.focus : null;
+  const focus: AutoId = ex.focus;
 
   return (
     <div className={`panel-dark on-dark rocket ${layered ? "rocket-layered" : ""}`}>
       <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:px-5">
         <div className="flex items-center gap-3">
           <span className="font-display text-[20px] font-semibold tracking-tight text-white">Rocket</span>
-          <span className="tag">Illustrative example</span>
         </div>
-        <div className="tabs" role="group" aria-label="Rocket mode">
-          <button type="button" aria-pressed={mode === "ask"} onClick={() => setMode("ask")}>
-            You ask
-          </button>
-          <button type="button" aria-pressed={mode === "proactive"} onClick={() => setMode("proactive")}>
-            Rocket reaches out
-          </button>
-        </div>
+
       </div>
 
       <div className="rk-shell">
@@ -101,10 +74,8 @@ export function RocketVignette({ layered = false }: { layered?: boolean }) {
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-[12px] leading-relaxed text-stage-mute">Built and run by Quavok. Rocket only reports on them and passes requests to the team.</p>
         </aside>
 
-        {mode === "ask" ? (
           <div className="flex min-w-0 flex-col">
             <div className="rk-thread" aria-live="polite">
               {asked ? (
@@ -152,42 +123,9 @@ export function RocketVignette({ layered = false }: { layered?: boolean }) {
               ))}
             </div>
           </div>
-        ) : (
-          <div className="flex min-w-0 flex-col">
-            <div className="flex flex-wrap items-center gap-2 border-b border-stage-line px-5 py-3 text-[13px] text-stage-mute">
-              <span className="dev-badge">In development</span>
-              <span>Proactive mode is a planned paid add-on. Rocket would message you first.</span>
-            </div>
-            <div className="rk-thread" aria-live="polite">
-              {PROACTIVE.map((m, i) => (
-                <div key={m.kind} className="msg msg-rk msg-anim" style={{ "--i": i } as CSSProperties}>
-                  <RocketAvatar />
-                  <div>
-                    <p className="who-line">Rocket · {m.kind}</p>
-                    <p>{m.text}</p>
-                    {m.action ? (
-                      sent ? (
-                        <p className="forwarded">
-                          <Icon name="forward" strokeWidth={2} />
-                          {m.done}
-                        </p>
-                      ) : (
-                        <button type="button" className="btn btn-ghost btn-sm mt-3" onClick={() => setSent(true)}>
-                          {m.action}
-                        </button>
-                      )
-                    ) : null}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
-      {layered && ((mode === "ask" && asked && ex.forwarded) || (mode === "proactive" && sent)) && <div className="rk-team" aria-hidden="true"><Icon name="forward" /><span><b>Quavok team</b><br />New request: quote reminders</span></div>}
-      <p className="border-t border-stage-line px-5 py-3 text-[12.5px] text-stage-mute">
-        Illustration with fictional data. Nothing here is sent anywhere. Rocket desktop and mobile apps and the proactive add-on are in development.
-      </p>
+      {layered && asked && ex.forwarded && <div className="rk-team" aria-hidden="true"><Icon name="forward" /><span><b>Quavok team</b><br />New request: quote reminders</span></div>}
+
     </div>
   );
 }

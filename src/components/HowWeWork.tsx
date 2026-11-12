@@ -103,7 +103,6 @@ function UnderstandScene() {
           </li>
         ))}
       </ul>
-      <p className="mt-3 text-[13px] text-mute">Illustrative example of a mapped process.</p>
     </div>
   );
 }
@@ -135,7 +134,6 @@ function ScopeScene() {
           <Icon name="check" strokeWidth={2.4} />
           Scope approved by you
         </span>
-        <span className="text-[13px] text-mute">Illustrative scope.</span>
       </div>
     </div>
   );
@@ -161,10 +159,7 @@ function EnvScene() {
           </div>
         </div>
       </div>
-      <p className="mt-4 text-[13px] leading-relaxed text-mute">
-        Illustrative. A dedicated, managed cloud environment per customer is how we intend to run your automations. You never see a server or a settings
-        screen.
-      </p>
+
     </div>
   );
 }

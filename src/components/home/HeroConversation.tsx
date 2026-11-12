@@ -36,7 +36,8 @@ export function HeroConversation() {
   }, []);
   const example = EXAMPLES[selected];
   useEffect(() => { setSpeechAvailable("speechSynthesis" in window && "SpeechSynthesisUtterance" in window); }, []);
-  return <figure id="day-preview" className="day-preview" data-phase={phase} data-intro-stage data-intro-conversation aria-label="Illustrative conversation with Rocket">
+  return <figure id="day-preview" className="day-preview" data-phase={phase} data-intro-stage data-intro-conversation aria-label="Conversation with Rocket">
+    <div className="day-chrome window-chrome" data-site-piece data-site-art aria-hidden="true"><i /><i /><i /></div>
     <div className="day-question" data-site-piece><span className="day-person">You</span><p>{example.question}</p></div>
     <div className="day-rocket"><span id="hero-rocket-perch" aria-hidden="true" /></div>
     <div className="day-answer" data-site-piece>
@@ -45,7 +46,7 @@ export function HeroConversation() {
       {speechAvailable && <button className="day-listen" type="button" onClick={() => window.dispatchEvent(new CustomEvent("quavok:rocket-say", {detail:example.answer}))} aria-label="Read the example reply aloud"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4ZM17 8q5 4 0 8" /></svg>Hear reply</button>}
     </div>
 
-    <figcaption className="day-controls"><span>Illustrative conversation</span><div role="group" aria-label="Choose an example question">{EXAMPLES.map((item, i) => <button key={item.question} type="button" aria-pressed={i===selected} aria-label={item.question} onClick={() => { window.dispatchEvent(new CustomEvent("quavok:rocket-reaction", {detail:""})); runConversation(i); }}>{i+1}</button>)}</div><a href="/?intro=1">Replay intro</a></figcaption>
+    <figcaption className="day-controls"><div role="group" aria-label="Choose an example question">{EXAMPLES.map((item, i) => <button key={item.question} type="button" aria-pressed={i===selected} aria-label={item.question} onClick={() => { window.dispatchEvent(new CustomEvent("quavok:rocket-reaction", {detail:""})); runConversation(i); }}>{i+1}</button>)}</div><a href="/?intro=1">Replay intro</a></figcaption>
     <span className="stage-confetti" aria-hidden="true">{Array.from({length:8},(_,i)=><i key={i} style={{"--burst-angle":`${i*45}deg`} as CSSProperties} />)}</span>
   </figure>;
 }

@@ -45,7 +45,7 @@ export const HOME_FAQS: Faq[] = [
   {
     q: "Do I need Rocket?",
     a: [
-      "No. Your automations run without it. Rocket is an optional, conversational way to ask about the automations we run for you and to pass new requests to our team. Its desktop and mobile apps, and a paid proactive add-on that reaches out to you first, are in development.",
+      "No. Your automations run without it. Rocket is an optional, conversational way to ask about the automations we run for you and to pass new requests to our team.",
     ],
   },
   {

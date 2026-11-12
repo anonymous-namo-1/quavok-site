@@ -8,7 +8,7 @@ import { ArrowIcon, Icon, type IconName } from "@/components/Icon";
 export const metadata = pageMeta({
   title: "Solutions",
   description:
-    "Illustrative examples of the repetitive workflows Quavok can automate by department: sales and leads, customer support, operations, finance and documents, coordination and reporting.",
+    "Examples of the repetitive workflows Quavok can automate by department: sales and leads, customer support, operations, finance and documents, coordination and reporting.",
   path: "/solutions/",
 });
 
@@ -168,7 +168,6 @@ export default function SolutionsPage() {
             {CTA.discuss.label}
             <ArrowIcon />
           </a>
-          <span className="tag">Illustrative examples, not client results</span>
         </div>
       </PageHero>
 
