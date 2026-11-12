@@ -30,28 +30,6 @@ const CHORES = [
   "Who’s putting the weekly report together?",
 ];
 
-const WHY = [
-  {
-    icon: "shield" as const,
-    title: "Fully managed, start to finish",
-    body: "We design, build, deploy, host, monitor and maintain. There is no software for your team to learn and nothing to configure.",
-  },
-  {
-    icon: "layers" as const,
-    title: "Built around how you work",
-    body: "Every automation is custom, shaped around your existing process and tools. Not a pack of templates you have to bend your business to.",
-  },
-  {
-    icon: "check" as const,
-    title: "You stay in control",
-    body: "You approve the scope, the wording and every change. Anything sensitive or out of the ordinary goes to a person, not a guess.",
-  },
-  {
-    icon: "person" as const,
-    title: "You talk to the people who build it",
-    body: "We’re a small, early-stage team of two founders. The people you explain your process to are the people who build and run it.",
-  },
-];
 
 export default function Home() {
   return (
@@ -138,16 +116,13 @@ export default function Home() {
             title="Your repeat list. Our kind of work."
             lead="Custom agents, workflows and integrations for the repetitive work across your business, each one designed around how you already operate."
           />
-          <div className="automation-index mt-14" data-rv-group>
+          <div className="automation-index automation-index--compact mt-14" data-rv-group>
             {CATEGORIES.map((c, i) => (
               <article key={c.title} className="cat" data-rv>
                 <span className="index-number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                <span className="ico" aria-hidden="true">
-                  <Icon name={c.icon} />
-                </span>
                 <h3 className="font-sans text-[16.5px] font-semibold leading-snug tracking-[-0.01em]">{c.title}</h3>
                 <ul>
-                  {c.examples.map((e) => (
+                  {c.examples.slice(0, 1).map((e) => (
                     <li key={e}>{e}</li>
                   ))}
                 </ul>
@@ -156,25 +131,7 @@ export default function Home() {
           </div>
 
           <div className="mt-24 grid gap-10">
-            <div className="grid gap-6 lg:grid-cols-2 lg:items-end" data-rv>
-              <div>
-              <p className="eyebrow">See one up close</p>
-              <h3 className="t-h3 mt-5 max-w-[22ch]" style={{ fontSize: "clamp(1.6rem, 1.2rem + 1.2vw, 2.25rem)" }}>
-                One process, five steps, one approval, one route to a person.
-              </h3>
-              </div>
-              <div>
-              <p className="t-body max-w-[52ch]">
-                Every automation we build has the same shape: it does the repetitive work, waits for you where you want a say, and hands anything unusual
-                to your team. Pick an example and select a step to see who does what.
-              </p>
-              <p className="mt-6">
-                <a className="text-link font-semibold" href="/solutions/">
-                  More examples by department
-                </a>
-              </p>
-              </div>
-            </div>
+            <h3 className="t-h3">Pick an example. See who does what.</h3>
             <div data-rv>
               <ScenarioGraph />
             </div>
@@ -210,38 +167,22 @@ export default function Home() {
             title="You explain the work. We do the rest."
             lead="Four steps, and you never build, configure or deploy anything. You tell us how the work happens, approve what we propose, and we take it from there."
           />
-          <div className="mt-14">
-            <HowWeWork />
-          </div>
+          <ol className="process-strip">
+            {[
+              ["Understand", "You explain the process. We map the repetitive parts."],
+              ["Build", "You approve the scope. We build and test it."],
+              ["Run", "You make the key calls. We run the technology."],
+              ["Improve", "You tell us what’s changed. We keep it useful."],
+            ].map(([title, body], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p></li>)}
+          </ol>
+          <p className="t-body">A small team of two founders. The people you explain your process to build and run it.</p>
+          <details className="process-details"><summary>Explore the build, approval and run walkthrough</summary><HowWeWork /></details>
           <p className="mt-4" data-rv>
             <a className="btn btn-ghost" href="/how-it-works/">
               How it works in detail
               <ArrowIcon />
             </a>
           </p>
-        </div>
-      </section>
-
-      {/* 6. Why us */}
-      <section className="section why-studio" aria-labelledby="why-title">
-        <div className="wrap">
-          <SectionHead
-            id="why-title"
-            eyebrow="Why Quavok"
-            title="We build the automation. We run the automation."
-            lead="A useful automation should make your day simpler. That includes the part where someone has to keep it working. That someone is us."
-          />
-          <div className="studio-promises mt-14" data-rv-group>
-            {WHY.map((w) => (
-              <article key={w.title} className="card p-7" data-rv>
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-ink text-purple" aria-hidden="true">
-                  <Icon name={w.icon} />
-                </span>
-                <h3 className="t-h3 mt-6">{w.title}</h3>
-                <p className="t-body mt-3">{w.body}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -286,7 +227,7 @@ export default function Home() {
             </p>
           </div>
           <div data-rv>
-            <RocketVignette />
+            <RocketVignette layered />
           </div>
         </div>
       </section>

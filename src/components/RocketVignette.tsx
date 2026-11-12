@@ -65,7 +65,7 @@ function RocketAvatar() {
   );
 }
 
-export function RocketVignette() {
+export function RocketVignette({ layered = false }: { layered?: boolean }) {
   const [mode, setMode] = useState<"ask" | "proactive">("ask");
   const [q, setQ] = useState(0);
   const [asked, setAsked] = useState(false);
@@ -74,7 +74,7 @@ export function RocketVignette() {
   const focus: AutoId | null = mode === "ask" ? ex.focus : null;
 
   return (
-    <div className="panel-dark on-dark rocket">
+    <div className={`panel-dark on-dark rocket ${layered ? "rocket-layered" : ""}`}>
       <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:px-5">
         <div className="flex items-center gap-3">
           <span className="font-display text-[20px] font-semibold tracking-tight text-white">Rocket</span>
@@ -184,6 +184,7 @@ export function RocketVignette() {
           </div>
         )}
       </div>
+      {layered && ((mode === "ask" && asked && ex.forwarded) || (mode === "proactive" && sent)) && <div className="rk-team" aria-hidden="true"><Icon name="forward" /><span><b>Quavok team</b><br />New request: quote reminders</span></div>}
       <p className="border-t border-stage-line px-5 py-3 text-[12.5px] text-stage-mute">
         Illustration with fictional data. Nothing here is sent anywhere. Rocket desktop and mobile apps and the proactive add-on are in development.
       </p>

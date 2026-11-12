@@ -13,6 +13,8 @@ type Props = {
   selected?: Sel;
   onSelect?: (s: Sel) => void;
   hot?: number | null;
+  gateState?: "waiting" | "approved";
+  excHot?: boolean;
 };
 
 function vars(w: Box, n: Box): CSSProperties {
@@ -51,7 +53,7 @@ function Edges({ layout, cls, hold }: { layout: typeof WIDE; cls: string; hold?:
 
 export type GraphSelection = Sel;
 
-export function WorkflowGraph({ scenario, className = "", introHold, selected, onSelect, hot }: Props) {
+export function WorkflowGraph({ scenario, className = "", introHold, selected, onSelect, hot, gateState, excHot }: Props) {
   const interactive = typeof onSelect === "function";
   const h = introHold ? { "data-intro-hold": "" } : {};
 
@@ -129,11 +131,11 @@ export function WorkflowGraph({ scenario, className = "", introHold, selected, o
           </>
         ) : (
           <>
-            <div className="g-gate" style={vars(WIDE.gate, NARROW.gate)} data-gate aria-hidden="true" {...h}>
+            <div className="g-gate" style={vars(WIDE.gate, NARROW.gate)} data-state={gateState} data-gate aria-hidden="true" {...h}>
               <Icon name="check" strokeWidth={2.4} />
               {scenario.gate.label}
             </div>
-            <div className="g-exc" style={vars(WIDE.exception, NARROW.exception)} data-exc aria-hidden="true" {...h}>
+            <div className="g-exc" style={vars(WIDE.exception, NARROW.exception)} data-hot={excHot || undefined} data-exc aria-hidden="true" {...h}>
               <Icon name="person" strokeWidth={2} width={14} height={14} />
               <span className="exc-wide">{scenario.exception.label}</span>
               <span className="exc-narrow">To a person</span>

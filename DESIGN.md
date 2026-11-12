@@ -95,3 +95,5 @@ The workflow intro is optional, replayable, skippable, and fails open. Its finis
 - Preserve all placeholders, brand assets, CNAME and deployment artifacts.
 - Do not imply customers configure agents or Rocket builds them.
 - Do not introduce fabricated proof, staff-replacement framing or a site-wide WhatsApp bubble.
+
+The homepage workflow has an open stage with no outer card. Two illustrative request choices demonstrate approval and human escalation; these controls do not configure or run customer automations. The category index is compact, the process overview has four steps, and the detailed walkthrough is available through a disclosure. Rocket's page example gains layered depth only on the homepage; its persistent companion uses a compact attached speech bubble opened by explicit action.

@@ -29,3 +29,9 @@ Inspiration only. Do not copy assets, illustrations, or text. Screenshots are in
 9. **Hairline-grid editorial framing** (Heron). Thin rules framing sections, with mono coordinates or labels in the corners ("§02 / HOW WE WORK"), so it reads as crafted and not like a template.
 10. **Playful explanation** (Cyera). A tiny optional mini-game or toy in the workflow section, e.g. drag a messy task onto the conveyor and watch the agents process it. Keep it lightweight in DOM/SVG.
 11. **Avoid**: generic glass cards with blob spheres (open.bot), uniform 3-card grids, stock gradients.
+
+## Follow-up: open workflow and compact Rocket (November 2026)
+
+Reviewed related Dribbble compositions: [NexUX connected workflow](https://dribbble.com/shots/27186040-Ai-Agent-Website-Design) and [Sudarshan's layered conversation](https://dribbble.com/shots/26916324-AI-Agents-Landing-page). The owner's [Alamgir reference](https://dribbble.com/shots/26757421-AI-agent-website-landing-page) exposed page metadata but its artwork could not be fetched reliably. No visual conclusions were drawn from that unavailable image.
+
+Opus 5.5 supplied source-based guidance: preserve intro selectors/geometry, remove the outer workflow card, add illustrative approval/exception choices, layer the existing Rocket example, and shorten duplicated homepage explanations. Implementation retains the detailed how-we-work and run trace behind an accessible disclosure. The companion itself stays small; only an explicit action opens its compact speech bubble. Reference assets, claims and client logos are not reused.

@@ -1,17 +1,29 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { WorkflowGraph } from "../graph/WorkflowGraph";
 import { SCENARIOS } from "@/lib/workflows";
 import { INTRO_DONE_EVENT } from "@/lib/intro/engine";
 import { Icon } from "../Icon";
 
 // The finished hero workflow. After the intro (or straight away when there is
-// none) one purple travels through it once, lighting each step as it passes.
+// none) one signal travels through it once, lighting each step as it passes.
 export function HeroStage() {
   const scenario = SCENARIOS[0];
   const ref = useRef<HTMLElement>(null);
   const [hot, setHot] = useState<number | null>(null);
+  const [sample, setSample] = useState<"idle" | "approval" | "approved" | "person">("idle");
+  const [ready, setReady] = useState(false);
+  const approve = useRef<HTMLButtonElement>(null);
+  const clearEnquiry = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    let timer = 0;
+    const finish = () => { timer = window.setTimeout(() => setReady(true), 2500); };
+    if (!document.documentElement.classList.contains("qa-pre")) setReady(true);
+    window.addEventListener(INTRO_DONE_EVENT, finish);
+    return () => { clearTimeout(timer); window.removeEventListener(INTRO_DONE_EVENT, finish); };
+  }, []);
+  useEffect(() => { if (sample === "approval") approve.current?.focus({ preventScroll: true }); }, [sample]);
 
   useEffect(() => {
     const root = ref.current;
@@ -111,11 +123,11 @@ export function HeroStage() {
   }, []);
 
   return (
-    <figure ref={ref} id="workflow-build" className="stage hero-workflow" data-intro-stage aria-labelledby="hero-stage-cap">
+    <figure ref={ref} id="workflow-build" className="stage hero-workflow" data-sample={sample} data-intro-stage aria-labelledby="hero-stage-cap">
       <div className="stage-cast" role="group" aria-label="Illustrative build crew">
         {[
           { name: "Milo", role: "Maps the process", tone: "sand" },
-          { name: "Kit", role: "Finds the words", tone: "mint" },
+          { name: "Kit", role: "Finds the words", tone: "soft" },
           { name: "Dot", role: "Joins the dots", tone: "purple" },
           { name: "Rue", role: "Checks the details", tone: "accent-alt" },
         ].map((member) => (
@@ -137,7 +149,16 @@ export function HeroStage() {
         </span>
       </div>
       <div className="stage-body grid-bg">
-        <WorkflowGraph scenario={scenario} introHold hot={hot} />
+        <WorkflowGraph scenario={scenario} introHold hot={sample === "idle" ? hot : sample === "approved" ? 4 : sample === "person" ? 1 : 2} gateState={sample === "approval" ? "waiting" : sample === "approved" ? "approved" : undefined} excHot={sample === "person"} />
+      </div>
+      <div className="stage-try" role="group" aria-label="Try an illustrative request">
+        <div className="sample-actions">
+          <span>Try a sample</span>
+          <button ref={clearEnquiry} type="button" disabled={!ready} onClick={() => setSample("approval")}>Clear enquiry</button>
+          <button type="button" disabled={!ready} onClick={() => setSample("person")}>Unclear enquiry</button>
+          {sample === "approval" && <button ref={approve} className="sample-approve" type="button" onClick={() => { setSample("approved"); clearEnquiry.current?.focus({ preventScroll: true }); }}>Approve follow-up</button>}
+        </div>
+        <p className="sample-status" aria-live="polite">{sample === "idle" ? "An illustrative run. Choose an enquiry to see where it goes." : sample === "approval" ? "Enquiry checked. CRM updated. Follow-up drafted. Your approval comes next." : sample === "approved" ? "Approved in this example. Follow-up sent and added to the evening summary." : "Outside the agreed criteria. Handed to a person. Nothing is guessed."}</p>
       </div>
       <figcaption id="hero-stage-cap" className="stage-foot">
         <span className="stage-ownership"><Icon name="check" width={15} height={15} /><span>You approve. We build and run.</span></span>
@@ -146,6 +167,7 @@ export function HeroStage() {
           Replay the build
         </a>
       </figcaption>
+      <span className="stage-confetti" aria-hidden="true">{Array.from({length: 10}, (_, i) => <i key={i} style={{"--burst-angle": `${i * 36}deg`} as CSSProperties} />)}</span>
       <div className="assembly-finale" aria-hidden="true"><Icon name="check" width={22} height={22} /><span>All connected.<small>And always in your hands.</small></span></div>
     </figure>
   );

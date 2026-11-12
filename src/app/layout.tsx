@@ -5,6 +5,7 @@ import "./studio.css";
 import "./editorial-detail.css";
 import "./hero-detail.css";
 import "./rocket-companion.css";
+import "./home-pass.css";
 import "./palette.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
