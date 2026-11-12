@@ -26,7 +26,7 @@ export default function PrivacyPage() {
               logs. Rocket’s minimised preference is saved in your browser’s localStorage on this device. You can restore Rocket with the corner button or clear the preference by clearing this site’s browser storage.
             </p>
             <p>
-              The Rocket preview on this website uses scripted replies. It has no AI or backend connection, and does not access your business systems.
+              Rocket does not access your business systems from this website.
             </p>
             <p>
               The contact form does not send anything to a server. Submitting it opens your own email app with your message filled in, addressed to{" "}

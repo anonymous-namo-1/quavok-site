@@ -15,9 +15,10 @@
 .rocket-face:hover { background: var(--color-purple-soft); }
 .rocket-face-tag { background: var(--color-purple-dark); color: var(--color-sand); }
 .rocket-face-visor i { background: var(--color-sand); }
-.rocket-preview-links a, .scope-sticker, .process-ribbon, .text-purple, .nav-links a[aria-current="page"] { color: var(--color-purple-soft); }
+.rocket-chat-links a, .scope-sticker, .process-ribbon, .text-purple, .nav-links a[aria-current="page"] { color: var(--color-purple-soft); }
 .hero-promise, .page-hero.editorial-hero .t-page, .editorial-closing .closing-inner .t-h2 { color: var(--color-sand); }
 .rocket-confetti i:nth-child(2n) { background: var(--color-sand); }
 .rocket-confetti i:nth-child(3n) { background: var(--color-purple-soft); }
 ::selection { background: var(--color-purple-dark); color: var(--color-sand); }
 .skip-link { background: var(--color-purple-dark); color: var(--color-sand); }
+.cast-purple, .hero .g-node[data-node="4"] .n-num { color: var(--color-purple-soft); }

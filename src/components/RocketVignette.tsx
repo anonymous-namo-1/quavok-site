@@ -3,7 +3,7 @@
 import { useState, type CSSProperties } from "react";
 import { Icon } from "./Icon";
 
-// Concept preview of Rocket: a conversation over automations Quavok already
+// Illustrative example of Rocket: a conversation over automations Quavok already
 // runs. Authored exchanges only: no free-text input, nothing is sent, no AI
 // call. Rocket never builds automations; it forwards requests to the team.
 
@@ -78,7 +78,7 @@ export function RocketVignette() {
       <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:px-5">
         <div className="flex items-center gap-3">
           <span className="font-display text-[20px] font-semibold tracking-tight text-white">Rocket</span>
-          <span className="tag">Concept preview</span>
+          <span className="tag">Illustrative example</span>
         </div>
         <div className="tabs" role="group" aria-label="Rocket mode">
           <button type="button" aria-pressed={mode === "ask"} onClick={() => setMode("ask")}>

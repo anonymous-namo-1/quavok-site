@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const STORAGE_KEY = "quavok-rocket-minimised";
-const INTRO = "Hi, I’m Rocket (trial). Pick a question and I’ll show you around. Less busywork. More room for what actually matters.";
+const INTRO = "Hi, I’m Rocket. Pick a question and I’ll show you around. Less busywork. More room for what actually matters.";
 const QUESTIONS = [
   { label: "What does Quavok do?", answer: "Quavok builds and runs custom AI automations around your business: enquiries, follow-ups, documents, reporting and other repetitive work. Your team gets more room for its craft, customers and growth." },
   { label: "Do I build anything?", answer: "No. Tell the team what’s slowing you down, agree the scope and approve the important decisions. Quavok designs, deploys and runs the automation for you." },
-  { label: "What is Rocket?", answer: "The real Rocket is the conversational layer for automations Quavok builds for you. Ask about their work or forward a new request to the team. The proactive paid add-on and desktop/mobile apps are in development. This website preview uses scripted replies." },
+  { label: "What is Rocket?", answer: "The real Rocket is the conversational layer for automations Quavok builds for you. Ask about their work or forward a new request to the team. The proactive paid add-on and desktop/mobile apps are in development." },
   { label: "How do I start?", answer: "Bring one repetitive process to a discovery conversation. No technical homework required. The team will explore what makes sense to automate with you." },
 ];
 const PAGE_HINTS: Record<string, string> = {
@@ -16,7 +16,7 @@ const PAGE_HINTS: Record<string, string> = {
   "/solutions/": "These workflows are illustrative examples, not client results.",
   "/how-it-works/": "Your part: explain and approve. The technical work stays with Quavok.",
   "/about/": "Meet the team’s approach. Unconfirmed details are marked as placeholders.",
-  "/rocket/": "The real Rocket talks to Quavok-built systems. This preview is scripted.",
+  "/rocket/": "The real Rocket talks to Quavok-built systems.",
   "/contact/": "The contact form prepares an email in your mail app. It does not send from the website.",
   "/privacy/": "Your minimise preference stays in this browser’s local storage.",
 };
@@ -30,10 +30,10 @@ const SECTION_HINTS: Record<string, string> = {
   faq: "Good questions welcome. Here are the practical details.",
 };
 type Mood = "curious" | "happy" | "sleepy" | "excited";
-type PreviewState = "closed" | "open" | "minimised";
+type ChatState = "closed" | "open" | "minimised";
 
 export function Companion() {
-  const [preview, setPreview] = useState<PreviewState>("closed");
+  const [chat, setChat] = useState<ChatState>("closed");
   const [mood, setMood] = useState<Mood>("curious");
   const [reply, setReply] = useState(INTRO);
   const [hint, setHint] = useState("This is an illustrative workflow, ready to explore.");
@@ -42,22 +42,22 @@ export function Companion() {
   const shell = useRef<HTMLElement>(null);
   const face = useRef<HTMLButtonElement>(null);
   const firstQuestion = useRef<HTMLButtonElement>(null);
-  const current = useRef<PreviewState>("closed");
+  const current = useRef<ChatState>("closed");
   const trigger = useRef<HTMLElement | null>(null);
   const clicks = useRef(0);
   const partyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const changePreview = (next: PreviewState) => {
+  const changeChat = (next: ChatState) => {
     current.current = next;
-    setPreview(next);
+    setChat(next);
     try {
       if (next === "minimised") localStorage.setItem(STORAGE_KEY, "1");
       else localStorage.removeItem(STORAGE_KEY);
-    } catch { /* The preview also works when storage is unavailable. */ }
+    } catch { /* The chat also works when storage is unavailable. */ }
     window.dispatchEvent(new Event("quavok:rocket-position"));
   };
   const close = () => {
-    changePreview("closed");
+    changeChat("closed");
     (trigger.current?.isConnected ? trigger.current : face.current)?.focus({ preventScroll: true });
   };
   const greet = () => {
@@ -66,10 +66,10 @@ export function Companion() {
     if (clicks.current % 5 === 0) {
       setReply("Secret handshake accepted. Your side quest: stretch your shoulders. Even good workflows need a breather.");
       setMood("excited");
-      changePreview("open");
+      changeChat("open");
     } else {
       setMood("happy");
-      changePreview(current.current === "open" ? "closed" : "open");
+      changeChat(current.current === "open" ? "closed" : "open");
     }
   };
   const showDemo = () => {
@@ -82,14 +82,14 @@ export function Companion() {
   };
 
   useEffect(() => {
-    if (preview === "open") firstQuestion.current?.focus({ preventScroll: true });
-  }, [preview]);
+    if (chat === "open") firstQuestion.current?.focus({ preventScroll: true });
+  }, [chat]);
 
   useEffect(() => {
     try {
       if (localStorage.getItem(STORAGE_KEY) === "1") {
         current.current = "minimised";
-        setPreview("minimised");
+        setChat("minimised");
       }
     } catch { /* Storage is optional. */ }
     const reduce = matchMedia("(prefers-reduced-motion: reduce)");
@@ -178,7 +178,7 @@ export function Companion() {
     sections.forEach(target => observer.observe(target));
     const open = () => {
       trigger.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-      changePreview("open"); wake("happy"); schedule();
+      changeChat("open"); wake("happy"); schedule();
     };
     const celebrate = () => {
       wake("excited");
@@ -194,7 +194,7 @@ export function Companion() {
       if (event.target instanceof Element && event.target.closest("input, textarea, select, [contenteditable=true]")) return;
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); open(); return; }
       if (event.key === "Escape" && current.current === "open") {
-        changePreview("closed");
+        changeChat("closed");
         (trigger.current?.isConnected ? trigger.current : face.current)?.focus({ preventScroll: true });
         return;
       }
@@ -238,22 +238,21 @@ export function Companion() {
     };
   }, []);
 
-  return <aside ref={shell} className="rocket-trial" data-preview={preview} data-mood={mood} data-cta-hint={ctaHint} aria-label="Rocket scripted preview">
-    <button ref={face} className="rocket-face" type="button" onClick={greet} aria-label={preview === "minimised" ? "Restore Rocket (trial)" : preview === "open" ? "Close Rocket (trial)" : "Ask Rocket (trial)"} aria-expanded={preview === "open"} aria-controls={preview === "open" ? "rocket-preview" : undefined}>
+  return <aside ref={shell} className="rocket-companion" data-chat={chat} data-mood={mood} data-cta-hint={ctaHint} aria-label="Rocket companion">
+    <button ref={face} className="rocket-face" type="button" onClick={greet} aria-label={chat === "minimised" ? "Restore Rocket" : chat === "open" ? "Close Rocket" : "Ask Rocket"} aria-expanded={chat === "open"} aria-controls={chat === "open" ? "rocket-chat" : undefined}>
       <span className="rocket-face-antenna" aria-hidden="true" />
       <span className="rocket-face-visor" aria-hidden="true"><i /><i /></span>
       <span className="rocket-face-smile" aria-hidden="true" />
-      <span className="rocket-face-tag" aria-hidden="true">trial</span>
     </button>
-    {preview === "closed" && <span className="rocket-whisper" aria-hidden="true">{ctaHint ? "Bring one repetitive task. We’ll start there." : hint}</span>}
-    {preview === "open" && createPortal(<section id="rocket-preview" className="rocket-preview" aria-label="Rocket (trial) quick questions">
-      <div className="rocket-preview-heading"><strong>Rocket <span>(trial)</span></strong><button type="button" onClick={close} aria-label="Close Rocket preview"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div>
-      <p className="rocket-preview-disclosure">Scripted preview — the real Rocket talks to the automations we build for you.</p>
-      <p className="rocket-preview-reply" aria-live="polite" aria-atomic="true">{reply}</p>
-      <div className="rocket-preview-questions">{QUESTIONS.map((question, index) => <button key={question.label} ref={index === 0 ? firstQuestion : undefined} type="button" onClick={() => { setReply(question.answer); setMood("happy"); }}>{question.label}<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10" /></svg></button>)}<button type="button" onClick={showDemo}>Show me the demo<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10" /></svg></button></div>
-      <div className="rocket-preview-links"><a href="/contact/">Discuss your workflow</a><a href="/contact/?topic=discovery#form">Book a Discovery Call</a></div>
-      <p className="rocket-preview-context" aria-live="polite" aria-atomic="true">{hint}</p>
-      <button className="rocket-preview-minimise" type="button" onClick={() => { changePreview("minimised"); face.current?.focus({ preventScroll: true }); }}>Minimise Rocket on this browser</button>
+    {chat === "closed" && <span className="rocket-whisper" aria-hidden="true">{ctaHint ? "Bring one repetitive task. We’ll start there." : hint}</span>}
+    {chat === "open" && createPortal(<section id="rocket-chat" className="rocket-chat" aria-label="Rocket quick questions">
+      <div className="rocket-chat-heading"><strong>Rocket </strong><button type="button" onClick={close} aria-label="Close Rocket chat"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div>
+      <p className="rocket-chat-disclosure">Demo conversation; the real Rocket runs inside your automations.</p>
+      <p className="rocket-chat-reply" aria-live="polite" aria-atomic="true">{reply}</p>
+      <div className="rocket-chat-questions">{QUESTIONS.map((question, index) => <button key={question.label} ref={index === 0 ? firstQuestion : undefined} type="button" onClick={() => { setReply(question.answer); setMood("happy"); }}>{question.label}<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10" /></svg></button>)}<button type="button" onClick={showDemo}>Show me the demo<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10" /></svg></button></div>
+      <div className="rocket-chat-links"><a href="/contact/">Discuss your workflow</a><a href="/contact/?topic=discovery#form">Book a Discovery Call</a></div>
+      <p className="rocket-chat-context" aria-live="polite" aria-atomic="true">{hint}</p>
+      <button className="rocket-chat-minimise" type="button" onClick={() => { changeChat("minimised"); face.current?.focus({ preventScroll: true }); }}>Minimise Rocket on this browser</button>
     </section>, document.body)}
     {party && <div className="rocket-confetti" aria-hidden="true">{Array.from({ length: 10 }, (_, index) => <i key={index} />)}</div>}
   </aside>;

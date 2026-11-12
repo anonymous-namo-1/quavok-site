@@ -67,7 +67,7 @@ export default function RocketPage() {
         </div>
       </PageHero>
 
-      <section className="section pt-4" aria-label="Rocket concept preview">
+      <section className="section pt-4" aria-label="Rocket illustrative example">
         <div className="wrap" data-rv>
           <RocketVignette />
         </div>

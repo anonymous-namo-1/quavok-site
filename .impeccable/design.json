@@ -31,9 +31,9 @@
     ],
     "shadows": [
       {
-        "name": "preview",
+        "name": "conversation",
         "value": "0 16px 64px #00000077",
-        "purpose": "Opt-in scripted preview panel"
+        "purpose": "Opt-in scripted conversation panel"
       }
     ]
   },
@@ -54,7 +54,7 @@
       "People-first promise",
       "Forest and sand colour fields",
       "Approval-led diagrams",
-      "Traveling scripted Rocket trial"
+      "Traveling scripted Rocket"
     ],
     "rules": [
       {

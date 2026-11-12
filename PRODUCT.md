@@ -20,7 +20,7 @@ Fully managed service. Customers never build, configure, deploy or maintain agen
 
 ## Capabilities and Constraints
 
-Rocket is the conversational layer over automations Quavok built. New-automation requests go to the Quavok team. The website's Rocket trial is a scripted preview: no AI backend, no connected customer automations and no live support. The paid proactive add-on and desktop/mobile apps are in development.
+Rocket is the conversational layer over automations Quavok built. New-automation requests go to the Quavok team. The website's Rocket is a scripted conversation: no AI backend, no connected customer automations and no live support. The paid proactive add-on and desktop/mobile apps are in development.
 
 The contact form only prepares a mailto draft to hello@quavok.com. Keep its TODO hook and never claim a message was sent. Existing published contact information may remain. Unknown facts retain visible PLACEHOLDER markers.
 
@@ -38,7 +38,7 @@ research/plan.md, research/grok-x.md, research/sol-web.md and research/inspirati
 
 - The customer requests and approves; Quavok handles the technology.
 - Demonstrations show a mechanism, not fictional business results.
-- Rocket's trial and unreleased capabilities are labelled beside the interaction.
+- Rocket's companion and unreleased capabilities are labelled beside the interaction.
 - The main action is Discuss Your Workflow or Book a Discovery Call.
 
 ## Accessibility & Inclusion

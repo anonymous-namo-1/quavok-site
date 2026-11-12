@@ -4,7 +4,7 @@ import "./globals.css";
 import "./studio.css";
 import "./editorial-detail.css";
 import "./hero-detail.css";
-import "./rocket-trial.css";
+import "./rocket-companion.css";
 import "./palette.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";

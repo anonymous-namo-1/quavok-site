@@ -37,7 +37,7 @@ typography:
 rounded:
   control: "8px"
   workflow: "14px"
-  preview: "16px"
+  conversation: "16px"
 spacing:
   gutter: "clamp(16px, 4vw, 40px)"
   section: "clamp(84px, 11vw, 152px)"
@@ -57,7 +57,7 @@ components:
 
 ## Overview
 
-The operations studio makes managed automation tangible: requests pass between named roles, stop for human approval, and finish with a clear summary. The typography speaks confidently while the Rocket trial and workflow characters add warmth. The owner chose a dark visual world, complementary forest/sand and a contrasting Electric Purple accent.
+The operations studio makes managed automation tangible: requests pass between named roles, stop for human approval, and finish with a clear summary. The typography speaks confidently while the Rocket and workflow characters add warmth. The owner chose a dark visual world, complementary forest/sand and a contrasting Electric Purple accent.
 
 ## Colors
 
@@ -73,17 +73,17 @@ Content uses a 1200px maximum width with responsive gutters. The homepage pairs 
 
 ## Elevation & Depth
 
-Dark tonal surfaces and hairline rules define structure. Offset shadows belong to the physical task stickers. A single purple spotlight illuminates the hero build. Rocket's opt-in preview uses a soft shadow to separate its temporary panel from the page.
+Dark tonal surfaces and hairline rules define structure. Offset shadows belong to the physical task stickers. A single purple spotlight illuminates the hero build. Rocket's opt-in conversation uses a soft shadow to separate its temporary panel from the page.
 
 ## Shapes
 
-Buttons use 8px corners, workflow containers 14px, the trial panel 16px. Dotted paths communicate handoffs. Rocket has a geometric visor, two eyes and an asymmetric rounded face. Keep iconography in authored SVG; do not introduce stock illustration or unrelated decoration.
+Buttons use 8px corners, workflow containers 14px, the companion panel 16px. Dotted paths communicate handoffs. Rocket has a geometric visor, two eyes and an asymmetric rounded face. Keep iconography in authored SVG; do not introduce stock illustration or unrelated decoration.
 
 ## Components
 
 Primary actions use Sand, with Electric Purple reserved for high-emphasis discovery actions and approval states. Focus rings use Electric Purple with visible offset. Form errors retain entered values and explain recovery; the contact form prepares an email until its destination is wired.
 
-Rocket starts in the homepage headline and follows the section in view. On narrow screens it perches in the unused header gap after leaving the headline so body text remains unobscured. Quick replies are explicitly scripted and open only by request. Minimise preference is stored locally. Pointer eyes, blinking, mood changes, named agent handoffs and completion confetti respect reduced motion. Cmd/Ctrl+K opens the preview; Escape closes it and returns focus.
+Rocket starts in the homepage headline and follows the section in view. On narrow screens it perches in the unused header gap after leaving the headline so body text remains unobscured. Quick replies are explicitly scripted and open only by request. Minimise preference is stored locally. Pointer eyes, blinking, mood changes, named agent handoffs and completion confetti respect reduced motion. Cmd/Ctrl+K opens the conversation; Escape closes it and returns focus.
 
 The workflow intro is optional, replayable, skippable, and fails open. Its finished HTML remains useful without JavaScript. Proactive Rocket features stay locally labelled in development.
 

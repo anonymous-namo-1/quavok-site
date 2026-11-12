@@ -10,7 +10,7 @@ Next.js (App Router) + React + TypeScript + Tailwind CSS v4, exported as plain s
 npm install        # Node 20.9+
 npm run dev        # http://localhost:3000 with hot reload
 npm run build      # static export to out/
-npm run preview    # serve out/ at http://localhost:4173 (no extra dependencies)
+npm run conversation    # serve out/ at http://localhost:4173 (no extra dependencies)
 npm run typecheck
 ```
 
@@ -71,7 +71,7 @@ Quavok is an early-stage, two-founder company working toward its first deploymen
 
 The default theme is dark throughout: Forest `#1f3d2b`, Sand `#e8dcc4`, and Electric Purple `#8b5cf6`, over a deep base `#13251a`. `src/app/studio.css` contains the editorial layouts, sticker wall, typography, dark surfaces and shared dark styling. The existing graph geometry and intro safeguards remain in place.
 
-Rocket (trial), in `src/components/Companion.tsx` and `src/app/rocket-trial.css`, is an explicitly scripted preview with no AI or automation backend. Its face begins inline in the hero headline and travels with the section in view. On narrow screens it perches in the header after leaving the headline. Quick replies cover Quavok, the managed service, Rocket, getting started and the workflow demo. Cmd/Ctrl+K or the “Ask Rocket” pill opens it; Escape restores focus. It remembers minimisation locally, tracks fine pointers, reacts to touch, and offers quiet contextual hints. Reduced motion disables eye movement, blinking, nodding and confetti. Konami keys or five face clicks reveal a small easter egg.
+Rocket, in `src/components/Companion.tsx` and `src/app/rocket-companion.css`, is an explicitly scripted conversation with no AI or automation backend. Its face begins inline in the hero headline and travels with the section in view. On narrow screens it perches in the header after leaving the headline. Quick replies cover Quavok, the managed service, Rocket, getting started and the workflow demo. Cmd/Ctrl+K or the “Ask Rocket” pill opens it; Escape restores focus. It remembers minimisation locally, tracks fine pointers, reacts to touch, and offers quiet contextual hints. Reduced motion disables eye movement, blinking, nodding and confetti. Konami keys or five face clicks reveal a small easter egg.
 
 The intro characters are Milo, Kit, Dot and Rue. A natural completion triggers a brief celebration; skipping does not. `hero-detail.css` owns the spotlight, cast and opening composition; `editorial-detail.css` owns inner-page layouts and the giant footer wordmark. `studio.css` owns shared dark surfaces and the saturated Purple field (`#392660`). `DESIGN.md` and `.impeccable/design.json` document the resulting design system.
 
