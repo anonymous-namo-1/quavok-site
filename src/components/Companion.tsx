@@ -27,6 +27,35 @@ export function Companion() {
   const [mood, setMood] = useState<Mood>("curious");
   const [reply, setReply] = useState(INTRO);
   const [hint, setHint] = useState("");
+  const [speechAvailable, setSpeechAvailable] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
+  const [storySpeaking, setStorySpeaking] = useState(false);
+  const [listening, setListening] = useState(false);
+  const callTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const utterance = useRef<SpeechSynthesisUtterance | null>(null);
+  const stopSpeech = () => {
+    if (!utterance.current) return;
+    utterance.current.onend = null;
+    utterance.current.onerror = null;
+    window.speechSynthesis.cancel();
+    utterance.current = null;
+    setSpeaking(false);
+  };
+  const speakText = (text: string) => {
+    if (utterance.current) { stopSpeech(); return; }
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en";
+    speech.rate = .98;
+    speech.onend = speech.onerror = () => { utterance.current = null; setSpeaking(false); };
+    utterance.current = speech;
+    setSpeaking(true);
+    window.speechSynthesis.speak(speech);
+  };
+  const readReply = () => speakText(reply);
+  useEffect(() => {
+    setSpeechAvailable("speechSynthesis" in window && "SpeechSynthesisUtterance" in window);
+    return () => { if (utterance.current) { utterance.current.onend = null; utterance.current.onerror = null; window.speechSynthesis.cancel(); } };
+  }, []);
   const shell = useRef<HTMLElement>(null);
   const face = useRef<HTMLButtonElement>(null);
   const firstQuestion = useRef<HTMLButtonElement>(null);
@@ -37,6 +66,7 @@ export function Companion() {
     current.current = next;
     setChat(next);
     setHint("");
+    if (next !== "open") stopSpeech();
     try {
       if (next === "minimised") localStorage.setItem(STORAGE_KEY, "1");
       else localStorage.removeItem(STORAGE_KEY);
@@ -48,12 +78,13 @@ export function Companion() {
     face.current?.focus({ preventScroll: true });
   };
   const greet = () => {
+    if (shell.current?.dataset.hero === "true" && current.current !== "open") { window.dispatchEvent(new Event("quavok:hero-call")); return; }
     if (current.current === "open") { close(); return; }
     setMood("happy");
     changeChat("open");
   };
   const showDemo = () => {
-    const workflow = document.getElementById("workflow-build");
+    const workflow = document.getElementById("day-preview") || document.getElementById("workflow-build");
     if (!workflow) { window.location.href = "/?intro=1"; return; }
     close();
     workflow.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "center" });
@@ -76,6 +107,7 @@ export function Companion() {
       current.current = next;
       setChat(next);
       setHint("");
+      stopSpeech();
     };
     restorePreference();
     const reduce = matchMedia("(prefers-reduced-motion: reduce)");
@@ -95,7 +127,7 @@ export function Companion() {
       idle = setTimeout(() => setMood("sleepy"), 14000);
     };
     const whisper = (text: string) => {
-      if (current.current !== "closed") return;
+      if (current.current !== "closed" || shell.current?.dataset.hero === "true") return;
       clearTimeout(hintTimer);
       setHint(text);
       hintTimer = setTimeout(() => setHint(""), 3200);
@@ -109,25 +141,30 @@ export function Companion() {
       const height = window.innerHeight;
       const originRect = document.getElementById("rocket-origin")?.getBoundingClientRect();
       const mobileOpen = width < 960 && current.current === "open";
+      const perchRect = [document.getElementById("hero-rocket-perch"), document.getElementById("rocket-perch")].map(node => node?.getBoundingClientRect()).find(rect => rect && rect.top > 100 && rect.bottom < height - 70);
+      const perched = !mobileOpen && current.current !== "minimised" && !!perchRect && perchRect.top > 100 && perchRect.bottom < height - 70;
+      const size = perched ? 96 : 48;
       const docked = !mobileOpen && current.current !== "minimised" && !!originRect && originRect.top >= 84 && originRect.bottom < height;
-      const headerPerch = width < 960 && !docked;
+      const headerPerch = width < 960 && !docked && !perched;
       const sectionRect = section?.getBoundingClientRect();
-      const x = docked && originRect ? originRect.left : headerPerch ? width - 120 : width - 72;
-      const y = docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
+      const x = perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? width - 120 : width - 72;
+      const y = perched && perchRect ? perchRect.top : docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
       const bubbleWidth = Math.min(300, width - 24);
       const bubbleLeft = Math.max(12 - x, Math.min(0, width - 12 - x - bubbleWidth));
-      const above = !headerPerch && y > height - 366;
+      const above = !headerPerch && y > height - (perched ? 420 : 366);
       // Keep the reserved mobile bubble area clear even when opened mid-section.
       const pageRegions = mobileOpen ? Array.from(document.querySelectorAll<HTMLElement>("main, .site-footer")).map(region => ({ region, clip: Math.max(0, 321 - region.getBoundingClientRect().top) })) : [];
-      const dx = px - x - 24;
-      const dy = py - y - 24;
+      const dx = px - x - size / 2;
+      const dy = py - y - size / 2;
       const distance = Math.max(1, Math.hypot(dx, dy));
       const eyesMove = fine.matches && !reduce.matches && current.current !== "minimised";
       el.style.setProperty("--rocket-x", `${Math.round(x)}px`);
       el.style.setProperty("--rocket-y", `${Math.round(y)}px`);
       el.style.setProperty("--bubble-left", `${Math.round(bubbleLeft)}px`);
-      el.style.setProperty("--bubble-tail", `${Math.round(24 - bubbleLeft)}px`);
+      el.style.setProperty("--bubble-tail", `${Math.round(size / 2 - bubbleLeft)}px`);
       el.dataset.docked = String(docked);
+      el.dataset.perched = String(perched);
+      el.dataset.hero = String(perched && document.getElementById("hero-rocket-perch")?.getBoundingClientRect().top === perchRect?.top);
       el.dataset.bubbleAbove = String(above);
       el.dataset.positioned = "true";
       pageRegions.forEach(({ region, clip }) => region.style.setProperty("--rocket-clearance", `${clip}px`));
@@ -173,6 +210,21 @@ export function Companion() {
     sections.forEach(target => observer.observe(target));
     const open = () => { changeChat("open"); wake("happy"); schedule(); };
     const celebrate = () => { wake("excited"); whisper("One less thing on your plate."); };
+    const reaction = (event: Event) => {
+      if (!(event instanceof CustomEvent) || typeof event.detail !== "string") return;
+      stopSpeech(); wake("happy"); whisper(event.detail);
+    };
+    const quiet = () => { if (document.hidden) { stopSpeech(); setStorySpeaking(false); } };
+    const called = () => {
+      setListening(true); wake("curious");
+      if (callTimer.current) clearTimeout(callTimer.current);
+      callTimer.current = setTimeout(() => setListening(false),5000);
+    };
+    const talking = (event: Event) => { if (event instanceof CustomEvent && typeof event.detail === "boolean") { setStorySpeaking(event.detail); if (event.detail) wake("happy"); } };
+    const say = (event: Event) => {
+      if (!(event instanceof CustomEvent) || typeof event.detail !== "string" || !("speechSynthesis" in window)) return;
+      speakText(event.detail); wake("happy");
+    };
     const sequence = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
     let codeIndex = 0;
     const key = (event: KeyboardEvent) => {
@@ -193,6 +245,11 @@ export function Companion() {
     window.addEventListener("quavok:open-rocket", open);
     window.addEventListener("quavok:rocket-position", schedule);
     window.addEventListener("quavok:assembly-complete", celebrate);
+    window.addEventListener("quavok:rocket-reaction", reaction);
+    window.addEventListener("quavok:rocket-say", say);
+    window.addEventListener("quavok:rocket-call", called);
+    window.addEventListener("quavok:rocket-talk", talking);
+    document.addEventListener("visibilitychange", quiet);
     document.addEventListener("keydown", key);
     document.addEventListener("pointerover", ctaEnter, { passive: true });
     document.addEventListener("focusin", ctaEnter);
@@ -207,23 +264,29 @@ export function Companion() {
       window.removeEventListener("scroll", scroll); window.removeEventListener("resize", schedule);
       window.removeEventListener("quavok:open-rocket", open); window.removeEventListener("quavok:rocket-position", schedule);
       window.removeEventListener("quavok:assembly-complete", celebrate);
+      window.removeEventListener("quavok:rocket-reaction", reaction);
+      window.removeEventListener("quavok:rocket-say", say);
+      window.removeEventListener("quavok:rocket-call", called);
+      window.removeEventListener("quavok:rocket-talk", talking);
+      if (callTimer.current) clearTimeout(callTimer.current);
+      document.removeEventListener("visibilitychange", quiet);
       document.removeEventListener("keydown", key); reduce.removeEventListener("change", schedule);
       document.removeEventListener("pointerover", ctaEnter); document.removeEventListener("focusin", ctaEnter);
     };
   }, []);
 
-  return <aside ref={shell} className="rocket-companion" data-chat={chat} data-mood={mood} aria-label="Rocket companion">
+  return <aside ref={shell} className="rocket-companion" data-chat={chat} data-mood={mood} data-speaking={speaking || storySpeaking} data-listening={listening || speaking || chat === "open"} aria-label="Rocket companion">
     <button ref={face} className="rocket-face" type="button" onClick={greet} aria-label={chat === "minimised" ? "Restore Rocket" : chat === "open" ? "Close Rocket" : "Ask Rocket"} aria-expanded={chat === "open"} aria-controls={chat === "open" ? "rocket-chat" : undefined} aria-keyshortcuts="Control+k Meta+k">
-      <span className="rocket-face-antenna" aria-hidden="true" />
+      <span className="rocket-headphones" aria-hidden="true"><i /><i /></span>
       <span className="rocket-face-visor" aria-hidden="true"><i /><i /></span>
       <span className="rocket-face-smile" aria-hidden="true" />
     </button>
     {chat === "closed" && hint && <span className="rocket-whisper" aria-hidden="true">{hint}</span>}
     {chat === "open" && <section id="rocket-chat" className="rocket-chat" aria-label="Rocket quick questions">
-      <div className="rocket-chat-heading"><strong>Rocket</strong><button type="button" onClick={close} aria-label="Close Rocket chat"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div>
+      <div className="rocket-chat-heading"><strong>Rocket</strong><div className="rocket-chat-actions">{speechAvailable && <button type="button" onClick={readReply} aria-label={speaking ? "Stop reading Rocket’s answer" : "Read Rocket’s answer aloud"} aria-pressed={speaking}><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z" />{speaking ? <path d="m17 9 5 6m0-6-5 6" /> : <path d="M17 8q5 4 0 8M20 5q7 7 0 14" />}</svg></button>}<button type="button" onClick={close} aria-label="Close Rocket chat"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div></div>
       <div className="rocket-chat-scroll">
         <p ref={answer} className="rocket-chat-reply" aria-live="polite" aria-atomic="true">{reply}</p>
-        <div className="rocket-chat-questions">{QUESTIONS.map((question, index) => <button key={question.label} ref={index === 0 ? firstQuestion : undefined} type="button" onClick={() => { setReply(question.answer); setMood("happy"); answer.current?.parentElement?.scrollTo({ top: 0 }); }}>{question.label}</button>)}<button type="button" onClick={showDemo}>Show the demo</button></div>
+        <div className="rocket-chat-questions">{QUESTIONS.map((question, index) => <button key={question.label} ref={index === 0 ? firstQuestion : undefined} type="button" onClick={() => { stopSpeech(); setReply(question.answer); setMood("happy"); answer.current?.parentElement?.scrollTo({ top: 0 }); }}>{question.label}</button>)}<button type="button" onClick={showDemo}>Show the demo</button></div>
         <div className="rocket-chat-links"><a href="/contact/">Discuss your workflow</a></div>
         <p className="rocket-chat-disclosure">Demo conversation; the real Rocket runs inside your automations.</p>
         <button className="rocket-chat-minimise" type="button" onClick={() => { changeChat("minimised"); face.current?.focus({ preventScroll: true }); }}>Minimise Rocket</button>

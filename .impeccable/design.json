@@ -44,7 +44,7 @@
       "refersTo": "button-purple",
       "description": "Primary discovery action in the header and hero",
       "html": "<button class=\"q-button\">Discuss Your Workflow \u2192</button>",
-      "css": ".q-button { background:#593b9d; color:#e8dcc4; min-height:50px; padding:12px 22px; border:0; border-radius:8px; font:600 15px Inter,sans-serif; cursor:pointer; } .q-button:hover { background:#e8dcc4; } .q-button:focus-visible { outline:2px solid #8b5cf6; outline-offset:4px; }"
+      "css": ".q-button { background:#593b9d; color:#e8dcc4; min-height:50px; padding:12px 22px; border:0; border-radius:8px; font:600 15px Manrope,sans-serif; cursor:pointer; } .q-button:hover { background:#e8dcc4; } .q-button:focus-visible { outline:2px solid #8b5cf6; outline-offset:4px; }"
     }
   ],
   "narrative": {

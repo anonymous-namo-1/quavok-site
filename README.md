@@ -52,7 +52,7 @@ All effects fail open: the finished state is in the HTML, reduced motion shows i
 
 | Effect | Files |
 | --- | --- |
-| Workflow-assembly intro (four labelled agent cursors build the hero workflow; Review stamps "Scope approved") | `src/lib/intro/boot.ts` (inline boot), `src/lib/intro/engine.ts`, `src/components/home/HeroIntro.tsx`, intro CSS in `globals.css` (`qa-*`) |
+| Page-assembly intro (anonymous cursors assemble navigation, headline, artwork, page sections and the workflow) | `src/lib/intro/boot.ts` (inline boot), `src/lib/intro/engine.ts`, `src/components/home/HeroIntro.tsx`, intro CSS in `globals.css` (`qa-*`) |
 | Electric Purple run through the finished hero graph | `src/components/home/HeroStage.tsx` |
 | Read-only scenario graph, scroll-drawn edges, inspectable steps | `src/components/graph/WorkflowGraph.tsx`, `ScenarioGraph.tsx` |
 | Before/after settle (FLIP) | `src/components/home/BeforeAfter.tsx` |
@@ -73,10 +73,24 @@ The default theme is dark throughout: Charcoal `#2b2930`, Sand `#e8dcc4`, and El
 
 Rocket, in `src/components/Companion.tsx` and `src/app/rocket-companion.css`, is an explicitly scripted conversation with no AI or automation backend. Its face begins inline in the hero headline and travels with the section in view. On narrow screens it perches in the header after leaving the headline. Quick replies cover Quavok, the managed service, Rocket, getting started and the workflow demo. A click, Cmd/Ctrl+K or the “Ask Rocket” pill opens a compact attached bubble. Escape, the close button and outside clicks return focus to Rocket. Only minimisation persists; old open-state values are ignored. It remembers minimisation locally, tracks fine pointers, reacts to touch, and offers quiet contextual hints. Reduced motion disables eye movement, blinking, nodding and confetti. Konami keys reveal a short, expiring greeting without opening the conversation.
 
-The intro characters are Milo, Kit, Dot and Rue. A natural completion triggers a brief celebration; skipping does not. `hero-detail.css` owns the spotlight, cast and opening composition; `editorial-detail.css` owns inner-page layouts and the giant footer wordmark. `studio.css` owns shared dark surfaces and the saturated Purple field (`#392660`). `DESIGN.md` and `.impeccable/design.json` document the resulting design system.
+Six anonymous cursor pointers assemble actual DOM elements across the homepage. No agent names or roster are displayed. A natural completion triggers a brief celebration; skipping does not. `hero-detail.css` owns the spotlight and opening composition; `editorial-detail.css` owns inner-page layouts and the giant footer wordmark. `studio.css` owns shared dark surfaces and the saturated Purple field (`#392660`). `DESIGN.md` and `.impeccable/design.json` document the resulting design system.
 
 `npm run build` first generates `public/og.png` (1200×630) from `scripts/og-image.tsx`, then exports the site. No network request is needed for that artwork. Brand icons and CNAME remain unchanged.
 
 QA screenshots are local in `.qa/` (gitignored). Headless Chrome checks cover all eight routes at 1440×900 and 390×844, console errors, overflow, axe WCAG A/AA checks, and the intro, graph, form and companion interactions. No browser-test dependency was added to the production bundle.
 
 The homepage now uses an open workflow stage with illustrative clear/unclear enquiry controls and an approval decision. The compact process overview keeps the detailed walkthrough in a native disclosure. Rocket’s homepage vignette uses layered panels; its dedicated page retains its existing layout.
+
+## Page assembly and original media
+
+The loading intro places navigation, typography, copy, actions, artwork and section containers, alongside the original node-and-connector build. Below-fold sections assemble in place without automatically scrolling the visitor. The promise and CTAs stay visible; skip, Escape, keyboard entry, reduced motion and fail-open are preserved.
+
+`src/components/home/Atmosphere.tsx` shows an original paper-orchestration artwork and its silent, 10-second camera-motion study. Video loads only in view, pauses outside the viewport or when the document is hidden, and has a pause button. Reduced motion and data saving use the still without requesting video. Assets live in `public/media/`; generation prompt and encoding are recorded in `research/visual-assets.md`.
+
+The current type pair is self-hosted Sora (display) and Manrope (body), with OFL licences in `src/fonts/`. Matching TTF files are used only by the build-time OG renderer. Repeated hero helper lines and category/process subheads have been removed; illustrative labels, development status and contact-form disclosures remain. Rocket's optional speaker control reads its existing scripted answer through the browser speech service, only after a click. Closing the bubble or changing the answer stops speech.
+
+Rocket also has a character perch in its homepage section. The same companion travels into it, waves, and opens its compact bubble only when invited. The detailed automation conversation is available in an expandable example. Selecting or approving an illustrative enquiry gives Rocket a brief contextual reaction.
+
+The current hero is benefit-led: a person asks Rocket about their day, and the illustrated replies show enquiries organised, follow-ups prepared and decisions kept with people. It uses no invented client counts or performance metrics. The anonymous cursor intro remains: it now places the question and reply alongside the headline, navigation, imagery and section containers. Technical workflow diagrams remain in the examples further down the page. Rocket’s mascot is a round bot with expressive eyes and over-ear headphones, shared across every page.
+
+The first-visit sequence is page assembly → a question about new leads → Rocket lowers its headphones around its neck → an illustrated reply appears. Clicking Rocket in the hero or choosing another example replays the conversational response. Audio remains opt-in. Reduced motion shows the completed reply immediately. The separate “Ask Rocket” command pill has been removed; the character remains keyboard accessible and Cmd/Ctrl+K still opens the compact conversation.

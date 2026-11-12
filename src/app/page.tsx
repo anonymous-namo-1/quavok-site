@@ -3,9 +3,10 @@ import { CTA, SITE } from "@/lib/site";
 import { INTRO_BOOT } from "@/lib/intro/boot";
 import { CATEGORIES } from "@/lib/categories";
 import { HOME_FAQS } from "@/lib/faqs";
-import { StudioDetails } from "@/components/home/StudioDetails";
+import { RocketEncounter } from "@/components/home/RocketEncounter";
+import { Atmosphere } from "@/components/home/Atmosphere";
 import { HeroIntro } from "@/components/home/HeroIntro";
-import { HeroStage } from "@/components/home/HeroStage";
+import { HeroConversation } from "@/components/home/HeroConversation";
 import { BeforeAfter } from "@/components/home/BeforeAfter";
 import { ScenarioGraph } from "@/components/graph/ScenarioGraph";
 import { HowWeWork } from "@/components/HowWeWork";
@@ -40,17 +41,18 @@ export default function Home() {
       <section className="hero" data-intro-hero aria-labelledby="hero-title">
         {/* Runs during parsing, before the hero paints. See lib/intro/boot.ts. */}
         <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT }} />
+        <div className="hero-art" data-site-piece aria-hidden="true"><img src="/media/paper-orchestration.webp" alt="" width={1536} height={1024} fetchPriority="high" /></div>
         <div className="hero-spotlight" aria-hidden="true" />
         <div className="wrap hero-grid">
           <div className="hero-copy">
             <h1 id="hero-title" className="t-hero">
-              <span className="hero-opening">Hand us the <span id="rocket-origin" aria-hidden="true" />busywork.</span>
+              <span className="hero-opening" data-site-piece>Hand us the busywork.</span>
               <span className="hero-promise" data-intro-type data-intro-hold>Focus on what actually matters.</span>
             </h1>
-            <p className="t-lead mt-7 max-w-[54ch]">
-              Your customers. Your craft. Your next big idea. We design, deploy and run custom AI automation, so your people have room for all three.
+            <p className="t-lead mt-7 max-w-[54ch]" data-site-piece data-site-essential>
+              Custom AI automation. Designed, deployed and run for you.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap gap-3" data-site-piece data-site-essential>
               <Magnetic href={CTA.discuss.href} className="btn btn-primary">
                 {CTA.discuss.label}
                 <ArrowIcon />
@@ -59,19 +61,12 @@ export default function Home() {
                 {CTA.automate.label}
               </a>
             </div>
-            <ul className="hero-points mt-9" aria-label="How it works in short">
-              <li>We build it</li>
-              <li>We run it</li>
-              <li>You approve what it does</li>
-            </ul>
+
           </div>
           <div className="workshop">
-            <p className="workshop-note"><span className="workshop-purple" aria-hidden="true" />Behind the scenes of less busywork</p>
-            <HeroStage />
-            <p className="workshop-afterword">You bring the process. We bring it together.</p>
+            <HeroConversation />
           </div>
         </div>
-        <StudioDetails />
         <HeroIntro />
       </section>
 
@@ -79,7 +74,7 @@ export default function Home() {
 
       {/* 2. Problem */}
       <section className="section busywork-wall" aria-labelledby="problem-title">
-        <div className="wrap grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div className="wrap grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20" data-site-section>
           <div>
             <SectionHead
               id="problem-title"
@@ -106,12 +101,11 @@ export default function Home() {
 
       {/* 3. What we automate */}
       <section id="automate" className="section" aria-labelledby="automate-title">
-        <div className="wrap">
+        <div className="wrap" data-site-section>
           <SectionHead
             id="automate-title"
             eyebrow=""
             title="Your repeat list. Our kind of work."
-            lead="Custom agents, workflows and integrations for the repetitive work across your business, each one designed around how you already operate."
           />
           <div className="automation-index automation-index--compact mt-14" data-rv-group>
             {CATEGORIES.map((c) => (
@@ -141,13 +135,13 @@ export default function Home() {
 
       {/* 4. Before / after */}
       <section className="section sorting-room" aria-labelledby="ba-title">
-        <div className="wrap">
+        <div className="wrap" data-site-section>
           <SectionHead
             id="ba-title"
             eyebrow=""
             title="Everything in its place."
-            lead="Routine work gets handled. Decisions wait for you. Exceptions go to a person."
           />
+          <Atmosphere />
           <div className="mt-12" data-rv>
             <BeforeAfter />
           </div>
@@ -156,12 +150,11 @@ export default function Home() {
 
       {/* 5. How we work */}
       <section id="how" className="section" aria-labelledby="how-title">
-        <div className="wrap">
+        <div className="wrap" data-site-section>
           <SectionHead
             id="how-title"
             eyebrow=""
             title="Your process. Our responsibility."
-            lead="From the first conversation to ongoing care, we handle the technology."
           />
           <ol className="process-strip">
             {[
@@ -171,7 +164,6 @@ export default function Home() {
               ["Improve", "You tell us what’s changed. We keep it useful."],
             ].map(([title, body], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p></li>)}
           </ol>
-          <p className="t-body">A small team of two founders. The people you explain your process to build and run it.</p>
           <details className="process-details"><summary>Explore the build, approval and run walkthrough</summary><HowWeWork /></details>
           <p className="mt-4" data-rv>
             <a className="btn btn-ghost" href="/how-it-works/">
@@ -184,7 +176,7 @@ export default function Home() {
 
       {/* 7. Rocket */}
       <section id="rocket" className="section rocket-room" aria-labelledby="rocket-title">
-        <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+        <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center" data-site-section>
           <div>
             <SectionHead
               id="rocket-title"
@@ -193,10 +185,6 @@ export default function Home() {
               lead="What ran? What needs your approval? Ask Rocket about the automations we build and run for you."
             />
             <ul className="mt-8 space-y-4 text-[15.5px]" data-rv>
-              <li className="flex gap-3">
-                <Icon name="check" className="mt-0.5 flex-none text-accent-soft" strokeWidth={2.2} />
-                <span>Ask what happened, what needs your approval, or for a summary.</span>
-              </li>
               <li className="flex gap-3">
                 <Icon name="forward" className="mt-0.5 flex-none text-accent-soft" strokeWidth={2} />
                 <span>Request a new automation. Rocket forwards it to our team; it never builds anything itself.</span>
@@ -223,14 +211,15 @@ export default function Home() {
             </p>
           </div>
           <div data-rv>
-            <RocketVignette layered />
+            <RocketEncounter />
+            <details className="rocket-example"><summary>Explore an example conversation</summary><RocketVignette /></details>
           </div>
         </div>
       </section>
 
       {/* 8. FAQ */}
       <section id="faq" className="section border-t border-line" aria-labelledby="faq-title">
-        <div className="wrap grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
+        <div className="wrap grid gap-12 lg:grid-cols-[0.7fr_1.3fr]" data-site-section>
           <div>
             <SectionHead id="faq-title" eyebrow="" title="Questions, answered plainly." />
             <p className="t-body mt-6 max-w-[36ch]" data-rv>

@@ -18,6 +18,8 @@ const types = {
   ".xml": "application/xml",
   ".svg": "image/svg+xml",
   ".png": "image/png",
+  ".webp": "image/webp",
+  ".mp4": "video/mp4",
   ".ico": "image/x-icon",
   ".woff2": "font/woff2",
 };
@@ -48,8 +50,20 @@ createServer(async (req, res) => {
   const path = hit?.path || join(root, "404.html");
   try {
     const body = await readFile(path);
-    res.writeHead(hit ? 200 : 404, { "Content-Type": types[extname(path)] || "application/octet-stream" });
-    res.end(body);
+    const headers = { "Content-Type": types[extname(path)] || "application/octet-stream", "Content-Length": body.length };
+    if (hit && extname(path) === ".mp4" && req.headers.range) {
+      const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range);
+      const start = range?.[1] ? Number(range[1]) : Math.max(0, body.length - Number(range?.[2] || 0));
+      const end = range?.[1] && range[2] ? Math.min(Number(range[2]), body.length - 1) : body.length - 1;
+      if (!range || start > end || start >= body.length) {
+        res.writeHead(416, { "Content-Range": `bytes */${body.length}` });
+        return res.end();
+      }
+      res.writeHead(206, { ...headers, "Accept-Ranges": "bytes", "Content-Range": `bytes ${start}-${end}/${body.length}`, "Content-Length": end - start + 1 });
+      return res.end(req.method === "HEAD" ? undefined : body.subarray(start, end + 1));
+    }
+    res.writeHead(hit ? 200 : 404, headers);
+    res.end(req.method === "HEAD" ? undefined : body);
   } catch {
     res.writeHead(500);
     res.end("Run `npm run build` first.");

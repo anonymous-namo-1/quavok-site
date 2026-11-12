@@ -8,7 +8,7 @@ import { useEffect } from "react";
 export function MotionRuntime() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduce.matches || !("IntersectionObserver" in window)) return;
+    if (reduce.matches || document.documentElement.classList.contains("qa-pre") || !("IntersectionObserver" in window)) return;
 
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-rv]"));
     const vh = window.innerHeight;

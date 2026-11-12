@@ -1,7 +1,5 @@
 /* A workflow on the workbench, not another dashboard card. */
 .hero .workshop .stage { background: transparent; border: 0; border-radius: 0; position: relative; }
-.hero .stage-cast { background: transparent; border: 0; padding: 0 0 12px; }
-.hero .cast-member { padding: 7px 9px; border: 1px solid var(--color-line-2); border-radius: 999px; background: var(--color-paper); }
 .hero .stage-body { background: none; padding: 8px 0 12px; }
 .hero .g-node { box-shadow: 0 18px 40px -24px #000; border-radius: 12px; }
 .hero .stage-head { padding: 10px 0; }
@@ -52,9 +50,6 @@
  .rocket-layered .rk-thread { min-height:220px; }
 }
 @media (max-width:639px) {
- .hero .stage-cast { gap:4px; }
- .hero .cast-member { padding:6px; }
- .hero .cast-member > svg { width:12px; }
  .sample-actions button { min-height:44px; }
  .stage-try { min-height:150px; }
  .process-strip { grid-template-columns:1fr 1fr; }
@@ -84,8 +79,6 @@
 }
 
 /* Art direction: quiet surfaces, distinct input/decision/output hierarchy. */
-.hero .cast-member { border:0; border-radius:0; background:transparent; padding:6px 0; }
-.hero .stage-cast { border-bottom:1px solid var(--color-line); padding-bottom:16px; margin-bottom:10px; }
 .hero .g-node { border-color:var(--color-line-2); box-shadow:none; }
 .hero .g-node[data-node="0"] { background:var(--color-sand); border-color:var(--color-sand); }
 .hero .g-node[data-node="0"] :is(.n-title,.n-sub,.n-num) { color:var(--color-charcoal); }
@@ -140,7 +133,6 @@
 @media (max-width:639px) {
  .automation-index--compact .cat, .automation-index--compact .cat:nth-child(even) { padding:18px 0; }
  .busywork-wall .sticker-wall { padding-top:0; }
- .hero .stage-cast { margin-bottom:4px; }
 }
 @media (max-width:639px) {
  .hero-spotlight { top:500px; right:-520px; }

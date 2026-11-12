@@ -7,6 +7,7 @@ import "./hero-detail.css";
 import "./rocket-companion.css";
 import "./home-pass.css";
 import "./palette.css";
+import "./assembly.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Companion } from "@/components/Companion";
@@ -14,15 +15,15 @@ import { MotionRuntime } from "@/components/MotionRuntime";
 import { SITE } from "@/lib/site";
 import { OG_IMAGE } from "@/lib/meta";
 
-const inter = localFont({
-  src: [{ path: "../fonts/inter-latin.woff2", weight: "400 600", style: "normal" }],
-  variable: "--font-inter",
+const manrope = localFont({
+  src: [{ path: "../fonts/manrope-latin.woff2", weight: "200 800", style: "normal" }],
+  variable: "--font-manrope",
   display: "swap",
 });
 
-const bricolage = localFont({
-  src: [{ path: "../fonts/bricolage-latin.woff2", weight: "200 800", style: "normal" }],
-  variable: "--font-bricolage",
+const sora = localFont({
+  src: [{ path: "../fonts/sora-latin.woff2", weight: "200 800", style: "normal" }],
+  variable: "--font-sora",
   display: "swap",
 });
 
@@ -70,7 +71,7 @@ const orgJsonLd = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     // The homepage boot script may add html.qa-pre before hydration.
-    <html lang="en" className={`${inter.variable} ${bricolage.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${manrope.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>

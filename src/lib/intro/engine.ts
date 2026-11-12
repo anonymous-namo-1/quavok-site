@@ -1,4 +1,4 @@
-/* Homepage intro: four labelled agent cursors build a workflow, then leave.
+/* Homepage intro: anonymous agent cursors assemble the page and its workflow, then leave.
 
    Evolved from the previous site's build-intro.js. The rules are unchanged:
    - One requestAnimationFrame loop. Every frame reads first, then writes.
@@ -352,9 +352,7 @@ type Box = {
 
 type Agent = {
   el: HTMLDivElement;
-  tag: HTMLSpanElement;
   bubble: HTMLSpanElement;
-  tagW: number;
   x: number;
   y: number;
   op: number;
@@ -366,7 +364,7 @@ type Agent = {
   box: Box;
 };
 
-function makeAgent(name: string, color: string, stamp?: string, chatter?: string): Agent {
+function makeAgent(color: string, stamp?: string, chatter?: string): Agent {
   const el = document.createElement("div");
   el.className = "qa-cur";
   el.style.setProperty("--qa", color);
@@ -381,11 +379,7 @@ function makeAgent(name: string, color: string, stamp?: string, chatter?: string
   path.setAttribute("stroke-width", "1.15");
   path.setAttribute("stroke-linejoin", "round");
   svg.appendChild(path);
-  const tag = document.createElement("span");
-  tag.className = "qa-tag";
-  tag.textContent = name;
   el.appendChild(svg);
-  el.appendChild(tag);
   const bubble = document.createElement("span");
   bubble.className = "qa-chatter";
   bubble.textContent = chatter || "On it.";
@@ -405,9 +399,7 @@ function makeAgent(name: string, color: string, stamp?: string, chatter?: string
 
   return {
     el,
-    tag,
     bubble,
-    tagW: 90,
     x: 0,
     y: 0,
     op: 0,
@@ -490,7 +482,7 @@ export function startIntro(): () => void {
       y = clamp(y, V.t + 4, V.b - 20);
     }
     const cls =
-      "qa-cur" + (a.down ? " qa-down" : "") + (x > V.r - a.tagW - 22 ? " qa-flip" : "") + (y > V.b - 56 ? " qa-raise" : "");
+      "qa-cur" + (a.down ? " qa-down" : "") + (x > V.r - 160 - 22 ? " qa-flip" : "") + (y > V.b - 56 ? " qa-raise" : "");
     if (cls !== a.cls) {
       a.cls = cls;
       a.el.className = cls;
@@ -1121,11 +1113,13 @@ export function startIntro(): () => void {
     fx.setAttribute("aria-hidden", "true");
     overlay.appendChild(fx);
 
-    const mapping = makeAgent("Milo · Mapping", SAND, undefined, "A place for everything.");
-    const copy = makeAgent("Kit · Copy", PURPLE_SOFT, undefined, "Less jargon. More human.");
-    const wiring = makeAgent("Dot · Wiring", PURPLE, undefined, "Connecting the dots.");
-    const review = makeAgent("Rue · Review", SAND_LIGHT, "Example checked", "A human gets the final say.");
-    agents = [mapping, copy, wiring, review];
+    const mapping = makeAgent(SAND, undefined, "A place for everything.");
+    const copy = makeAgent(PURPLE_SOFT, undefined, "Less jargon. More human.");
+    const wiring = makeAgent(PURPLE, undefined, "Connecting the dots.");
+    const review = makeAgent(SAND_LIGHT, "All in place", "A human gets the final say.");
+    const layout = makeAgent(PURPLE_SOFT, undefined, "Putting things in place.");
+    const art = makeAgent(SAND, undefined, "A little atmosphere.");
+    agents = [mapping, copy, wiring, review, layout, art];
     for (const a of agents) fx.appendChild(a.box.el);
     caretEl = document.createElement("div");
     caretEl.className = "qa-caret";
@@ -1133,7 +1127,6 @@ export function startIntro(): () => void {
     fx.appendChild(caretEl);
     for (const a of agents) fx.appendChild(a.el);
     document.body.appendChild(overlay);
-    for (const a of agents) a.tagW = a.tag.offsetWidth || 90;
 
     // Where each cursor comes in from.
     const v = view();
@@ -1148,6 +1141,47 @@ export function startIntro(): () => void {
 
     tracks = [];
     let total = 0;
+
+    // Build the page's actual DOM: navigation, opening, copy, artwork and
+    // the sections below the fold. No scroll hijack or replica screenshot.
+    layout.x = v.l - 40; layout.y = v.t + 40;
+    art.x = v.r + 40; art.y = v.t + v.h * .4;
+    const pagePieces = Array.from(document.querySelectorAll<HTMLElement>("[data-site-piece], [data-site-section]"))
+      .filter(el => isShown(el)).map(el => ({ item: track(el)!, section: el.hasAttribute("data-site-section"), essential: el.hasAttribute("data-site-essential") }));
+    const visiblePieces = pagePieces.filter(piece => !piece.section);
+    const sections = pagePieces.filter(piece => piece.section).map(piece => piece.item);
+    const pageSteps: Step[] = [];
+    for (const { item, essential } of visiblePieces.filter(piece => !["hero-art", "day-question", "day-answer"].some(className => piece.item.el.classList.contains(className)))) {
+      if (essential) item.op = .4;
+      pageSteps.push(move(layout, () => ({ x: clamp(item.home.x + 12, V.l + 12, V.r - 32), y: clamp(item.home.y + 12, V.t + 12, V.b - 80) }), .12));
+      pageSteps.push({ d: .26, begin: () => { layout.down = true; layout.bubble.textContent = "Putting it in place."; }, run: u => {
+        item.op = (essential ? .4 : 0) + (essential ? .6 : 1) * easeInOut(u);
+        item.tx = -24 * (1 - easeInOut(u)); item.ty = 8 * (1 - easeInOut(u));
+      }, end: () => { item.op = 1; item.tx = item.ty = 0; layout.down = false; } });
+    }
+    pageSteps.push(leave(layout, .3));
+    tracks.push({at: .08, steps: pageSteps, i: 0, acc: 0});
+    total = Math.max(total, .08 + sum(pageSteps));
+    // Two cursors place the person's question and Rocket's answer as real
+    // page elements. The hero changed; the agents-building-the-site stays.
+    for (const [className, agent, at] of [["day-question", mapping, 1], ["day-answer", wiring, 1.8]] as const) {
+      const message = visiblePieces.find(piece => piece.item.el.classList.contains(className))?.item;
+      if (!message) continue;
+      const option: DragOpt = {gx:.2, gy:.3, off:() => ({dx:48,dy:24})};
+      const steps = [move(agent, () => grabPoint(message,option,1),.3), dragIn(agent,message,option,.6),leave(agent,.3)];
+      tracks.push({at,steps,i:0,acc:0}); total=Math.max(total,at+sum(steps));
+    }
+    const artwork = visiblePieces.find(piece => piece.item.el.classList.contains("hero-art"))?.item;
+    const artSteps: Step[] = [];
+    if (artwork) {
+      artSteps.push(move(art, () => ({x: V.r - 100, y: V.t + 140}), .35));
+      if (v.w >= 900) artSteps.push(marquee(art, () => ({x: V.r * .55, y: V.t + 90, w: V.w * .4, h: Math.min(340, V.h * .5)}), .35));
+      artSteps.push(popIn([artwork], .55));
+    }
+    artSteps.push(popIn(sections, 1.2), leave(art, .35));
+    tracks.push({at: .55, steps: artSteps, i: 0, acc: 0});
+    total = Math.max(total, .55 + sum(artSteps));
+    for (const {item} of pagePieces) item.write();
 
     // Copy: selects the headline, types it, then names the workflow.
     const sCopy: Step[] = [];
@@ -1254,6 +1288,19 @@ export function startIntro(): () => void {
       const aRev = Math.max(1.5, tw - 0.45);
       tracks.push({ at: aRev, steps: sRev, i: 0, acc: 0 });
       total = Math.max(total, aRev + sum(sRev));
+    }
+
+    // The benefit-led hero is assembled as a conversation, then checked.
+    if (stage?.hasAttribute("data-intro-conversation")) {
+      const bounds = (): Rect => {
+        const target = visibleEnough(stage,.5) ? stage : hero?.querySelector(".hero-copy") || stage;
+        const r = target.getBoundingClientRect();
+        const y = Math.max(80,r.top);
+        return {x:Math.max(8,r.left), y, w:Math.min(r.width,V.w-16), h:Math.max(40,Math.min(r.bottom,V.b-72)-y)};
+      };
+      const steps: Step[] = [move(review, () => ({x:bounds().x,y:bounds().y}), .25), marquee(review,bounds,.4), approve(review,.5),leave(review,.3)];
+      tracks.push({at:2.9,steps,i:0,acc:0});
+      total=Math.max(total,2.9+sum(steps));
     }
 
     listen();

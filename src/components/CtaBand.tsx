@@ -11,7 +11,7 @@ export function CtaBand({
   return (
     <section className="section closing-room editorial-closing" aria-labelledby="cta-title">
       <div className="wrap">
-        <div className="closing-inner relative px-6 py-16 sm:px-12 sm:py-24" data-rv>
+        <div className="closing-inner relative px-6 py-16 sm:px-12 sm:py-24" data-rv data-site-section>
           <div className="relative">
             <h2 id="cta-title" className="t-h2">
               {title}

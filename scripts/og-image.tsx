@@ -20,7 +20,7 @@ export function GET() {
           background: "#2b2930",
           color: "#e8dcc4",
           padding: "72px 80px",
-          fontFamily: "sans-serif",
+          fontFamily: "Manrope",
         }}
       >
         <div style={{ display: "flex" }}>
@@ -28,7 +28,7 @@ export function GET() {
           <img src={logo} width={228} height={48} alt="" />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ fontSize: 72, fontWeight: 700, letterSpacing: -3, lineHeight: 1.02, maxWidth: 980 }}>
+          <div style={{ fontFamily: "Sora", fontSize: 68, fontWeight: 700, letterSpacing: -3, lineHeight: 1.02, maxWidth: 980 }}>
             Focus on what actually matters.
           </div>
           <div style={{ fontSize: 30, color: "#e8dcc4" }}>Hand us the busywork. We design, deploy and run the automation.</div>
@@ -56,6 +56,9 @@ export function GET() {
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts: [
+      {name: "Sora", data: readFileSync(join(process.cwd(), "src/fonts/sora-og.ttf")), weight: 700, style: "normal"},
+      {name: "Manrope", data: readFileSync(join(process.cwd(), "src/fonts/manrope-og.ttf")), weight: 400, style: "normal"},
+    ] },
   );
 }

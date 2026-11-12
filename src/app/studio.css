@@ -96,7 +96,6 @@
   .qa-chatter { position: absolute; left: 22px; top: -36px; white-space: nowrap; padding: 6px 10px; border-radius: 9px 9px 9px 0; border: 1px solid var(--qa); background: #1f1d24; color: #e8dcc4; font: 12px var(--font-sans); box-shadow: 2px 3px 0 #2b293022; }
   .qa-flip .qa-chatter { left: auto; right: 4px; }
   .qa-raise .qa-chatter { top: -68px; }
-  .qa-tag { border: 1px solid #e8dcc4; }
   .qa-box.qa-ok b { background: #1d1b22; color: var(--color-ink); }
 }
 @media (min-width: 1040px) {
@@ -234,7 +233,6 @@
 @layer components {
   .qa-skip { background: #1f1d24; color: #e8dcc4; border-color: #c5a9fa; }
   .qa-skip kbd { color: #c0bda6; }
-  .qa-tag { color: var(--color-charcoal); border-color: var(--qa); }
   .qa-box { border-width: 2px; }
 }
 @layer components {

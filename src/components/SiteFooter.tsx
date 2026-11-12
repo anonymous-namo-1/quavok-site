@@ -2,7 +2,7 @@ import { CTA, NAV, SITE } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer editorial-footer">
+    <footer data-site-section className="site-footer editorial-footer">
       <div className="wrap">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>

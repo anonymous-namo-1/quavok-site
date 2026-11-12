@@ -38,18 +38,18 @@ export function SiteHeader() {
   return (
     <header className="site-header" data-scrolled={scrolled || open}>
       <div className="wrap bar">
-        <a href="/" className="logo" aria-label="Quavok home">
+        <a href="/" className="logo" data-site-piece aria-label="Quavok home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/assets/brand/logo-lockup.png" alt="Quavok" width={133} height={28} />
         </a>
-        <nav className="nav-links" aria-label="Main">
+        <nav className="nav-links" data-site-piece aria-label="Main">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} aria-current={isCurrent(n.href) ? "page" : undefined}>
               {n.label}
             </a>
           ))}
         </nav>
-        <a className="btn btn-primary btn-sm nav-cta" href={CTA.discuss.href}>
+        <a className="btn btn-primary btn-sm nav-cta" data-site-piece data-site-essential href={CTA.discuss.href}>
           {CTA.discuss.label}
           <ArrowIcon />
         </a>

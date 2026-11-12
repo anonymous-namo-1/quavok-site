@@ -69,22 +69,6 @@
   box-shadow: none;
   scroll-margin-top: 110px;
 }
-.hero .stage-cast {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding: 18px 14px;
-  border-bottom: 1px solid #39373e;
-  background: #1c1a21;
-  gap: 8px;
-}
-.cast-member { display: flex; gap: 5px; align-items: center; min-width: 0; }
-.cast-member > svg { flex-shrink: 0; }
-.cast-member b { font: 600 12px var(--font-sans); display: block; }
-.cast-member small { display: block; font: 9px/1.4 var(--font-sans); color: #c9c4ad; margin-top: 4px; }
-.cast-sand { color: #e8dcc4; }
-.cast-soft { color: #c5a9fa; }
-.cast-purple { color: #8b5cf6; }
-.cast-accent-alt { color: #e8dcc4; }
 .hero .stage-head { background: transparent; border-bottom: 0; padding: 19px 20px 6px; }
 .hero .stage-title { font-size: 17px; }
 .hero .stage-status { color: #c9c4ad; font-size: 10px; }
@@ -120,7 +104,6 @@
 .assembly-finale { display: flex; align-items: center; gap: 10px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -40%) scale(.94); background: #8b5cf6; color: #2b2930; border-radius: 12px; padding: 18px 22px; opacity: 0; pointer-events: none; width: max-content; font: 650 22px var(--font-display); }
 .assembly-finale small { display: block; font: 12px var(--font-sans); margin-top: 4px; }
 .qa-cur .qa-chatter { background: #1f1d24; color: #e8dcc4; border-color: var(--qa); box-shadow: 0 6px 20px #0b091040; font-size: 11px; }
-.qa-cur .qa-tag { font-size: 10px; }
 @media (prefers-reduced-motion: no-preference) {
   .hero .assembly-approved { animation: none; }
   .hero .assembly-approved .assembly-finale { animation: workflow-finale 2.5s cubic-bezier(.16, 1, .3, 1) both; }
@@ -133,7 +116,6 @@
 @media (max-width: 1100px) and (min-width: 1040px) {
   .hero .hero-grid { gap: 30px; }
   .hero .t-hero { font-size: 59px; }
-  .cast-member small { font-size: 8px; }
 }
 @media (max-width: 1039px) {
   .hero { padding-top: 48px; }
@@ -153,11 +135,6 @@
   .hero .hero-points { gap: 8px 13px; font-size: 10px; }
   .hero .hero-grid { gap: 40px; }
   .hero .workshop-note { font-size: 10px; margin-bottom: 14px; }
-  .hero .stage-cast { padding: 15px 11px; gap: 4px; }
-  .cast-member { gap: 4px; }
-  .cast-member > svg { width: 13px; height: 17px; }
-  .cast-member small { display: none; }
-  .cast-member b { font-size: 11px; }
   .hero .stage-head { padding: 17px 12px 6px; gap: 8px; }
   .hero .stage-title { font-size: 16px; }
   .hero .stage-status { font-size: 9px; gap: 5px; }

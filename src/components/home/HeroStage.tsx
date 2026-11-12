@@ -124,41 +124,22 @@ export function HeroStage() {
 
   return (
     <figure ref={ref} id="workflow-build" className="stage hero-workflow" data-sample={sample} data-intro-stage aria-labelledby="hero-stage-cap">
-      <div className="stage-cast" role="group" aria-label="Illustrative build crew">
-        {[
-          { name: "Milo", role: "Maps the process", tone: "sand" },
-          { name: "Kit", role: "Finds the words", tone: "soft" },
-          { name: "Dot", role: "Joins the dots", tone: "purple" },
-          { name: "Rue", role: "Checks the details", tone: "accent-alt" },
-        ].map((member) => (
-          <div className={`cast-member cast-${member.tone}`} key={member.name}>
-            <svg viewBox="0 0 20 24" width="18" height="22" aria-hidden="true">
-              <path d="M2 2v17l5-5 4 8 3-2-4-7h8L2 2Z" fill="currentColor" stroke="currentColor" strokeLinejoin="round" />
-            </svg>
-            <span><b>{member.name}</b><small>{member.role}</small></span>
-          </div>
-        ))}
-      </div>
       <div className="stage-head">
         <span className="stage-title" data-intro-title data-intro-hold>
           {scenario.title}
         </span>
-        <span className="stage-status">
-          <i aria-hidden="true" />
-          Illustrative build
-        </span>
+
       </div>
       <div className="stage-body grid-bg">
         <WorkflowGraph scenario={scenario} introHold hot={sample === "idle" ? hot : sample === "approved" ? 4 : sample === "person" ? 1 : 2} gateState={sample === "approval" ? "waiting" : sample === "approved" ? "approved" : undefined} excHot={sample === "person"} />
       </div>
       <div className="stage-try" role="group" aria-label="Try an illustrative request">
         <div className="sample-actions">
-          <span>Try a sample</span>
-          <button ref={clearEnquiry} type="button" disabled={!ready} onClick={() => setSample("approval")}>Clear enquiry</button>
+          <button ref={clearEnquiry} type="button" disabled={!ready} onClick={() => { setSample("approval"); window.dispatchEvent(new CustomEvent("quavok:rocket-reaction", {detail:"Your call. The example waits for you."})); }}>Clear enquiry</button>
           <button type="button" disabled={!ready} onClick={() => setSample("person")}>Unclear enquiry</button>
-          {sample === "approval" && <button ref={approve} className="sample-approve" type="button" onClick={() => { setSample("approved"); clearEnquiry.current?.focus({ preventScroll: true }); }}>Approve follow-up</button>}
+          {sample === "approval" && <button ref={approve} className="sample-approve" type="button" onClick={() => { setSample("approved"); window.dispatchEvent(new CustomEvent("quavok:rocket-reaction", {detail:"Approved. The example can move on."})); clearEnquiry.current?.focus({ preventScroll: true }); }}>Approve follow-up</button>}
         </div>
-        <p className="sample-status" aria-live="polite">{sample === "idle" ? "An illustrative run. Choose an enquiry to see where it goes." : sample === "approval" ? "Enquiry checked. CRM updated. Follow-up drafted. Your approval comes next." : sample === "approved" ? "Approved in this example. Follow-up sent and added to the evening summary." : "Outside the agreed criteria. Handed to a person. Nothing is guessed."}</p>
+        <p className="sample-status" aria-live="polite">{sample === "idle" ? "Illustrative example. Choose an enquiry." : sample === "approval" ? "Enquiry checked. CRM updated. Follow-up drafted. Your approval comes next." : sample === "approved" ? "Approved in this example. Follow-up sent and added to the evening summary." : "Outside the agreed criteria. Handed to a person. Nothing is guessed."}</p>
       </div>
       <figcaption id="hero-stage-cap" className="stage-foot">
         <span className="stage-ownership"><Icon name="check" width={15} height={15} /><span>You approve. We build and run.</span></span>
@@ -168,7 +149,7 @@ export function HeroStage() {
         </a>
       </figcaption>
       <span className="stage-confetti" aria-hidden="true">{Array.from({length: 10}, (_, i) => <i key={i} style={{"--burst-angle": `${i * 36}deg`} as CSSProperties} />)}</span>
-      <div className="assembly-finale" aria-hidden="true"><Icon name="check" width={22} height={22} /><span>All connected.<small>And always in your hands.</small></span></div>
+      <div className="assembly-finale" aria-hidden="true"><Icon name="check" width={22} height={22} /><span>All connected.</span></div>
     </figure>
   );
 }

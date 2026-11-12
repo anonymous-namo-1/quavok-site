@@ -7,7 +7,7 @@
 .btn-ghost, .hero .btn-ghost { --btn-bg: transparent; --btn-fg: var(--color-sand); --btn-bd: #716f76; }
 .btn-ghost:hover { --btn-bg: #2b2930; --btn-fg: var(--color-sand); }
 .hero-spotlight { background: radial-gradient(ellipse 24% 46% at 50% 50%, #8b5cf680, #8b5cf638 45%, transparent 78%); }
-.hero .g-gate, .assembly-finale, .qa-box.qa-ok b, .qa-tag, .stamp, .g-gate,
+.hero .g-gate, .assembly-finale, .qa-box.qa-ok b, .stamp, .g-gate,
 .rk-suggest button[aria-pressed="true"], .g-node[data-hot="true"] .n-num, button.g-node[aria-pressed="true"] .n-num {
   background: var(--color-purple-dark); color: var(--color-sand); border-color: var(--color-purple-soft);
 }
@@ -21,4 +21,3 @@
 .rocket-confetti i:nth-child(3n) { background: var(--color-purple-soft); }
 ::selection { background: var(--color-purple-dark); color: var(--color-sand); }
 .skip-link { background: var(--color-purple-dark); color: var(--color-sand); }
-.cast-purple, .hero .g-node[data-node="4"] .n-num { color: var(--color-purple-soft); }
