@@ -57,8 +57,8 @@ export function ScenarioGraph() {
     tabRefs.current[next]?.focus();
   };
 
-  let title = "Select any step";
-  let body = "Each box is one step of the process. Select one to see what happens there and who is responsible.";
+  let title = "Select a step";
+  let body = "See what happens there and who handles it.";
   let who: Who | null = null;
   if (sel?.kind === "step") {
     const st = s.steps[sel.i];

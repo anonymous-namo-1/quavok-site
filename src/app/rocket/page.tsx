@@ -13,7 +13,7 @@ const ROCKET_FAQS: Faq[] = [
   {q:"Can Rocket build or change an automation?",a:["No. Rocket forwards new requests to the Quavok team. We scope, build and run the automation with you."]},
   {q:"Do I need Rocket to use Quavok?",a:["No. Your automations run without it. Rocket is an optional way to interact with them."]},
   {q:"What can Rocket see?",a:["Rocket is designed to answer about the automations Quavok runs for your business. What it can access is agreed with you as part of the scope."]},
-  {q:"How can I get Rocket?",a:["Discuss your automation with the Quavok team. [PLACEHOLDER: confirm base Rocket availability]."]},
+  {q:"How can I get Rocket?",a:["Ask for it when you discuss your automation with the Quavok team."]},
 ];
 export default function RocketPage(){return <>
   <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(faqJsonLd(ROCKET_FAQS))}} />

@@ -161,7 +161,7 @@ export default function SolutionsPage() {
       <PageHero
         eyebrow="Solutions"
         title="Good people. Better things to do."
-        lead="The chasing. The copying. The same report, every Friday. These examples show where we could take work off your team’s plate, so they can spend more time with customers and on their craft. Each workflow is designed around your business."
+        lead="The chasing. The copying. The same report, every Friday. These examples show where we could take work off your team’s plate. Each one is designed around your business."
       >
         <div className="flex flex-wrap items-center gap-3">
           <a className="btn btn-primary" href={CTA.discuss.href}>

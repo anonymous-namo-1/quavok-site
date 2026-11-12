@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { guideForSection, playVoice, stopVoice, voiceForText, voiceOwner } from "@/lib/voice";
+import { guideForSection, playVoice, stopVoice, voiceForText, voiceOwner, voiceText } from "@/lib/voice";
 import { soundEnabled } from "@/lib/sound";
 
 const STORAGE_KEY = "quavok-rocket-minimised";
-const INTRO = "Hi, I’m Rocket. What would you like to know?";
+const INTRO = voiceText("greeting");
 const QUESTIONS = [
-  { label: "What does Quavok do?", answer: "Quavok designs, builds and runs automations for your repetitive work. You explain the process and approve the important decisions." },
-  { label: "Do I build anything?", answer: "No technical homework. Quavok handles the build, deployment and ongoing care." },
-  { label: "What is Rocket?", answer: "Rocket talks to your Quavok-built automations and forwards new requests to the team." },
-  { label: "How do I start?", answer: "Bring one repetitive process to a discovery conversation. The team will explore it with you." },
+  { label: "What does Quavok do?", answer: voiceText("faq-0") },
+  { label: "Do I build anything?", answer: voiceText("faq-1") },
+  { label: "What is Rocket?", answer: voiceText("faq-2") },
+  { label: "How do I start?", answer: voiceText("faq-3") },
 ];
 const SECTION_HINTS: Record<string, string> = {
   automate: "A little less busywork.",

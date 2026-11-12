@@ -58,7 +58,7 @@ export const HOME_FAQS: Faq[] = [
     q: "What happens when an automation fails?",
     a: [
       "Running it is our job. We monitor the automations we run, and they are designed to stop and hand over rather than guess: when something fails or falls outside the agreed rules, the item is held or routed to a person, and we investigate and fix the cause.",
-      "You’ll be told when something needs your attention. Specific monitoring hours and response times will be agreed with you: [PLACEHOLDER: confirm support hours and response times].",
+      "You’ll be told when something needs your attention. Monitoring hours and response times are agreed with you before anything goes live.",
     ],
   },
 ];

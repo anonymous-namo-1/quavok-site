@@ -16,7 +16,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="What keeps getting in the way?"
-        lead="Tell us about one task your team keeps repeating. No polished brief needed. Use the form to prepare an email, then send it from your email app. We’ll start with the work and see where automation could help."
+        lead="Tell us about one task your team keeps repeating. No polished brief needed. We’ll start with the work and see where automation could help."
       />
       <section className="section pt-4" aria-label="Contact form and details">
         <div className="wrap grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-14">
@@ -60,9 +60,6 @@ export default function ContactPage() {
                 <li>2. We set up a discovery call about one process.</li>
                 <li>3. If it&apos;s a good fit, we propose a scope and a price before any work starts.</li>
               </ol>
-              <p className="mt-4 text-[13.5px] text-mute">
-                Scheduling link: <span className="placeholder">[PLACEHOLDER: booking calendar URL]</span>
-              </p>
             </div>
           </aside>
         </div>

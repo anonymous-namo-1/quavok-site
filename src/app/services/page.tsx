@@ -77,7 +77,7 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="Leave the busywork with us."
-        lead="Your team knows the work. We build the automation around it, then keep it running. From the first process map to the everyday fixes, the technical work is ours. You approve what it does and get back to what matters."
+        lead="Your team knows the work. We build the automation around it and keep it running, from the first process map to the everyday fixes. You approve what it does."
       >
         <div className="flex flex-wrap gap-3">
           <a className="btn btn-primary" href={CTA.discuss.href}>

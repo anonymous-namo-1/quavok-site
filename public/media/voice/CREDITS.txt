@@ -1,5 +1,7 @@
-Rocket demo speech generated locally using Piper TTS (OHF-Voice/piper1-gpl) and the en_US-ljspeech-medium voice.
-Model: https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/ljspeech/medium
-Model card: dataset is the public-domain LJ Speech Dataset, https://keithito.com/LJ-Speech-Dataset/ .
-Only generated audio is shipped. Piper, the model and generation dependencies are not part of the website runtime.
-Keyboard switch samples are original procedural Foley created for this website.
+Rocket and the visitor's voice clips were generated offline with Kokoro-82M (hexgrad/Kokoro-82M, Apache-2.0),
+run through kokoro-onnx (thewh1teagle/kokoro-onnx, MIT). Voices: af_heart (Rocket) and am_michael (the visitor).
+Model: https://huggingface.co/hexgrad/Kokoro-82M . Licence: https://www.apache.org/licenses/LICENSE-2.0
+Only generated audio is shipped. Kokoro, the model and generation dependencies are not part of the website runtime.
+Keyboard samples (public/media/keyboard/key-1.wav ... key-6.wav) are six single keystrokes cut from "Mechanical Keyboard Typing" by shaunhillyard,
+https://freesound.org/people/shaunhillyard/sounds/830496/ , released under CC0 1.0 (public domain dedication, https://creativecommons.org/publicdomain/zero/1.0/).
+Attribution is not required by CC0; it is given as a courtesy. The clips were trimmed, high-passed, faded and peak-normalized for this website.

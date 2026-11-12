@@ -1,4 +1,4 @@
-// One audio context for original keyboard samples and quiet UI cues.
+// One audio context for recorded mechanical-keyboard samples and quiet UI cues.
 // Samples load only when sound is enabled. No microphone or remote service.
 export type Sound = "key" | "place" | "select" | "open" | "close" | "call" | "reply" | "done";
 let context: AudioContext | null = null;
@@ -8,6 +8,7 @@ let loadingKeys: Promise<void> | null = null;
 let enabled = false;
 let lastKey = -1;
 let lastCue = -1;
+let lastSample = -1;
 
 export function soundEnabled() { return enabled; }
 export function setSoundEnabled(value: boolean) {
@@ -29,7 +30,7 @@ export async function activateSound() {
 
     }
     if (context.state === "suspended") await context.resume();
-    if (!loadingKeys) loadingKeys=Promise.all(["/media/keyboard/key-1.wav","/media/keyboard/key-2.wav","/media/keyboard/key-3.wav","/media/keyboard/key-4.wav"].map(async url=>{
+    if (!loadingKeys) loadingKeys=Promise.all(["/media/keyboard/key-1.wav","/media/keyboard/key-2.wav","/media/keyboard/key-3.wav","/media/keyboard/key-4.wav","/media/keyboard/key-5.wav","/media/keyboard/key-6.wav"].map(async url=>{
       const response=await fetch(url); if(!response.ok)throw Error("Keyboard sample unavailable");
       return context!.decodeAudioData(await response.arrayBuffer());
     })).then(buffers=>{keys=buffers;}).catch(()=>{keys=[];loadingKeys=null;});
@@ -54,19 +55,26 @@ function tone(frequency: number, endFrequency: number, start: number, duration: 
   oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); };
 }
 
-export function playSound(sound: Sound) {
+export function playSound(sound: Sound, heavy = false) {
   if (!enabled || !context || !master || context.state !== "running" || document.hidden) return;
   const t = context.currentTime;
   if (sound === "key") {
     if (t - lastKey < .025) return;
     lastKey = t;
     if (!document.documentElement.classList.contains("qa-building") || !keys.length) return;
+    // The last sample is the heavier, spacebar-like press. Regular keys never
+    // repeat the same sample twice in a row, and each press lands a few ms
+    // off the grid, the way a person actually types.
+    const regular = keys.length > 5 ? keys.length - 1 : keys.length;
+    let pick = heavy && keys.length > 5 ? keys.length - 1 : Math.floor(Math.random() * regular);
+    if (!heavy && regular > 1 && pick === lastSample) pick = (pick + 1 + Math.floor(Math.random() * (regular - 1))) % regular;
+    lastSample = pick;
     const source=context.createBufferSource();
     const gain=context.createGain();
-    source.buffer=keys[Math.floor(Math.random()*keys.length)];
-    source.playbackRate.value=.97+Math.random()*.06;
-    gain.gain.value=.85+Math.random()*.15;
-    source.connect(gain);gain.connect(master);source.start(t);
+    source.buffer=keys[pick];
+    source.playbackRate.value=.96+Math.random()*.08;
+    gain.gain.value=(heavy ? .95 : .72)+Math.random()*.22;
+    source.connect(gain);gain.connect(master);source.start(t + Math.random()*.014);
     source.onended=()=>{source.disconnect();gain.disconnect();};
     return;
   }

@@ -312,7 +312,7 @@ class Typer {
   // Show the first n characters and return where the caret goes.
   typeTo(n: number): Rect {
     const nextIndex = Math.floor(n);
-    if (nextIndex > this.soundIndex) playSound("key");
+    if (nextIndex > this.soundIndex) playSound("key", (this.it.el.textContent || "")[nextIndex - 1] === " ");
     this.soundIndex = nextIndex;
     const cm = this.sync();
     const it = this.it;

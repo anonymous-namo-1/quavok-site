@@ -142,7 +142,7 @@ export default function HowItWorksPage() {
               rules, it is held or routed to a person, and we look into it. You&apos;re told when something needs your attention.
             </p>
             <p className="mt-4 text-[14px] text-mute">
-              Monitoring hours and response times: <span className="placeholder">[PLACEHOLDER: confirm support hours and response times]</span>
+              Monitoring hours and response times are agreed with you before anything goes live.
             </p>
           </div>
           <div className="card p-7 sm:p-9" data-rv>

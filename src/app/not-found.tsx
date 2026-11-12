@@ -13,7 +13,7 @@ export default function NotFound() {
           This page isn&apos;t part of the workflow.
         </h1>
         <p className="t-lead mt-6 max-w-[52ch]">
-          It may have moved when we rebuilt the site. Older pages for the previous WhatsApp assistant offer are no longer published.
+          It may have moved when we rebuilt the site.
         </p>
         <div className="mt-9 flex flex-wrap gap-3">
           <a className="btn btn-primary" href="/">

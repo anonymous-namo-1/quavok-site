@@ -24,7 +24,7 @@ export const NAV = [
 ] as const;
 
 export const CTA = {
-  discuss: { href: "/contact/", label: "Discuss Your Workflow" },
-  book: { href: "/contact/?topic=discovery#form", label: "Book a Discovery Call" },
-  automate: { href: "/#automate", label: "See What We Automate" },
+  discuss: { href: "/contact/", label: "Discuss your workflow" },
+  book: { href: "/contact/?topic=discovery#form", label: "Book a discovery call" },
+  automate: { href: "/#automate", label: "See what we automate" },
 } as const;

@@ -8,7 +8,7 @@ export const CATEGORIES: { icon: IconName; title: string; examples: string[] }[]
   },
   {
     icon: "support",
-    title: "Customer inquiries & routine support",
+    title: "Customer enquiries & routine support",
     examples: ["Answer recurring questions from approved answers", "Status and order updates", "Hand complaints to a person"],
   },
   {
@@ -39,6 +39,6 @@ export const CATEGORIES: { icon: IconName; title: string; examples: string[] }[]
   {
     icon: "industry",
     title: "Industry-specific repetitive workflows",
-    examples: ["The routine particular to your trade", "Designed around how you already operate", "Scoped with you, not from a template"],
+    examples: ["The routine that’s specific to your trade", "Designed around how you already operate", "Scoped with you, not from a template"],
   },
 ];

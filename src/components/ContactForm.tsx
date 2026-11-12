@@ -160,7 +160,7 @@ export function ContactForm() {
           Open in your email app
         </button>
         <p id="form-note" className="text-[13.5px] leading-snug text-mute">
-          This form doesn’t send anything from the website yet. It opens your email app with your message ready to send to {SITE.email}.
+          Opens your email app with the message ready to send to {SITE.email}.
         </p>
       </div>
 

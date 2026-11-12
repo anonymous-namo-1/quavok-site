@@ -8,7 +8,6 @@ import { HeroIntro } from "@/components/home/HeroIntro";
 import { HeroConversation } from "@/components/home/HeroConversation";
 import { BeforeAfter } from "@/components/home/BeforeAfter";
 import { ScenarioGraph } from "@/components/graph/ScenarioGraph";
-import { HowWeWork } from "@/components/HowWeWork";
 import { RocketVignette } from "@/components/RocketVignette";
 import { FaqList, faqJsonLd } from "@/components/Faq";
 import { SectionHead } from "@/components/Section";
@@ -78,9 +77,6 @@ export default function Home() {
               title="Great people. Too many little tasks."
               lead="The copy-paste. The chasing. The report rebuilt every Friday. Small jobs that take up too much of the day."
             />
-            <p className="t-body mt-6 max-w-[56ch]" data-rv>
-              You keep the judgment. We handle the repetition.
-            </p>
           </div>
           <div>
             <ul className="sticker-wall" data-rv-group>
@@ -123,7 +119,7 @@ export default function Home() {
             </div>
             <div className="workflow-invitation">
               <p>Have a process like this?</p>
-              <a className="btn btn-primary" href="/contact/">Discuss Your Workflow<ArrowIcon /></a>
+              <a className="btn btn-primary" href={CTA.discuss.href}>{CTA.discuss.label}<ArrowIcon /></a>
             </div>
           </div>
         </div>
@@ -161,7 +157,6 @@ export default function Home() {
             ].map(([title, body], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{body}</p></li>)}
           </ol>
           <span className="rocket-stop rocket-stop--process" data-rocket-perch aria-hidden="true" />
-          <details className="process-details"><summary>Explore the build, approval and run walkthrough</summary><HowWeWork /></details>
           <p className="mt-4" data-rv>
             <a className="btn btn-ghost" href="/how-it-works/">
               How it works in detail
@@ -184,7 +179,7 @@ export default function Home() {
             <ul className="mt-8 space-y-4 text-[15.5px]" data-rv>
               <li className="flex gap-3">
                 <Icon name="forward" className="mt-0.5 flex-none text-accent-soft" strokeWidth={2} />
-                <span>Request a new automation. Rocket forwards it to our team; it never builds anything itself.</span>
+                <span>Need something new? Rocket passes the request to our team. It never builds anything itself.</span>
               </li>
             </ul>
             <p className="mt-8" data-rv>
@@ -196,7 +191,7 @@ export default function Home() {
           </div>
           <div data-rv>
             <RocketEncounter />
-            <details className="rocket-example"><summary>Explore an example conversation</summary><RocketVignette /></details>
+            <details className="rocket-example"><summary>See an example conversation</summary><RocketVignette /></details>
           </div>
         </div>
       </section>
