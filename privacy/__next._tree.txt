@@ -1,0 +1,8 @@
+:HL["/_next/static/chunks/1cr-dnt6f5__u.css","style"]
+:HL["/_next/static/chunks/0ly7xjnm8mu4c.css","style"]
+:HL["/_next/static/media/manrope_latin-s.p.3mbsihvb8fg7z.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/sora_latin-s.p.2o7d_x-bmx02y.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/assets/brand/logo-lockup.png","image"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"privacy","h":64,"c":"$Q2"}]]
+0:{"b":"el0_9EEGAaJAgwElJbcPE","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

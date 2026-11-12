@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 120 120">
+  <defs>
+    <mask id="m" maskUnits="userSpaceOnUse">
+      <rect x="-10" y="-10" width="120" height="120" fill="black"/>
+      <circle cx="48" cy="46" r="34" fill="white"/>
+      <circle cx="46" cy="44" r="16" fill="black"/>
+      <path d="M54 52 L78 76 L68 82 L48 58 Z" fill="black"/>
+    </mask>
+  </defs>
+  <circle cx="48" cy="46" r="34" fill="#FFFFFF" mask="url(#m)"/>
+</svg>
