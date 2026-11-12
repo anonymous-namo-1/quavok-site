@@ -1,0 +1,150 @@
+[
+  {
+    "id": "command",
+    "text": "Let's build this page.",
+    "role": "rocket",
+    "src": "/media/voice/command.mp3",
+    "duration": 1.567
+  },
+  {
+    "id": "question-0",
+    "text": "Any new leads today?",
+    "role": "person",
+    "src": "/media/voice/question-0.mp3",
+    "duration": 1.489
+  },
+  {
+    "id": "answer-0",
+    "text": "Your new enquiries are organised in the CRM. Follow-ups are drafted. Anything unusual is waiting for your decision.",
+    "role": "rocket",
+    "src": "/media/voice/answer-0.mp3",
+    "duration": 6.766
+  },
+  {
+    "id": "question-1",
+    "text": "What needs my approval?",
+    "role": "person",
+    "src": "/media/voice/question-1.mp3",
+    "duration": 1.567
+  },
+  {
+    "id": "answer-1",
+    "text": "The follow-up wording is ready to review. Nothing goes out until you approve it.",
+    "role": "rocket",
+    "src": "/media/voice/answer-1.mp3",
+    "duration": 4.441
+  },
+  {
+    "id": "question-2",
+    "text": "Could we add quote reminders?",
+    "role": "person",
+    "src": "/media/voice/question-2.mp3",
+    "duration": 2.011
+  },
+  {
+    "id": "answer-2",
+    "text": "I’ll pass that to the Quavok team. They’ll work through the scope with you and build it around your process.",
+    "role": "rocket",
+    "src": "/media/voice/answer-2.mp3",
+    "duration": 5.538
+  },
+  {
+    "id": "greeting",
+    "text": "Hi, I’m Rocket. What would you like to know?",
+    "role": "rocket",
+    "src": "/media/voice/greeting.mp3",
+    "duration": 2.586
+  },
+  {
+    "id": "faq-0",
+    "text": "Quavok designs, builds and runs automations for your repetitive work. You explain the process and approve the important decisions.",
+    "role": "rocket",
+    "src": "/media/voice/faq-0.mp3",
+    "duration": 8.02
+  },
+  {
+    "id": "faq-1",
+    "text": "No technical homework. Quavok handles the build, deployment and ongoing care.",
+    "role": "rocket",
+    "src": "/media/voice/faq-1.mp3",
+    "duration": 4.963
+  },
+  {
+    "id": "faq-2",
+    "text": "Rocket talks to your Quavok-built automations and forwards new requests to the team.",
+    "role": "rocket",
+    "src": "/media/voice/faq-2.mp3",
+    "duration": 5.12
+  },
+  {
+    "id": "faq-3",
+    "text": "Bring one repetitive process to a discovery conversation. The team will explore it with you.",
+    "role": "rocket",
+    "src": "/media/voice/faq-3.mp3",
+    "duration": 5.068
+  },
+  {
+    "id": "guide-busywork",
+    "text": "The busywork is the bit we take off your plate. Your people keep the judgment.",
+    "role": "rocket",
+    "section": "problem-title",
+    "src": "/media/voice/guide-busywork.mp3",
+    "duration": 4.31
+  },
+  {
+    "id": "guide-automate",
+    "text": "Start with the task you repeat most. Quavok builds the automation around how you already work.",
+    "role": "rocket",
+    "section": "automate",
+    "src": "/media/voice/guide-automate.mp3",
+    "duration": 5.616
+  },
+  {
+    "id": "guide-handoffs",
+    "text": "The routine work is handled. Decisions wait for you, and anything unusual goes to a person.",
+    "role": "rocket",
+    "section": "ba-title",
+    "src": "/media/voice/guide-handoffs.mp3",
+    "duration": 6.008
+  },
+  {
+    "id": "guide-process",
+    "text": "You explain the process and approve the scope. We design, deploy, and keep it running.",
+    "role": "rocket",
+    "section": "how",
+    "src": "/media/voice/guide-process.mp3",
+    "duration": 5.303
+  },
+  {
+    "id": "guide-rocket",
+    "text": "Ask me about the automations Quavok builds for you. New requests go straight to the team.",
+    "role": "rocket",
+    "section": "rocket",
+    "src": "/media/voice/guide-rocket.mp3",
+    "duration": 5.512
+  },
+  {
+    "id": "guide-questions",
+    "text": "Bring your questions. When you are ready, tell the team about one repetitive task.",
+    "role": "rocket",
+    "section": "faq",
+    "src": "/media/voice/guide-questions.mp3",
+    "duration": 5.094
+  },
+  {
+    "id": "guide-start",
+    "text": "Your next step is a discovery conversation. No technical homework required.",
+    "role": "rocket",
+    "section": "cta-title",
+    "src": "/media/voice/guide-start.mp3",
+    "duration": 4.78
+  },
+  {
+    "id": "guide-footer",
+    "text": "You keep the craft, the customers, and the decisions. We handle the repetitive work.",
+    "role": "rocket",
+    "section": "footer",
+    "src": "/media/voice/guide-footer.mp3",
+    "duration": 5.277
+  }
+]

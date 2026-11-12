@@ -1,9 +1,10 @@
-// Original procedural UI sounds. One audio context and one noise buffer;
-// no recordings, remote requests, microphone access or background music.
+// One audio context for original keyboard samples and quiet UI cues.
+// Samples load only when sound is enabled. No microphone or remote service.
 export type Sound = "key" | "place" | "select" | "open" | "close" | "call" | "reply" | "done";
 let context: AudioContext | null = null;
 let master: GainNode | null = null;
-let noise: AudioBuffer | null = null;
+let keys: AudioBuffer[] = [];
+let loadingKeys: Promise<void> | null = null;
 let enabled = false;
 let lastKey = -1;
 let lastCue = -1;
@@ -12,6 +13,10 @@ export function soundEnabled() { return enabled; }
 export function setSoundEnabled(value: boolean) {
   enabled = value;
   if (!value) void context?.suspend();
+  if (typeof window!=="undefined") {
+    try { localStorage.setItem("quavok-sound-effects",value ? "on" : "off"); } catch { /* Optional storage. */ }
+    window.dispatchEvent(new CustomEvent("quavok:sound-change",{detail:value}));
+  }
 }
 export async function activateSound() {
   if (!enabled || !("AudioContext" in window)) return false;
@@ -19,13 +24,16 @@ export async function activateSound() {
     if (!context) {
       context = new AudioContext({ latencyHint: "interactive" });
       master = context.createGain();
-      master.gain.value = .16;
+      master.gain.value = .32;
       master.connect(context.destination);
-      noise = context.createBuffer(1, Math.ceil(context.sampleRate * .045), context.sampleRate);
-      const samples = noise.getChannelData(0);
-      for (let i = 0; i < samples.length; i++) samples[i] = Math.random() * 2 - 1;
+
     }
     if (context.state === "suspended") await context.resume();
+    if (!loadingKeys) loadingKeys=Promise.all(["/media/keyboard/key-1.wav","/media/keyboard/key-2.wav","/media/keyboard/key-3.wav","/media/keyboard/key-4.wav"].map(async url=>{
+      const response=await fetch(url); if(!response.ok)throw Error("Keyboard sample unavailable");
+      return context!.decodeAudioData(await response.arrayBuffer());
+    })).then(buffers=>{keys=buffers;}).catch(()=>{keys=[];loadingKeys=null;});
+    await loadingKeys;
     return context.state === "running";
   } catch { return false; }
 }
@@ -52,19 +60,14 @@ export function playSound(sound: Sound) {
   if (sound === "key") {
     if (t - lastKey < .025) return;
     lastKey = t;
-    // A sharp switch click over a short, low keycap thock.
-    const source = context.createBufferSource();
-    const filter = context.createBiquadFilter();
-    const gain = context.createGain();
-    source.buffer = noise;
-    filter.type = "bandpass"; filter.frequency.value = 1800 + Math.random() * 1400; filter.Q.value = .7;
-    gain.gain.setValueAtTime(.5, t);
-    gain.gain.exponentialRampToValueAtTime(.0001, t + .035);
-    source.connect(filter); filter.connect(gain); gain.connect(master);
-    source.start(t); source.stop(t + .045);
-    source.onended = () => { source.disconnect(); filter.disconnect(); gain.disconnect(); };
-    const pitch = 110 + Math.random() * 45;
-    tone(pitch, 65, t, .055, .32, "triangle");
+    if (!document.documentElement.classList.contains("qa-building") || !keys.length) return;
+    const source=context.createBufferSource();
+    const gain=context.createGain();
+    source.buffer=keys[Math.floor(Math.random()*keys.length)];
+    source.playbackRate.value=.97+Math.random()*.06;
+    gain.gain.value=.85+Math.random()*.15;
+    source.connect(gain);gain.connect(master);source.start(t);
+    source.onended=()=>{source.disconnect();gain.disconnect();};
     return;
   }
   if (t - lastCue < .045) return;

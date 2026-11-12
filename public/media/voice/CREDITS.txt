@@ -1,0 +1,5 @@
+Rocket demo speech generated locally using Piper TTS (OHF-Voice/piper1-gpl) and the en_US-ljspeech-medium voice.
+Model: https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/ljspeech/medium
+Model card: dataset is the public-domain LJ Speech Dataset, https://keithito.com/LJ-Speech-Dataset/ .
+Only generated audio is shipped. Piper, the model and generation dependencies are not part of the website runtime.
+Keyboard switch samples are original procedural Foley created for this website.

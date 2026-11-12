@@ -69,7 +69,7 @@ Self-hosted Sora is the display voice, with variable weight from 100–800. Manr
 
 ## Layout
 
-Content uses a 1200px maximum width with responsive gutters. The homepage pairs its promise with the assembly workbench; below it, a tilted task wall, ruled automation index, approval diagrams and open process rows change the rhythm. Inner pages use asymmetric headline/copy columns. Below 1040px the hero becomes one continuous composition; mobile sections use 64px vertical padding. Keep a direct discovery action near the workflow examples as well as the opening and closing.
+Content uses a 1200px maximum width with responsive gutters. The homepage pairs its promise with a Rocket conversation window; below it, a tilted task wall, ruled automation index, approval diagrams and open process rows change the rhythm. Inner pages use asymmetric headline/copy columns. The hero stays in two columns from 768px; mobile sections use 64px vertical padding. Keep a direct discovery action near the workflow examples as well as the opening and closing.
 
 ## Elevation & Depth
 
@@ -83,9 +83,9 @@ Buttons use 8px corners, workflow containers 14px, the companion panel 16px. Dot
 
 Primary actions use Off-white, with Electric Purple reserved for high-emphasis discovery actions and approval states. Focus rings use Electric Purple with visible offset. Form errors retain entered values and explain recovery; the contact form prepares an email until its destination is wired.
 
-Rocket starts in the homepage headline and follows the section in view. On narrow screens it perches in the unused header gap after leaving the headline so body text remains unobscured. Quick replies are explicitly scripted and open only by request. Minimise preference is stored locally. Pointer eyes, blinking, mood changes, anonymous cursor handoffs and completion confetti respect reduced motion. Cmd/Ctrl+K opens the conversation; Escape closes it and returns focus.
+Rocket starts alone before the homepage build, then moves into the hero conversation and follows the section in view. On narrow screens it perches in the unused header gap after leaving the headline so body text remains unobscured. Quick replies open only by request, with the single disclosure inside the panel. Minimise preference is stored locally. Pointer eyes, blinking, mood changes, anonymous cursor handoffs and completion confetti respect reduced motion. Cmd/Ctrl+K opens the conversation; Escape closes it and returns focus.
 
-The workflow intro is optional, replayable, skippable, and fails open. Its finished HTML remains useful without JavaScript. Proactive Rocket features stay locally labelled in development.
+The workflow intro is optional, replayable, skippable, and fails open. Its finished HTML remains useful without JavaScript. Unreleased-feature promotion is omitted.
 
 ## Do's and Don'ts
 
@@ -99,3 +99,7 @@ The workflow intro is optional, replayable, skippable, and fails open. Its finis
 The hero is a compact conversation window about the customer’s workday. No decorative background image sits behind it. At tablet widths from 768px it uses a balanced two-column composition; phones stack intentionally. Framed monochrome photos belong to the workday story, paired with enquiry/follow-up and human-decision windows. No unrelated film or abstract machinery is displayed.
 
 Rocket travels between reserved anchors with distinct left, right and center positions. The same character appears at every stop. Main content is never used as an overlay target. Future-feature promotion is omitted from public copy; unconfirmed business facts retain their placeholders.
+
+The sound-led sequence is explicitly started by the visitor. Rocket speaks its command, the cursors build with soft mechanical key sounds, then Rocket moves into the conversation before the person speaks. The reply follows the question, and Rocket’s mouth follows actual audio playback. Section guidance waits for a stable section and does not interrupt the hero or conversation. Mute controls both voice and effects; no keyboard sounds play with Rocket replies.
+
+Controls share quiet tonal hover states, a clear pressed state, 44px touch targets and offset lavender focus rings. Primary labels use off-white on deep purple; selected tabs use dark ink on pale purple.

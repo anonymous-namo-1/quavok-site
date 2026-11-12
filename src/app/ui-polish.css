@@ -1,0 +1,173 @@
+/* Import after experience.css. Control states leave page geometry to its owners. */
+.btn {
+  background: var(--color-purple-dark);
+  color: var(--color-white);
+  border-color: var(--color-purple);
+  box-shadow: none;
+  transition: background-color 140ms ease-out, border-color 140ms ease-out, color 140ms ease-out;
+}
+
+.btn-sm { min-height: 44px; }
+.btn:hover { background: var(--color-purple-dark); border-color: var(--color-purple-soft); box-shadow: none; }
+.btn:active { background: var(--color-charcoal); border-color: var(--color-purple-soft); scale: 1; }
+.btn svg, .btn:hover svg.arrow { translate: none; transition: none; }
+
+.btn-ghost, .hero .btn-ghost, .on-dark .btn-ghost {
+  background: var(--color-paper-2);
+  color: var(--color-white);
+  border: 1px solid var(--color-control-line);
+  padding-inline: 22px;
+  text-decoration: none;
+}
+
+.btn-ghost:hover, .hero .btn-ghost:hover, .on-dark .btn-ghost:hover {
+  background: var(--color-charcoal);
+  border-color: var(--color-purple-soft);
+}
+
+.btn-ghost:active, .hero .btn-ghost:active, .on-dark .btn-ghost:active {
+  background: var(--color-midnight);
+  border-color: var(--color-white);
+}
+
+.day-controls button, .site-sound {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  flex-shrink: 0;
+  border: 1px solid var(--color-control-line);
+  border-radius: 50%;
+  background: var(--color-paper-2);
+  color: var(--color-white);
+  font-variant-numeric: tabular-nums;
+  transition: background-color 140ms ease-out, border-color 140ms ease-out, color 140ms ease-out;
+}
+
+.day-controls button { font-size: 13px; font-weight: 600; }
+.day-controls button:hover, .site-sound:hover { background: var(--color-charcoal); border-color: var(--color-purple-soft); }
+.day-controls button[aria-pressed="true"], .site-sound[aria-pressed="true"] {
+  background: var(--color-purple-dark);
+  border-color: var(--color-purple-soft);
+  color: var(--color-white);
+}
+.day-controls button:active, .site-sound:active { border-color: var(--color-white); }
+
+.day-controls a, .day-listen, .qa-entry-quiet { min-height: 44px; }
+.day-controls a, .day-listen { text-underline-offset: 4px; }
+.day-controls a:hover, .day-listen:hover { color: var(--color-white); text-decoration: underline; }
+
+.tabs, .on-dark .tabs { background: var(--color-paper-2); border-color: var(--color-control-line); }
+.tabs button, .on-dark .tabs button, .rk-suggest button {
+  min-height: 44px;
+  min-width: 44px;
+  color: var(--color-white);
+  box-shadow: none;
+  transition: background-color 140ms ease-out, color 140ms ease-out;
+}
+.rk-suggest button { border-color: var(--color-control-line); background: var(--color-paper-2); }
+.tabs button:hover, .on-dark .tabs button:hover, .rk-suggest button:hover { background: var(--color-charcoal); }
+.tabs button:is([aria-selected="true"], [aria-pressed="true"]),
+.on-dark .tabs button:is([aria-selected="true"], [aria-pressed="true"]),
+.rk-suggest button[aria-pressed="true"] {
+  background: var(--color-purple-soft);
+  color: var(--color-midnight);
+  border-color: var(--color-purple-soft);
+  box-shadow: none;
+}
+.tabs button:active, .rk-suggest button:active { scale: 1; }
+
+.qa-entry-actions .btn { font-weight: 600; }
+.qa-entry-quiet {
+  color: var(--color-white);
+  border-radius: 999px;
+  text-decoration-color: var(--color-control-line);
+  text-decoration-thickness: 1px;
+  transition: background-color 140ms ease-out, text-decoration-color 140ms ease-out;
+}
+.qa-entry-quiet:hover { background: var(--color-card); text-decoration-color: var(--color-purple-soft); }
+.qa-entry-quiet:active { background: var(--color-charcoal); }
+
+.nav-links a { min-height: 44px; display: inline-flex; align-items: center; }
+.nav-links a:hover, .menu-btn:hover { background: var(--color-charcoal); color: var(--color-white); }
+.nav-links a[aria-current="page"] { color: var(--color-purple-soft); background: var(--color-card); }
+.menu-btn { flex-shrink: 0; }
+.menu-btn[aria-expanded="true"] { color: var(--color-purple-soft); background: var(--color-card); }
+
+.faq summary, .rocket-example > summary, .process-details summary {
+  min-height: 44px;
+  color: var(--color-white);
+  text-decoration-color: var(--color-control-line);
+  text-underline-offset: 5px;
+}
+.rocket-example > summary::marker, .process-details summary::marker { color: var(--color-purple-soft); }
+.rocket-example[open] > summary, .process-details[open] summary { color: var(--color-purple-soft); }
+.rocket-example > summary:hover, .process-details summary:hover { text-decoration-color: var(--color-purple-soft); }
+.faq summary .pm { background: var(--color-paper-2); border-color: var(--color-control-line); }
+.faq summary:hover .pm { background: var(--color-charcoal); border-color: var(--color-purple-soft); }
+.faq details[open] summary .pm { background: var(--color-purple-dark); border-color: var(--color-purple-soft); }
+.faq details[open] summary .pm::before, .faq details[open] summary .pm::after { background: var(--color-white); }
+
+.field :is(input, textarea, select), #form textarea[readonly] {
+  color-scheme: dark;
+  background: var(--color-paper-2);
+  color: var(--color-white);
+  border-color: var(--color-control-line);
+  caret-color: var(--color-purple-soft);
+  box-shadow: none;
+  transition: border-color 140ms ease-out, background-color 140ms ease-out;
+}
+.field :is(input, textarea)::placeholder { color: var(--color-mute); opacity: 1; }
+.field :is(input, textarea, select):hover { border-color: var(--color-mute); }
+.field :is(input, textarea, select):focus, #form textarea[readonly]:focus {
+  background: var(--color-card);
+  border-color: var(--color-purple-soft);
+  outline: 2px solid var(--color-purple-soft);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+.field [aria-invalid="true"], .field [aria-invalid="true"]:hover {
+  border-color: var(--color-white);
+  border-style: dashed;
+}
+.field .err { color: var(--color-white); font-weight: 500; }
+.radio-cards label { min-height: 44px; background: var(--color-paper-2); border-color: var(--color-control-line); color: var(--color-white); }
+.radio-cards label:hover { background: var(--color-charcoal); }
+.radio-cards label:has(input:checked) { background: var(--color-card); border-color: var(--color-purple-soft); box-shadow: none; }
+.radio-cards input { accent-color: var(--color-purple-soft); }
+.radio-cards label:has(input:focus-visible) { outline: 2px solid var(--color-purple-soft); outline-offset: 3px; }
+
+:is(.btn, .day-controls button, .day-controls a, .day-listen, .site-sound,
+  .tabs button, .rk-suggest button, .qa-entry-quiet, .menu-btn, .nav-links a,
+  .m-link, .faq summary, .rocket-example > summary, .process-details summary):focus-visible {
+  outline: 2px solid var(--color-purple-soft);
+  outline-offset: 3px;
+}
+
+:is(.btn, .day-controls button, .site-sound, .tabs button, .rk-suggest button,
+  .qa-entry-quiet):is(:disabled, [aria-disabled="true"]) {
+  background: var(--color-card);
+  border-color: var(--color-control-line);
+  color: var(--color-mute);
+  opacity: 1;
+  cursor: not-allowed;
+  box-shadow: none;
+  scale: 1;
+}
+.qa-entry-actions .btn:disabled, .btn[aria-busy="true"] { cursor: progress; }
+.field :is(input, textarea, select):disabled { color: var(--color-mute); cursor: not-allowed; opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn svg, .day-controls button, .day-controls a, .day-listen,
+  .site-sound, .tabs button, .rk-suggest button, .qa-entry-quiet,
+  .nav-links a, .menu-btn, .menu-btn span, .menu-btn span::before, .menu-btn span::after,
+  .faq summary .pm, .faq summary .pm::before, .faq summary .pm::after,
+  .field :is(input, textarea, select), #form textarea[readonly] {
+    transition: none;
+    animation: none;
+  }
+}
+
+.day-controls a { font-size: 12px; }
+.work-window-row strong { font-size: 12px; }
+.day-answer > p { text-wrap: pretty; }

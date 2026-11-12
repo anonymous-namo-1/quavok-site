@@ -26,11 +26,12 @@ declare global {
 }
 
 export const INTRO_DONE_EVENT = "quavok:intro-done";
+export type IntroResult = "complete" | "skipped" | "failed" | "finished";
 
-function purpleDone() {
+function purpleDone(reason:IntroResult = "finished") {
   window.__qaIntroDone = true;
   try {
-    window.dispatchEvent(new Event(INTRO_DONE_EVENT));
+    window.dispatchEvent(new CustomEvent(INTRO_DONE_EVENT,{detail:{reason}}));
   } catch {
     /* ignore */
   }
@@ -466,8 +467,9 @@ export function startIntro(): () => void {
     } catch {
       /* ignore */
     }
+    const held=docEl.classList.contains("qa-pre") || docEl.classList.contains("qa-prologue");
     docEl.classList.remove("qa-pre", "qa-prologue");
-    window.dispatchEvent(new Event("quavok:build-start"));
+    if(held)window.dispatchEvent(new Event("quavok:build-start"));
   }
 
   function view(): View {
@@ -620,6 +622,22 @@ export function startIntro(): () => void {
     };
   }
 
+  function resizeIn(a: Agent, it: Item, d: number): Step {
+    return {
+      d,
+      begin:()=>{a.show=true;a.down=true;a.box.on=true;a.box.handles=true;a.box.ok=false;a.box.follow=null;a.box.hold=0;it.op=1;a.bubble.textContent="Making room for your day.";},
+      run:u=>{
+        const k=easeInOut(u), w=.18+.82*k, h=.08+.92*k;
+        const r=it.home;
+        const visibleHeight=Math.min(r.h,Math.max(72,V.b-r.y-70));
+        it.clip=`inset(0 ${(1-w)*100}% ${(1-visibleHeight/r.h*h)*100}% 0 round 16px)`;
+        a.box.x=r.x;a.box.y=r.y;a.box.w=r.w*w;a.box.h=visibleHeight*h;
+        a.x=r.x+a.box.w;a.y=r.y+a.box.h;
+      },
+      end:()=>{it.clip="";it.op=1;a.down=false;a.box.hold=.18;playSound("place");},
+    };
+  }
+
   function marquee(a: Agent, rect: () => Rect, d: number): Step {
     return {
       d,
@@ -765,6 +783,8 @@ export function startIntro(): () => void {
         else ey = v.b + 60;
         a.free = true;
         a.down = false;
+        a.box.on = false;
+        a.box.follow = null;
       },
       run: (u) => {
         const e = easeInOut(u);
@@ -805,7 +825,7 @@ export function startIntro(): () => void {
 
   /* ---------- finishing ---------- */
 
-  function finish() {
+  function finish(reason:IntroResult = "skipped") {
     if (done) return;
     done = true;
     try {
@@ -833,7 +853,9 @@ export function startIntro(): () => void {
         if (ov.parentNode) ov.parentNode.removeChild(ov);
       }
     }
-    purpleDone();
+    docEl.classList.remove("qa-building");
+    window.dispatchEvent(new Event("quavok:build-end"));
+    window.setTimeout(()=>purpleDone(reason),240);
   }
 
   function onKey(e: KeyboardEvent) {
@@ -846,7 +868,7 @@ export function startIntro(): () => void {
   function onClick(e: MouseEvent) {
     if (done || !overlay) return;
     const t = e.target as Node;
-    if (overlay.contains(t)) return;
+    if (overlay.contains(t) || (t instanceof Element && t.closest(".site-sound"))) return;
     for (const it of items) {
       if (it.op < 0.5 && it.el.contains(t)) {
         e.preventDefault();
@@ -860,6 +882,7 @@ export function startIntro(): () => void {
     if (overlay && !overlay.contains(e.target as Node) && tabAt && now() - tabAt < 500) finish();
   }
 
+  function onPageHide() { finish(); }
   function onHidden() {
     if (document.hidden && started) finish();
   }
@@ -877,7 +900,7 @@ export function startIntro(): () => void {
     document.addEventListener("click", onClick, true);
     document.addEventListener("focusin", onFocus);
     document.addEventListener("visibilitychange", onHidden);
-    window.addEventListener("pagehide", finish);
+    window.addEventListener("pagehide", onPageHide);
     window.addEventListener("resize", onViewport);
     window.addEventListener("orientationchange", onViewport);
     if (vv) {
@@ -893,7 +916,7 @@ export function startIntro(): () => void {
       document.removeEventListener("click", onClick, true);
       document.removeEventListener("focusin", onFocus);
       document.removeEventListener("visibilitychange", onHidden);
-      window.removeEventListener("pagehide", finish);
+      window.removeEventListener("pagehide", onPageHide);
       window.removeEventListener("resize", onViewport);
       window.removeEventListener("orientationchange", onViewport);
       if (vv) {
@@ -977,7 +1000,7 @@ export function startIntro(): () => void {
 
       if (!busy) {
         window.dispatchEvent(new Event("quavok:assembly-complete"));
-        finish();
+        finish("complete");
         return;
       }
       raf = requestAnimationFrame(frame);
@@ -1041,10 +1064,12 @@ export function startIntro(): () => void {
       return;
     }
 
+    const tracked=new Map<Element,Item>();
     const track = (el: Element | null) => {
       if (!el) return null;
+      const existing=tracked.get(el);if(existing)return existing;
       const it = new Item(el as HTMLElement);
-      items.push(it);
+      tracked.set(el,it);items.push(it);
       return it;
     };
 
@@ -1054,6 +1079,7 @@ export function startIntro(): () => void {
 
     const stageFull = !!stage && visibleEnough(stage, 0.72);
     const stagePeek = !!stage && !stageFull && peeking(stage);
+    const conversationShell=(stageFull || stagePeek) && stage?.hasAttribute("data-intro-conversation") ? track(stage) : null;
 
     const nodeEls = stage ? Array.from(stage.querySelectorAll<HTMLElement>("[data-node]")) : [];
     const gateEl = stage?.querySelector<HTMLElement>("[data-gate]") || null;
@@ -1095,13 +1121,14 @@ export function startIntro(): () => void {
         excLine.op = 0;
         edges.push(excLine);
       }
-    } else if (stagePeek && stage) {
+    } else if (stagePeek && stage && !conversationShell) {
       // A phone sees only the top of the stage: no dragging, it fades in late.
       const it = new Item(stage);
       items.push(it);
       late.push(it);
     }
 
+    docEl.classList.add("qa-building");
     // Hand over from the stylesheet hold to inline styles in one go.
     for (const it of items) it.write();
     for (const e of edges) e.write();
@@ -1169,14 +1196,9 @@ export function startIntro(): () => void {
     const pageSteps: Step[] = [];
     for (const { item, essential } of visiblePieces.filter(piece => !piece.item.el.hasAttribute("data-site-art") && !["hero-art", "day-question", "day-answer"].some(className => piece.item.el.classList.contains(className)))) {
       if (essential) item.op = .4;
-      let soundTick = -1;
-      pageSteps.push(move(layout, () => ({ x: clamp(item.home.x + 12, V.l + 12, V.r - 32), y: clamp(item.home.y + 12, V.t + 12, V.b - 80) }), .12));
-      pageSteps.push({ d: .26, begin: () => { layout.down = true; layout.bubble.textContent = "Putting it in place."; }, run: u => {
-        const tick = Math.floor(u * Math.min(16,item.el.textContent?.trim().length || 0));
-        if (tick > soundTick) { soundTick = tick; if (tick) playSound("key"); }
-        item.op = (essential ? .4 : 0) + (essential ? .6 : 1) * easeInOut(u);
-        item.tx = -24 * (1 - easeInOut(u)); item.ty = 8 * (1 - easeInOut(u));
-      }, end: () => { item.op = 1; item.tx = item.ty = 0; layout.down = false; } });
+      const option:DragOpt={gx:.15,gy:.5,off:()=>({dx:-28,dy:14}),pad:3};
+      pageSteps.push(move(layout,()=>grabPoint(item,option,1),.12));
+      pageSteps.push(dragIn(layout,item,option,.32));
     }
     pageSteps.push(leave(layout, .3));
     tracks.push({at: .08, steps: pageSteps, i: 0, acc: 0});
@@ -1190,12 +1212,13 @@ export function startIntro(): () => void {
       const steps = [move(agent, () => grabPoint(message,option,1),.3), dragIn(agent,message,option,.6),leave(agent,.3)];
       tracks.push({at,steps,i:0,acc:0}); total=Math.max(total,at+sum(steps));
     }
-    const artwork = visiblePieces.find(piece => (piece.item.el.classList.contains("hero-art") || piece.item.el.hasAttribute("data-site-art")))?.item;
+    const artwork = conversationShell || visiblePieces.find(piece => (piece.item.el.classList.contains("hero-art") || piece.item.el.hasAttribute("data-site-art")))?.item;
     const artSteps: Step[] = [];
     if (artwork) {
       artSteps.push(move(art, () => ({x: artwork.home.x,y:artwork.home.y}), .35));
-      if (v.w >= 900) artSteps.push(marquee(art, boxAround(artwork,6), .35));
-      artSteps.push(popIn([artwork], .55));
+      artSteps.push(resizeIn(art,artwork,.75));
+      // Window chrome belongs to the shell rather than a separate fade.
+      if(conversationShell)visiblePieces.filter(piece=>piece.item.el.hasAttribute("data-site-art")).forEach(piece=>piece.item.op=1);
     }
     artSteps.push(popIn(sections, 1.2), leave(art, .35));
     tracks.push({at: .55, steps: artSteps, i: 0, acc: 0});
@@ -1210,7 +1233,7 @@ export function startIntro(): () => void {
       return { x: r.x, y: r.y };
     }, 0.4));
     sCopy.push(marquee(copy, h1Box, 0.4));
-    sCopy.push(typeText(copy, h1Typer, nodes.length ? 1.35 : 1.5, true));
+    sCopy.push(typeText(copy, h1Typer, nodes.length ? 1.35 : 2, true));
     if (title && titleTyper) {
       const tt = titleTyper;
       sCopy.push(move(copy, () => ({ x: title!.home.x, y: title!.home.y + title!.home.h }), 0.3));
@@ -1335,15 +1358,15 @@ export function startIntro(): () => void {
       } catch {
         /* ignore */
       }
-      watchdog = window.setTimeout(finish, (total + 2.5) * 1000);
+      watchdog = window.setTimeout(()=>finish("failed"), (total + 2.5) * 1000);
       stall = window.setInterval(() => {
-        if (lastFrame && now() - lastFrame > 1500) finish();
+        if (lastFrame && now() - lastFrame > 1500) finish("failed");
       }, 500);
       lastFrame = 0;
       raf = requestAnimationFrame(frame);
       // If no frame arrives at all, do not leave the hero empty.
       window.setTimeout(() => {
-        if (!lastFrame) finish();
+        if (!lastFrame) finish("failed");
       }, 1500);
     }
 

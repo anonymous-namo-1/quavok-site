@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { guideForSection, playVoice, stopVoice, voiceForText, voiceOwner } from "@/lib/voice";
+import { soundEnabled } from "@/lib/sound";
 
 const STORAGE_KEY = "quavok-rocket-minimised";
 const INTRO = "Hi, I’m Rocket. What would you like to know?";
@@ -27,36 +29,18 @@ export function Companion() {
   const [mood, setMood] = useState<Mood>("curious");
   const [reply, setReply] = useState(INTRO);
   const [hint, setHint] = useState("");
-  const [speechAvailable, setSpeechAvailable] = useState(false);
-  const [speaking, setSpeaking] = useState(false);
-  const [storySpeaking, setStorySpeaking] = useState(false);
-  const [listening, setListening] = useState(false);
-  const [launching, setLaunching] = useState(false);
+  const speechAvailable = true;
+  const [speaking,setSpeaking] = useState(false);
+  const [storySpeaking,setStorySpeaking] = useState(false);
+  const [listening,setListening] = useState(false);
+  const [launching,setLaunching] = useState(false);
   const callTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const utterance = useRef<SpeechSynthesisUtterance | null>(null);
-  const stopSpeech = () => {
-    if (!utterance.current) return;
-    utterance.current.onend = null;
-    utterance.current.onerror = null;
-    window.speechSynthesis.cancel();
-    utterance.current = null;
-    setSpeaking(false);
-  };
-  const speakText = (text: string) => {
-    if (utterance.current) { stopSpeech(); return; }
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "en";
-    speech.rate = .98;
-    speech.onend = speech.onerror = () => { utterance.current = null; setSpeaking(false); };
-    utterance.current = speech;
-    setSpeaking(true);
-    window.speechSynthesis.speak(speech);
+  const stopSpeech = () => stopVoice("chat");
+  const speakText = (text:string) => {
+    if(voiceOwner()==="chat"){stopVoice("chat");return;}
+    const id=voiceForText(text);if(id)void playVoice(id,{owner:"chat",force:true});
   };
   const readReply = () => speakText(reply);
-  useEffect(() => {
-    setSpeechAvailable("speechSynthesis" in window && "SpeechSynthesisUtterance" in window);
-    return () => { if (utterance.current) { utterance.current.onend = null; utterance.current.onerror = null; window.speechSynthesis.cancel(); } };
-  }, []);
   const shell = useRef<HTMLElement>(null);
   const face = useRef<HTMLButtonElement>(null);
   const firstQuestion = useRef<HTMLButtonElement>(null);
@@ -68,6 +52,7 @@ export function Companion() {
     setChat(next);
     setHint("");
     if (next !== "open") stopSpeech();
+    else {stopVoice("demo");stopVoice("guide");if(soundEnabled())void playVoice("greeting",{owner:"chat"});}
     try {
       if (next === "minimised") localStorage.setItem(STORAGE_KEY, "1");
       else localStorage.removeItem(STORAGE_KEY);
@@ -143,6 +128,7 @@ export function Companion() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       const prologue = document.documentElement.classList.contains("qa-prologue");
+      const building = document.documentElement.classList.contains("qa-building");
       const originRect = document.getElementById("rocket-origin")?.getBoundingClientRect();
       const mobileOpen = width < 960 && current.current === "open";
       const visiblePerch = Array.from(document.querySelectorAll<HTMLElement>("[data-rocket-perch],#hero-rocket-perch,#rocket-perch"))
@@ -150,16 +136,16 @@ export function Companion() {
         .filter(({rect}) => rect.top > 100 && rect.bottom < height - 70)
         .sort((a,b) => Math.abs(a.rect.top + a.rect.height / 2 - height * .45) - Math.abs(b.rect.top + b.rect.height / 2 - height * .45))[0];
       const perchRect = visiblePerch?.rect;
-      const perched = !mobileOpen && current.current !== "minimised" && !!perchRect && perchRect.top > 100 && perchRect.bottom < height - 70;
+      const perched = !building && !mobileOpen && current.current !== "minimised" && !!perchRect && perchRect.top > 100 && perchRect.bottom < height - 70;
       const size = prologue ? 96 : perched && perchRect ? perchRect.width : 48;
-      const docked = !mobileOpen && current.current !== "minimised" && !!originRect && originRect.top >= 84 && originRect.bottom < height;
+      const docked = !building && !mobileOpen && current.current !== "minimised" && !!originRect && originRect.top >= 84 && originRect.bottom < height;
       const headerPerch = width < 960 && !docked && !perched;
       const sectionRect = section?.getBoundingClientRect();
       const logoRect = document.querySelector(".site-header .logo")?.getBoundingClientRect();
       const soundRect = document.querySelector(".site-sound")?.getBoundingClientRect();
       const headerX = logoRect && soundRect ? logoRect.right + (soundRect.left - logoRect.right - 48) / 2 : width - 120;
-      const x = prologue ? width / 2 - 48 : perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? Math.max(8,headerX) : width - 72;
-      const y = prologue ? height / 2 - 90 : perched && perchRect ? perchRect.top : docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
+      const x = prologue ? width / 2 - 48 : building ? (width < 960 ? Math.max(8,headerX) : width - 72) : perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? Math.max(8,headerX) : width - 72;
+      const y = prologue ? height / 2 - 90 : building ? (width < 960 ? 9 : 110) : perched && perchRect ? perchRect.top : docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
       const bubbleWidth = Math.min(300, width - 24);
       const bubbleLeft = Math.max(12 - x, Math.min(0, width - 12 - x - bubbleWidth));
       const above = !headerPerch && y > height - (perched ? 420 : 366);
@@ -210,15 +196,34 @@ export function Companion() {
       if (!fine.matches) react("curious");
       schedule();
     };
+    let guideTimer:ReturnType<typeof setTimeout>;
+    let narrationKey="";
+    const narrated=new Set<string>();
+    const queueGuide=()=>{
+      clearTimeout(guideTimer);
+      guideTimer=setTimeout(()=>{
+        if(!soundEnabled()||document.hidden||current.current!=="closed"||voiceOwner()||document.documentElement.matches(".qa-prologue,.qa-building"))return;
+        const id=guideForSection(narrationKey);
+        if(!id||narrated.has(narrationKey))return;
+        narrated.add(narrationKey);void playVoice(id,{owner:"guide"});
+      },850);
+    };
     const visible = new Set<Element>();
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => { if (entry.isIntersecting) visible.add(entry.target); else visible.delete(entry.target); });
-      const next = sections.find(candidate => visible.has(candidate));
+      const next = sections.filter(candidate=>visible.has(candidate)).sort((a,b)=>Math.abs(a.getBoundingClientRect().top-innerHeight*.25)-Math.abs(b.getBoundingClientRect().top-innerHeight*.25))[0];
       if (next && next !== section) {
-        section = next;
-        const label = next.id || next.getAttribute("aria-labelledby") || "";
-        const text = SECTION_HINTS[label];
-        if (text && Date.now() - lastHint > 16000) { lastHint = Date.now(); whisper(text); }
+        stopVoice("guide");section=next;
+        narrationKey=next.tagName==="FOOTER"?"footer":next.id||next.getAttribute("aria-labelledby")||"";
+        if(narrationKey==="page-title"){
+          const pathname=location.pathname;
+          if(/services|solutions/.test(pathname))narrationKey="automate";
+          else if(/how-it-works/.test(pathname))narrationKey="how";
+          else if(/contact/.test(pathname))narrationKey="cta-title";
+          else if(/rocket/.test(pathname))narrationKey="rocket";
+          else if(/about/.test(pathname))narrationKey="problem-title";
+        }
+        queueGuide();
       }
       schedule();
     }, { rootMargin: "-20% 0px -45% 0px", threshold: 0 });
@@ -230,7 +235,15 @@ export function Companion() {
       if (!(event instanceof CustomEvent) || typeof event.detail !== "string") return;
       stopSpeech(); wake("happy"); whisper(event.detail);
     };
-    const quiet = () => { if (document.hidden) { stopSpeech(); setStorySpeaking(false); } };
+    const quiet = () => { if (document.hidden) { stopVoice(); clearTimeout(guideTimer);setStorySpeaking(false); } else queueGuide(); };
+    const voiceChanged=(event:Event)=>{
+      if(!(event instanceof CustomEvent)||typeof event.detail?.active!=="boolean")return;
+      setSpeaking(event.detail.active&&event.detail.role==="rocket");
+      if(event.detail.active)wake(event.detail.role==="person"?"curious":"happy");
+      else queueGuide();
+    };
+    const audioReady=()=>{narrated.delete(narrationKey);queueGuide();};
+    const soundChanged=()=>{if(soundEnabled())queueGuide();else{clearTimeout(guideTimer);stopVoice();}};
     const called = () => {
       setListening(true); wake("curious");
       if (callTimer.current) clearTimeout(callTimer.current);
@@ -238,7 +251,7 @@ export function Companion() {
     };
     const talking = (event: Event) => { if (event instanceof CustomEvent && typeof event.detail === "boolean") { setStorySpeaking(event.detail); if (event.detail) wake("happy"); } };
     const say = (event: Event) => {
-      if (!(event instanceof CustomEvent) || typeof event.detail !== "string" || !("speechSynthesis" in window)) return;
+      if (!(event instanceof CustomEvent) || typeof event.detail !== "string") return;
       speakText(event.detail); wake("happy");
     };
     const sequence = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
@@ -250,7 +263,7 @@ export function Companion() {
       codeIndex = event.key === sequence[codeIndex] ? codeIndex + 1 : event.key === sequence[0] ? 1 : 0;
       if (codeIndex === sequence.length) { codeIndex = 0; wake("excited"); whisper("Secret handshake accepted."); }
     };
-    const pageShow = () => { restorePreference(); schedule(); };
+    const pageShow = (event:PageTransitionEvent) => { if(event.persisted)restorePreference(); schedule(); };
     const resizeObserver = new ResizeObserver(schedule);
     resizeObserver.observe(document.body);
     window.addEventListener("pageshow", pageShow);
@@ -260,6 +273,10 @@ export function Companion() {
     window.addEventListener("resize", schedule, { passive: true });
     window.addEventListener("quavok:open-rocket", open);
     window.addEventListener("quavok:build-start", buildStarted);
+    window.addEventListener("quavok:build-end",schedule);
+    window.addEventListener("quavok:voice-state",voiceChanged);
+    window.addEventListener("quavok:audio-ready",audioReady);
+    window.addEventListener("quavok:sound-change",soundChanged);
     window.addEventListener("quavok:rocket-position", schedule);
     window.addEventListener("quavok:assembly-complete", celebrate);
     window.addEventListener("quavok:rocket-reaction", reaction);
@@ -280,7 +297,12 @@ export function Companion() {
       window.removeEventListener("pointermove", pointer); window.removeEventListener("pointerdown", outside);
       window.removeEventListener("scroll", scroll); window.removeEventListener("resize", schedule);
       window.removeEventListener("quavok:open-rocket", open);
-      window.removeEventListener("quavok:build-start", buildStarted); window.removeEventListener("quavok:rocket-position", schedule);
+      window.removeEventListener("quavok:build-start", buildStarted);
+      window.removeEventListener("quavok:build-end",schedule);
+      window.removeEventListener("quavok:voice-state",voiceChanged);
+      window.removeEventListener("quavok:audio-ready",audioReady);
+      window.removeEventListener("quavok:sound-change",soundChanged);
+      clearTimeout(guideTimer);stopVoice(); window.removeEventListener("quavok:rocket-position", schedule);
       window.removeEventListener("quavok:assembly-complete", celebrate);
       window.removeEventListener("quavok:rocket-reaction", reaction);
       window.removeEventListener("quavok:rocket-say", say);
@@ -304,7 +326,7 @@ export function Companion() {
       <div className="rocket-chat-heading"><strong>Rocket</strong><div className="rocket-chat-actions">{speechAvailable && <button type="button" onClick={readReply} aria-label={speaking ? "Stop reading Rocket’s answer" : "Read Rocket’s answer aloud"} aria-pressed={speaking}><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z" />{speaking ? <path d="m17 9 5 6m0-6-5 6" /> : <path d="M17 8q5 4 0 8M20 5q7 7 0 14" />}</svg></button>}<button type="button" onClick={close} aria-label="Close Rocket chat"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div></div>
       <div className="rocket-chat-scroll">
         <p ref={answer} className="rocket-chat-reply" aria-live="polite" aria-atomic="true">{reply}</p>
-        <div className="rocket-chat-questions">{QUESTIONS.map((question, index) => <button key={question.label} ref={index === 0 ? firstQuestion : undefined} type="button" onClick={() => { stopSpeech(); setReply(question.answer); setMood("happy"); answer.current?.parentElement?.scrollTo({ top: 0 }); }}>{question.label}</button>)}<button type="button" onClick={showDemo}>Show the demo</button></div>
+        <div className="rocket-chat-questions">{QUESTIONS.map((question, index) => <button key={question.label} ref={index === 0 ? firstQuestion : undefined} type="button" onClick={() => { stopSpeech(); setReply(question.answer); if(soundEnabled())speakText(question.answer); setMood("happy"); answer.current?.parentElement?.scrollTo({ top: 0 }); }}>{question.label}</button>)}<button type="button" onClick={showDemo}>Show the demo</button></div>
         <div className="rocket-chat-links"><a href="/contact/">Discuss your workflow</a></div>
         <p className="rocket-chat-disclosure">Demo conversation; the real Rocket runs inside your automations.</p>
         <button className="rocket-chat-minimise" type="button" onClick={() => { changeChat("minimised"); face.current?.focus({ preventScroll: true }); }}>Minimise Rocket</button>

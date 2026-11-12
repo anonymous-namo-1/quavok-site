@@ -7,7 +7,7 @@ Created for Quavok with the built-in image-generation tool. No reference-site il
 - `public/media/paper-orchestration.webp`: 1536×1024 compressed still, used for the hero background and video poster.
 - `public/media/paper-orchestration.mp4`: 960×640, 24fps, 10 seconds, H.264, no audio. A slow, seamless camera-drift study of the original still, not a recording of a real automation.
 
-Original generated PNG retained outside the repo at `/home/box/.codex/generated_images/01a1cc95-c0ca-7af2-bf45-ba8884453b35/exec-aefc6c14-5a5c-481c-aa79-0fa4e170b3d3.png`. The website references only the two project files above.
+Original generated PNG retained outside the repo at `/home/box/.codex/generated_images/01a1cc95-c0ca-7af2-bf45-ba8884453b35/exec-aefc6c14-5a5c-481c-aa79-0fa4e170b3d3.png`. These retired files are no longer referenced by the website.
 
 ## Final generation prompt
 
@@ -21,7 +21,7 @@ Playback is controlled by viewport intersection, document visibility, intro comp
 
 ## Hex interaction reference
 
-[Hex](https://anoma.ly/hex/) was inspected in the browser, including its “Play the demo with sound” control. The character/demo uses canvas and authored audio cues. Quavok borrows the opt-in audio pattern: Rocket can read its visible scripted answer through browser speech synthesis. No Hex images, code, voices or sound files were copied. No microphone access or AI backend is introduced.
+[Hex](https://anoma.ly/hex/) was inspected in the browser, including its “Play the demo with sound” control. The character/demo uses canvas and authored audio cues. Quavok borrows the opt-in audio pattern. Rocket reads authored lines using bundled clips; see `audio-assets.md`. No Hex images, code, voices or sound files were copied. No microphone access or AI backend is introduced.
 
 ## Current workday photographs
 

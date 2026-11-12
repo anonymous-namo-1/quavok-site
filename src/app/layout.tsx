@@ -8,6 +8,8 @@ import "./rocket-companion.css";
 import "./home-pass.css";
 import "./palette.css";
 import "./assembly.css";
+import "./experience.css";
+import "./ui-polish.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Companion } from "@/components/Companion";

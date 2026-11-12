@@ -71,15 +71,15 @@ Quavok is an early-stage, two-founder company working toward its first deploymen
 
 The resting palette is monochrome: Midnight `#101010`, Charcoal `#282828`, Surface `#181818`, Card `#202020`, Off-white `#f0f0f0`, muted text `#b8b8b8`. Purple accents primary actions, focus and Rocket. Six distinct colors are reserved for the anonymous cursor-build performance.
 
-The first visit opens with Rocket on an empty screen. Its command starts six cursors assembling actual page elements, followed by the new-leads question and Rocket’s authored reply. Skip, Escape, keyboard entry, reduced motion, error recovery and the watchdog all release the finished page. No scroll hijack or backend is involved.
+The first visit opens with Rocket on an empty screen. “Start with sound” plays its command before six cursors assemble actual page elements. “Continue silently” follows the same visual story. When Rocket reaches the conversation window, the person asks first, then Rocket answers. Skip, Escape, reduced motion, error recovery and watchdogs release the finished page. No scroll hijack or backend is involved.
 
-Rocket is one round character with two expressive eyes. It travels between reserved page anchors beside the hero, workflow examples, photo windows, process, CTA and footer. Mobile conversation bubbles move to a reserved header area. Click or Cmd/Ctrl+K opens the compact bubble; close, outside click and Escape restore focus. Only minimisation is remembered. Spoken replies are optional and browser-provided.
+Rocket is one round character with two expressive eyes. It travels between reserved page anchors beside the hero, workflow examples, photo windows, process, CTA and footer. Mobile conversation bubbles move to a reserved header area. Click or Cmd/Ctrl+K opens the compact bubble; close, outside click and Escape restore focus. Only minimisation is remembered. Spoken replies use bundled, authored audio clips, without a speech service or microphone.
 
 The homepage uses purpose-led black-and-white photos in framed windows: routine follow-ups are handled while people focus on craft and decisions. There is no decorative film or abstract background machine. `WorkWindows.tsx` owns the photo compositions. Asset provenance and full generation prompts are in `research/visual-assets.md`.
 
 Type is self-hosted Sora and Manrope. OFL licences and build-only OG fonts are in `src/fonts/`. `npm run build` creates the matching OG image before exporting.
 
-`SoundControl.tsx` and `lib/sound.ts` provide one shared browser AudioContext for mechanical typing, placement, selection, Rocket and reply cues. Sound is opt-in and remembered. “Build with sound” starts the opening sequence after audio is unlocked. The header control mutes effects; hidden tabs pause them.
+`SoundControl.tsx` and `lib/sound.ts` share one AudioContext for four original mechanical-key samples and restrained UI cues. Keyboard sounds run only while the website is being built. `lib/voice.ts` owns one shared audio player: the opening command, question, answer and section guidance run sequentially; chat takes priority. Scrolling away cancels stale narration. Sound is opt-in and remembered, and the header control mutes both voice and effects. Hidden tabs stop playback. The voice catalogue, asset provenance and regeneration notes are in `research/audio-assets.md`.
 
 Public copy omits repetitive demo badges and unreleased-feature promotion. The companion retains its single demo disclosure. Contact form and unconfirmed business placeholders remain honest and visible.
 

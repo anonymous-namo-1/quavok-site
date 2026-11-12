@@ -41,19 +41,19 @@ export default function Home() {
         <div className="hero-spotlight" aria-hidden="true" />
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <h1 id="hero-title" className="t-hero">
-              <span className="hero-opening" data-site-piece>Hand us the busywork.</span>
-              <span className="hero-promise" data-intro-type data-intro-hold>Focus on what actually matters.</span>
+            <h1 id="hero-title" className="t-hero" data-intro-type data-intro-hold>
+              <span className="hero-opening">Hand us the busywork.</span>
+              <span className="hero-promise">Focus on what actually matters.</span>
             </h1>
             <p className="t-lead mt-7 max-w-[54ch]" data-site-piece data-site-essential>
               Custom AI automation. Designed, deployed and run for you.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3" data-site-piece data-site-essential>
-              <Magnetic href={CTA.discuss.href} className="btn btn-primary">
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Magnetic href={CTA.discuss.href} className="btn btn-primary" data-site-piece data-site-essential>
                 {CTA.discuss.label}
                 <ArrowIcon />
               </Magnetic>
-              <a className="btn btn-ghost" href={CTA.automate.href}>
+              <a className="btn btn-ghost" href={CTA.automate.href} data-site-piece data-site-essential>
                 {CTA.automate.label}
               </a>
             </div>

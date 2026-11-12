@@ -20,6 +20,8 @@ const types = {
   ".png": "image/png",
   ".webp": "image/webp",
   ".mp4": "video/mp4",
+  ".mp3": "audio/mpeg",
+  ".wav": "audio/wav",
   ".ico": "image/x-icon",
   ".woff2": "font/woff2",
 };
@@ -51,7 +53,7 @@ createServer(async (req, res) => {
   try {
     const body = await readFile(path);
     const headers = { "Content-Type": types[extname(path)] || "application/octet-stream", "Content-Length": body.length };
-    if (hit && extname(path) === ".mp4" && req.headers.range) {
+    if (hit && [".mp4", ".mp3", ".wav"].includes(extname(path)) && req.headers.range) {
       const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range);
       const start = range?.[1] ? Number(range[1]) : Math.max(0, body.length - Number(range?.[2] || 0));
       const end = range?.[1] && range[2] ? Math.min(Number(range[2]), body.length - 1) : body.length - 1;

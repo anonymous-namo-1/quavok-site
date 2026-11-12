@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ComponentPropsWithoutRef } from "react";
 
 // The one magnetic control on the site: a slight pull toward a fine pointer.
 // Touch, reduced motion and the running intro get a plain button.
-export function Magnetic({ href, className = "", children }: { href: string; className?: string; children: ReactNode }) {
+export function Magnetic({ href, className = "", children, ...props }: ComponentPropsWithoutRef<"a"> & { href: string }) {
   const ref = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export function Magnetic({ href, className = "", children }: { href: string; cla
   }, []);
 
   return (
-    <a ref={ref} href={href} className={`magnetic ${className}`}>
+    <a {...props} ref={ref} href={href} className={`magnetic ${className}`}>
       <span className="magnetic-inner">{children}</span>
     </a>
   );
