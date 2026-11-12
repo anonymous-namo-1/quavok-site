@@ -23,7 +23,7 @@ export default function PrivacyPage() {
             <h2 className="t-h3 pt-4 text-ink">This website</h2>
             <p>
               This is a static website. It has no accounts, no cookies of our own and no analytics trackers. The hosting provider may keep standard server
-              logs. Rocket’s minimised preference is saved in your browser’s localStorage on this device. You can restore Rocket with the corner button or clear the preference by clearing this site’s browser storage.
+              logs. Rocket’s minimised preference and your sound-effects setting are saved in your browser’s localStorage on this device. You can restore Rocket with the corner button or clear the preference by clearing this site’s browser storage.
             </p>
             <p>
               Rocket does not access your business systems from this website. The optional read-aloud control uses your browser’s speech service.

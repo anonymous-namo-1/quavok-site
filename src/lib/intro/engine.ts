@@ -14,6 +14,7 @@
    headline and the workflow name, and Review selects the finished stage and
    stamps "Scope approved". */
 
+import { playSound } from "@/lib/sound";
 import { INTRO_KEY } from "./boot";
 
 type BootState = { forced: boolean; t: number };
@@ -228,6 +229,7 @@ class Typer {
   map: CharMap | null = null;
   key = "";
   dirty = true;
+  soundIndex = 0;
   constructor(it: Item) {
     this.it = it;
   }
@@ -308,6 +310,9 @@ class Typer {
   }
   // Show the first n characters and return where the caret goes.
   typeTo(n: number): Rect {
+    const nextIndex = Math.floor(n);
+    if (nextIndex > this.soundIndex) playSound("key");
+    this.soundIndex = nextIndex;
     const cm = this.sync();
     const it = this.it;
     const h = it.home;
@@ -380,7 +385,7 @@ function makeAgent(color: string, stamp?: string, chatter?: string): Agent {
   const path = document.createElementNS(SVGNS, "path");
   path.setAttribute("d", "M.75.55.75 15.5 5.15 11.85 8.45 18.7 10.95 17.45 7.6 10.65 14.05 10.65Z");
   path.setAttribute("fill", color);
-  path.setAttribute("stroke", "#141219");
+  path.setAttribute("stroke", "#101010");
   path.setAttribute("stroke-width", "1.15");
   path.setAttribute("stroke-linejoin", "round");
   svg.appendChild(path);
@@ -576,6 +581,7 @@ export function startIntro(): () => void {
   }
 
   function dragIn(a: Agent, it: Item, opt: DragOpt, d: number): Step {
+    let tick = -1;
     return {
       d,
       begin: () => {
@@ -591,6 +597,8 @@ export function startIntro(): () => void {
         a.bubble.textContent = label ? `${label}. In its place.` : "A place for everything.";
       },
       run: (u) => {
+        const index = Math.floor(u * Math.min(16,it.el.textContent?.trim().length || 0));
+        if (index > tick) { tick = index; if (index) playSound("key"); }
         const k = 1 - easeBack(u);
         const o = opt.off(it.home);
         it.tx = o.dx * k;
@@ -604,6 +612,7 @@ export function startIntro(): () => void {
         it.tx = 0;
         it.ty = 0;
         it.op = 1;
+        playSound("place");
         a.down = false;
         a.box.dash = false;
         a.box.hold = 0.2;
@@ -1160,8 +1169,11 @@ export function startIntro(): () => void {
     const pageSteps: Step[] = [];
     for (const { item, essential } of visiblePieces.filter(piece => !["hero-art", "day-question", "day-answer"].some(className => piece.item.el.classList.contains(className)))) {
       if (essential) item.op = .4;
+      let soundTick = -1;
       pageSteps.push(move(layout, () => ({ x: clamp(item.home.x + 12, V.l + 12, V.r - 32), y: clamp(item.home.y + 12, V.t + 12, V.b - 80) }), .12));
       pageSteps.push({ d: .26, begin: () => { layout.down = true; layout.bubble.textContent = "Putting it in place."; }, run: u => {
+        const tick = Math.floor(u * Math.min(16,item.el.textContent?.trim().length || 0));
+        if (tick > soundTick) { soundTick = tick; if (tick) playSound("key"); }
         item.op = (essential ? .4 : 0) + (essential ? .6 : 1) * easeInOut(u);
         item.tx = -24 * (1 - easeInOut(u)); item.ty = 8 * (1 - easeInOut(u));
       }, end: () => { item.op = 1; item.tx = item.ty = 0; layout.down = false; } });

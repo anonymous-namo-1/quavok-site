@@ -17,8 +17,8 @@ export function GET() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#2b2930",
-          color: "#e8dcc4",
+          background: "#282828",
+          color: "#f0f0f0",
           padding: "72px 80px",
           fontFamily: "Manrope",
         }}
@@ -31,7 +31,7 @@ export function GET() {
           <div style={{ fontFamily: "Sora", fontSize: 68, fontWeight: 700, letterSpacing: -3, lineHeight: 1.02, maxWidth: 980 }}>
             Focus on what actually matters.
           </div>
-          <div style={{ fontSize: 30, color: "#e8dcc4" }}>Hand us the busywork. We design, deploy and run the automation.</div>
+          <div style={{ fontSize: 30, color: "#f0f0f0" }}>Hand us the busywork. We design, deploy and run the automation.</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           {steps.map((s, i) => (
@@ -41,16 +41,16 @@ export function GET() {
                   display: "flex",
                   padding: "12px 18px",
                   borderRadius: 14,
-                  background: i === 3 ? "#1d1b22" : "#1f1d24",
-                  color: i === 3 ? "#8b5cf6" : "#e8dcc4",
-                  border: "2px solid #e8dcc4",
+                  background: i === 3 ? "#1c1c1c" : "#202020",
+                  color: i === 3 ? "#8b5cf6" : "#f0f0f0",
+                  border: "2px solid #f0f0f0",
                   fontSize: 24,
                   fontWeight: 600,
                 }}
               >
                 {s}
               </div>
-              {i < steps.length - 1 ? <div style={{ width: 28, height: 2, background: "#2b2930", display: "flex" }} /> : null}
+              {i < steps.length - 1 ? <div style={{ width: 28, height: 2, background: "#282828", display: "flex" }} /> : null}
             </div>
           ))}
         </div>

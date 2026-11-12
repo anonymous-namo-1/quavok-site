@@ -44,7 +44,7 @@
       "refersTo": "button-purple",
       "description": "Primary discovery action in the header and hero",
       "html": "<button class=\"q-button\">Discuss Your Workflow \u2192</button>",
-      "css": ".q-button { background:#593b9d; color:#e8dcc4; min-height:50px; padding:12px 22px; border:0; border-radius:8px; font:600 15px Manrope,sans-serif; cursor:pointer; } .q-button:hover { background:#e8dcc4; } .q-button:focus-visible { outline:2px solid #8b5cf6; outline-offset:4px; }"
+      "css": ".q-button { background:#593b9d; color:#f0f0f0; min-height:50px; padding:12px 22px; border:0; border-radius:8px; font:600 15px Manrope,sans-serif; cursor:pointer; } .q-button:hover { background:#f0f0f0; } .q-button:focus-visible { outline:2px solid #8b5cf6; outline-offset:4px; }"
     }
   ],
   "narrative": {
@@ -52,7 +52,7 @@
     "overview": "Dark editorial confidence with visible workflow handoffs and a warm scripted guide.",
     "keyCharacteristics": [
       "People-first promise",
-      "Charcoal and sand colour fields",
+      "Charcoal and off-white colour fields",
       "Approval-led diagrams",
       "Traveling scripted Rocket"
     ],
@@ -64,7 +64,7 @@
       }
     ],
     "dos": [
-      "Use dark surfaces and readable sand text",
+      "Use dark surfaces and readable off-white text",
       "Show human approval and exception routes"
     ],
     "donts": [

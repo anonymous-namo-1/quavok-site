@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { CTA, NAV } from "@/lib/site";
+import { SoundControl } from "./SoundControl";
 import { ArrowIcon } from "./Icon";
 
 // Plain <a> links on purpose: each page is its own static document, which
@@ -53,6 +54,7 @@ export function SiteHeader() {
           {CTA.discuss.label}
           <ArrowIcon />
         </a>
+        <SoundControl />
         <button
           ref={btnRef}
           type="button"

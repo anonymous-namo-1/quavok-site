@@ -1,23 +1,25 @@
 /* Charcoal, Sand and Electric Purple. Deep Purple is Electric Purple × 0.64. */
 .btn, .btn-primary, .btn-purple, .hero .btn-primary, .site-header .btn-primary, .mobile-menu .btn-primary {
-  --btn-bg: var(--color-purple-dark); --btn-fg: var(--color-sand); --btn-bd: var(--color-purple);
+  --btn-bg: var(--color-purple-dark); --btn-fg: var(--color-white); --btn-bd: var(--color-purple);
   border-radius: 999px;
 }
-.btn:hover, .btn-primary:hover, .btn-purple:hover { --btn-bg: #493081; --btn-fg: var(--color-sand); --btn-bd: var(--color-purple-soft); }
-.btn-ghost, .hero .btn-ghost { --btn-bg: transparent; --btn-fg: var(--color-sand); --btn-bd: #716f76; }
-.btn-ghost:hover { --btn-bg: #2b2930; --btn-fg: var(--color-sand); }
+.btn:hover, .btn-primary:hover, .btn-purple:hover { --btn-bg: #493081; --btn-fg: var(--color-white); --btn-bd: var(--color-purple-soft); }
+.btn-ghost, .hero .btn-ghost { --btn-bg: transparent; --btn-fg: var(--color-white); --btn-bd: #707070; }
+.btn-ghost:hover { --btn-bg: #282828; --btn-fg: var(--color-white); }
 .hero-spotlight { background: radial-gradient(ellipse 24% 46% at 50% 50%, #8b5cf680, #8b5cf638 45%, transparent 78%); }
 .hero .g-gate, .assembly-finale, .qa-box.qa-ok b, .stamp, .g-gate,
 .rk-suggest button[aria-pressed="true"], .g-node[data-hot="true"] .n-num, button.g-node[aria-pressed="true"] .n-num {
-  background: var(--color-purple-dark); color: var(--color-sand); border-color: var(--color-purple-soft);
+  background: var(--color-purple-dark); color: var(--color-white); border-color: var(--color-purple-soft);
 }
 .rocket-face { background: var(--color-purple); }
 .rocket-face:hover { background: var(--color-purple-soft); }
-.rocket-face-tag { background: var(--color-purple-dark); color: var(--color-sand); }
-.rocket-eyes i { background: var(--color-sand); }
+.rocket-face-tag { background: var(--color-purple-dark); color: var(--color-white); }
+.rocket-eyes i { background: var(--color-white); }
 .rocket-chat-links a, .scope-sticker, .process-ribbon, .text-purple, .nav-links a[aria-current="page"] { color: var(--color-purple-soft); }
-.hero-promise, .page-hero.editorial-hero .t-page, .editorial-closing .closing-inner .t-h2 { color: var(--color-sand); }
-.rocket-confetti i:nth-child(2n) { background: var(--color-sand); }
+.hero-promise, .page-hero.editorial-hero .t-page, .editorial-closing .closing-inner .t-h2 { color: var(--color-white); }
+.rocket-confetti i:nth-child(2n) { background: var(--color-white); }
 .rocket-confetti i:nth-child(3n) { background: var(--color-purple-soft); }
-::selection { background: var(--color-purple-dark); color: var(--color-sand); }
-.skip-link { background: var(--color-purple-dark); color: var(--color-sand); }
+::selection { background: var(--color-purple-dark); color: var(--color-white); }
+.skip-link { background: var(--color-purple-dark); color: var(--color-white); }
+/* Monochrome at rest. Purple carries action and character, not whole surfaces. */
+.hero-spotlight { background:radial-gradient(ellipse 24% 46% at 50% 50%,#8b5cf62b,#8b5cf610 45%,transparent 78%); }

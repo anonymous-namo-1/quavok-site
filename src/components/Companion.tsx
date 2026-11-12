@@ -151,7 +151,10 @@ export function Companion() {
       const docked = !mobileOpen && current.current !== "minimised" && !!originRect && originRect.top >= 84 && originRect.bottom < height;
       const headerPerch = width < 960 && !docked && !perched;
       const sectionRect = section?.getBoundingClientRect();
-      const x = prologue ? width / 2 - 48 : perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? width - 120 : width - 72;
+      const logoRect = document.querySelector(".site-header .logo")?.getBoundingClientRect();
+      const soundRect = document.querySelector(".site-sound")?.getBoundingClientRect();
+      const headerX = logoRect && soundRect ? logoRect.right + (soundRect.left - logoRect.right - 48) / 2 : width - 120;
+      const x = prologue ? width / 2 - 48 : perched && perchRect ? perchRect.left : docked && originRect ? originRect.left : headerPerch ? Math.max(8,headerX) : width - 72;
       const y = prologue ? height / 2 - 90 : perched && perchRect ? perchRect.top : docked && originRect ? originRect.top : headerPerch ? 9 : Math.min(height - 88, Math.max(120, (sectionRect?.top ?? height * .4) + 44));
       const bubbleWidth = Math.min(300, width - 24);
       const bubbleLeft = Math.max(12 - x, Math.min(0, width - 12 - x - bubbleWidth));

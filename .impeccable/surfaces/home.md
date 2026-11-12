@@ -10,15 +10,15 @@ The owner's explicit additions pin both world and first-viewport experience: “
 
 An operations studio where work visibly passes between anonymous cursor pointers. The first viewport pairs a people-first promise and inline Rocket with a live, clearly illustrative workflow assembly. The customer's involvement is approval, not operating a builder.
 
-Palette: Midnight #141219, Charcoal #2b2930, Sand #e8dcc4, Purple field #392660, Electric Purple #8b5cf6, sand text #e8dcc4. Sora display has precise geometric forms; Manrope handles explanation; mono identifies workflow roles and process steps.
+Palette: Midnight #101010, Charcoal #282828, Off-white #f0f0f0, Purple field #191919, Electric Purple #8b5cf6, off-white text #f0f0f0. Sora display has precise geometric forms; Manrope handles explanation; mono identifies workflow roles and process steps.
 
-Left-aligned promise beside the workflow on desktop; one continuous composition on mobile. A single sand note breaks the rhythm of the quiet dark task list. Automation examples use ruled index rows. Existing approval gates and run trace make the managed service concrete. The footer is anchored by an oversized QUAVOK wordmark.
+Left-aligned promise beside the workflow on desktop; one continuous composition on mobile. A single off-white note breaks the rhythm of the quiet dark task list. Automation examples use ruled index rows. Existing approval gates and run trace make the managed service concrete. The footer is anchored by an oversized QUAVOK wordmark.
 
 Signature interaction: Rocket originates inside the headline, then travels/perches near the current section; asking opens an explicitly scripted quick-reply conversation. Mobile stays compact and collapsible. Reduced motion gets static positioning and no eye movement/confetti.
 
 ## Bolder pass
 
-Keep the problem section dark with one sand note. Make the workflow handoffs visible, with dotted connectors and short action speech. Replace the tiny, fixed-corner companion with an inline-to-travelling Rocket. Give the footer enough typographic scale to close the page confidently. Avoid adding decoration to every other section.
+Keep the problem section dark with one off-white note. Make the workflow handoffs visible, with dotted connectors and short action speech. Replace the tiny, fixed-corner companion with an inline-to-travelling Rocket. Give the footer enough typographic scale to close the page confidently. Avoid adding decoration to every other section.
 
 ## Quality bar
 

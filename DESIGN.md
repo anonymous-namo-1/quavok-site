@@ -2,21 +2,21 @@
 name: Quavok operations studio
 description: Dark, people-first managed automation with visible handoffs.
 colors:
-  midnight: "#141219"
-  charcoal: "#2b2930"
-  sand: "#e8dcc4"
-  purple-field: "#392660"
+  midnight: "#101010"
+  charcoal: "#282828"
+  off-white: "#f0f0f0"
+  surface-deep: "#191919"
   purple: "#8b5cf6"
   purple-dark: "#593b9d"
   purple-soft: "#c5a9fa"
-  paper-2: "#1a181f"
-  card: "#1f1d24"
-  ink: "#e8dcc4"
-  ink-2: "#d6ceb6"
-  mute: "#c0bda6"
-  faint: "#b5b49d"
-  line: "#39373e"
-  line-2: "#434148"
+  paper-2: "#181818"
+  card: "#202020"
+  ink: "#f0f0f0"
+  ink-2: "#d4d4d4"
+  mute: "#b8b8b8"
+  faint: "#a6a6a6"
+  line: "#363636"
+  line-2: "#555555"
 typography:
   display:
     fontFamily: "Sora, sans-serif"
@@ -45,23 +45,23 @@ spacing:
 components:
   button-primary:
     backgroundColor: "{colors.purple-dark}"
-    textColor: "{colors.sand}"
+    textColor: "{colors.off-white}"
     rounded: "{rounded.control}"
     height: "50px"
   button-purple:
     backgroundColor: "{colors.purple-dark}"
-    textColor: "{colors.sand}"
+    textColor: "{colors.off-white}"
     rounded: "{rounded.control}"
     height: "50px"
 ---
 
 ## Overview
 
-The operations studio makes managed automation tangible: requests pass between anonymous cursors, stop for human approval, and finish with a clear summary. The typography speaks confidently while the Rocket and workflow cursors add warmth. The owner chose a dark visual world, complementary charcoal/sand and a contrasting Electric Purple accent.
+The operations studio makes managed automation tangible: requests pass between anonymous cursors, stop for human approval, and finish with a clear summary. The typography speaks confidently while the Rocket and workflow cursors add warmth. The owner chose a dark visual world, complementary charcoal/off-white and a contrasting Electric Purple accent.
 
 ## Colors
 
-Midnight is the page base. Charcoal holds navigation and inner-page openings. Sand carries display emphasis. Purple accents the companion; its deeper shade marks buttons and workflow outputs. Electric Purple marks primary actions and approval decisions. Sand-tinted text stays readable on all dark fields. Use Sand text on Deep Purple #593b9d for normal-size button labels. Electric Purple #8b5cf6 is reserved for highlights, focus and decorative moments.
+Midnight is the page base. Charcoal holds navigation and inner-page openings. Off-white carries display emphasis. Purple accents the companion; its deeper shade marks buttons and workflow outputs. Electric Purple marks primary actions and approval decisions. Off-white-tinted text stays readable on all dark fields. Use Off-white text on Deep Purple #593b9d for normal-size button labels. Electric Purple #8b5cf6 is reserved for highlights, focus and decorative moments.
 
 ## Typography
 
@@ -81,7 +81,7 @@ Buttons use 8px corners, workflow containers 14px, the companion panel 16px. Dot
 
 ## Components
 
-Primary actions use Sand, with Electric Purple reserved for high-emphasis discovery actions and approval states. Focus rings use Electric Purple with visible offset. Form errors retain entered values and explain recovery; the contact form prepares an email until its destination is wired.
+Primary actions use Off-white, with Electric Purple reserved for high-emphasis discovery actions and approval states. Focus rings use Electric Purple with visible offset. Form errors retain entered values and explain recovery; the contact form prepares an email until its destination is wired.
 
 Rocket starts in the homepage headline and follows the section in view. On narrow screens it perches in the unused header gap after leaving the headline so body text remains unobscured. Quick replies are explicitly scripted and open only by request. Minimise preference is stored locally. Pointer eyes, blinking, mood changes, anonymous cursor handoffs and completion confetti respect reduced motion. Cmd/Ctrl+K opens the conversation; Escape closes it and returns focus.
 
@@ -98,7 +98,7 @@ The workflow intro is optional, replayable, skippable, and fails open. Its finis
 
 The homepage workflow has an open stage with no outer card. Two illustrative request choices demonstrate approval and human escalation; these controls do not configure or run customer automations. The category index is compact, the process overview has four steps, and the detailed walkthrough is available through a disclosure. Rocket's page example gains layered depth only on the homepage; its persistent companion uses a compact attached speech bubble opened by explicit action.
 
-The owner superseded the green palette: backgrounds now use warm charcoal and muted plum. The single sand task note, workflow input and compact Rocket bubble share a warm surface language. Hero/closing display type carries the strongest emphasis; middle headings are smaller and lighter, with descriptions alongside them on desktop. The workflow input, approval and output each have a distinct visual role.
+The owner superseded the green palette: backgrounds now use neutral charcoal and neutral gray. The single off-white task note, workflow input and compact Rocket bubble share a warm surface language. Hero/closing display type carries the strongest emphasis; middle headings are smaller and lighter, with descriptions alongside them on desktop. The workflow input, approval and output each have a distinct visual role.
 
 Original etched paper-orchestration imagery gives the page a physical metaphor: scattered paper passing through a series of rings into one flowing ribbon. It appears subtly behind the hero workflow and in a bounded film/still panel above the comparison. Six unnamed pointers build actual page DOM during the intro; navigation, typography, actions, imagery and lower sections join the workflow assembly. Never hijack scroll to show off the intro. Motion media remains static during the intro, under reduced motion and data saving, and pauses offscreen.
 
@@ -113,3 +113,7 @@ The first-visit sequence is page assembly → a question about new leads → Roc
 The six unnamed building cursors each have a distinct accent: gold, lavender, cyan, mint, pink and peach. These colors are confined to the cursor performance. Rocket has a simple round face and expressive eyes; it has no headphones or other accessories.
 
 Rocket opens a first-visit prologue on an empty screen and gives the command “Let’s build this page” before the anonymous cursors start assembly. The round character has two eyes directly on its face, with no visor, headphones or surrounding orbit. Skip, Escape, reduced motion and fail-open release the whole page.
+
+The final resting palette is monochrome: Midnight #101010, Charcoal #282828, Surface #181818, Card #202020, Off-white #f0f0f0, muted text #b8b8b8 and neutral rules. Purple (#8b5cf6, deep #593b9d and soft #c5a9fa) is limited to primary actions, focus, Rocket and important states. The original background artwork and film render in grayscale. Six distinct colors remain confined to the requested cursor-build performance.
+
+Sound effects use one browser AudioContext, a shared noise buffer and short procedural tones. Mechanical key clicks follow the cursor text build and animated replies; placement, selection, Rocket calls, replies and completion have quiet, distinct cues. The header control enables/mutes effects and remembers the preference. In the opening scene it becomes “Build with sound” and starts assembly after a user gesture unlocks audio. Effects pause when the tab is hidden. Spoken replies remain a separate explicit read-aloud action.

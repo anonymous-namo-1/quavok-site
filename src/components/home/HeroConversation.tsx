@@ -20,7 +20,7 @@ export function HeroConversation() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { setPhase("settled"); window.dispatchEvent(new Event("quavok:rocket-call")); return; }
     setPhase("question");
     timers.current.push(setTimeout(() => { setPhase("listening"); window.dispatchEvent(new Event("quavok:rocket-call")); }, 650));
-    timers.current.push(setTimeout(() => { setPhase("answering"); window.dispatchEvent(new CustomEvent("quavok:rocket-talk",{detail:true})); }, 1450));
+    timers.current.push(setTimeout(() => { setPhase("answering"); window.dispatchEvent(new CustomEvent("quavok:rocket-talk",{detail:true})); window.dispatchEvent(new CustomEvent("quavok:text-typing",{detail:EXAMPLES[index].answer})); }, 1450));
     timers.current.push(setTimeout(() => { setPhase("settled"); window.dispatchEvent(new CustomEvent("quavok:rocket-talk",{detail:false})); }, 3200));
   };
   useEffect(() => {

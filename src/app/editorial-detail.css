@@ -1,8 +1,8 @@
 /* Inner pages share the workshop's dark surfaces, with room for the actual work. */
 .page-hero.editorial-hero {
   padding-block: clamp(64px, 8vw, 128px);
-  background: #2b2930;
-  border-bottom: 1px solid #424047;
+  background: #282828;
+  border-bottom: 1px solid #414141;
 }
 .page-hero.editorial-hero::before,
 .page-hero.editorial-hero .wrap::after { content: none; }
@@ -12,26 +12,26 @@
   font-size: clamp(3rem, 6.5vw, 6.3rem);
   line-height: .99;
   letter-spacing: -.04em;
-  color: #e8dcc4;
+  color: #f0f0f0;
   font-variation-settings: "wdth" 85;
 }
-.page-hero.editorial-hero .t-lead { max-width: 49ch; color: #d8d0b8; }
+.page-hero.editorial-hero .t-lead { max-width: 49ch; color: #d0d0d0; }
 .editorial-hero-copy { align-self: end; }
 .service-entry, .solution-entry, .process-entry {
   padding-block: clamp(32px, 5vw, 64px);
-  border-top: 1px solid #424047;
+  border-top: 1px solid #414141;
   scroll-margin-top: 110px;
 }
 .service-entry:first-child, .solution-entry:first-child, .process-entry:first-child { border-top: 0; }
-.service-entry .t-h3, .solution-entry .t-h3 { color: #e8dcc4; }
-.service-example { padding: 20px 0 0; border-top: 1px solid #424047; }
-.principle-entry { border-top: 1px solid #424047; padding-block: 24px; }
-.principle-entry h3 { color: #e8dcc4; }
-.process-entry .step-num { color: #c9c4ad; }
-.process-entry .step-num b { color: #e8dcc4; letter-spacing: -.04em; }
+.service-entry .t-h3, .solution-entry .t-h3 { color: #f0f0f0; }
+.service-example { padding: 20px 0 0; border-top: 1px solid #414141; }
+.principle-entry { border-top: 1px solid #414141; padding-block: 24px; }
+.principle-entry h3 { color: #f0f0f0; }
+.process-entry .step-num { color: #c3c3c3; }
+.process-entry .step-num b { color: #f0f0f0; letter-spacing: -.04em; }
 .closing-room.editorial-closing {
-  background: #2b2930;
-  border-block: 1px solid #424047;
+  background: #282828;
+  border-block: 1px solid #414141;
 }
 .editorial-closing .closing-inner::after { content: none; }
 .editorial-closing .closing-inner { padding-block: clamp(64px, 8vw, 120px); }
@@ -42,15 +42,15 @@
   line-height: 1;
   letter-spacing: -.04em;
 }
-.editorial-closing p { color: #d8d0b8; }
-.site-footer.editorial-footer { background: #141219; padding-bottom: 96px; overflow: clip; }
-.site-footer.editorial-footer h2 { text-transform: none; letter-spacing: 0; font-family: var(--font-sans); font-size: 14px; color: #e8dcc4; }
+.editorial-closing p { color: #d0d0d0; }
+.site-footer.editorial-footer { background: #101010; padding-bottom: 96px; overflow: clip; }
+.site-footer.editorial-footer h2 { text-transform: none; letter-spacing: 0; font-family: var(--font-sans); font-size: 14px; color: #f0f0f0; }
 .footer-wordmark {
   display: flex;
   width: 100%;
   padding-inline: 2vw;
   margin-top: clamp(48px, 7vw, 110px);
-  color: #e8dcc4;
+  color: #f0f0f0;
   font-family: var(--font-display);
   font-size: 23vw;
   line-height: .77;
@@ -63,7 +63,7 @@
 @media (min-width: 1000px) {
   .editorial-hero-layout { grid-template-columns: 1.08fr .92fr; gap: 7%; }
   .editorial-hero-copy { padding-bottom: 5px; }
-  .service-entry > :last-child, .solution-entry > :last-child { border-left: 1px solid #424047; padding-left: 40px; }
+  .service-entry > :last-child, .solution-entry > :last-child { border-left: 1px solid #414141; padding-left: 40px; }
 }
 @media (max-width: 600px) {
   .page-hero.editorial-hero .t-page { font-size: clamp(2.7rem, 12vw, 4.5rem); max-width: 14ch; }
